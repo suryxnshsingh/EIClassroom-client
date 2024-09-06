@@ -9,12 +9,15 @@ export default function Faculty(){
                 <Card name={"Pranshu Pandey"} designation={"HOD"} employeeId={"EIC/2022/007"} qualification={"B.Tech"} joining={"2022-09-01"} phone={"+91 1234567890"} email={"XJ9L8@example.com"} imgsrc={"/pranshu.jpg"}/>
                 <Card name={"DS Ajnar"} designation={"HOD"} employeeId={"EIC/2022/007"} qualification={"B.Tech"} joining={"2022-09-01"} phone={"+91 1234567890"} email={"XJ9L8@example.com"} imgsrc={"/pranshu.jpg"}/>
                 <Card name={"Sanchita Das"} designation={"HOD"} employeeId={"EIC/2022/007"} qualification={"B.Tech"} joining={"2022-09-01"} phone={"+91 1234567890"} email={"XJ9L8@example.com"} imgsrc={"/pranshu.jpg"}/>
-                <Card name={"Deepali Bhadwi"} designation={"HOD"} employeeId={"EIC/2022/007"} qualification={"B.Tech"} joining={"2022-09-01"} phone={"+91 1234567890"} email={"XJ9L8@example.com"} imgsrc={"/pranshu.jpg"}/>
-                <Card name={"Anuj Mishra"} designation={"HOD"} employeeId={"EIC/2022/007"} qualification={"B.Tech"} joining={"2022-09-01"} phone={"+91 1234567890"} email={"XJ9L8@example.com"} imgsrc={"/pranshu.jpg"}/>
+                <Card name={"Deepali "} designation={"HOD"} employeeId={"EIC/2022/007"} qualification={"B.Tech"} joining={"2022-09-01"} phone={"+91 1234567890"} email={"XJ9L8@example.com"} imgsrc={"/pranshu.jpg"}/>
+                <Card name={"PP Bansod"} designation={"HOD"} employeeId={"EIC/2022/007"} qualification={"B.Tech"} joining={"2022-09-01"} phone={"+91 1234567890"} email={"XJ9L8@example.com"} imgsrc={"/pranshu.jpg"}/>
                 <Card name={"Tarni Joshi"} designation={"HOD"} employeeId={"EIC/2022/007"} qualification={"B.Tech"} joining={"2022-09-01"} phone={"+91 1234567890"} email={"XJ9L8@example.com"} imgsrc={"/pranshu.jpg"}/>
                 <Card name={"Gamad Rapist"} designation={"HOD"} employeeId={"EIC/2022/007"} qualification={"B.Tech"} joining={"2022-09-01"} phone={"+91 1234567890"} email={"XJ9L8@example.com"} imgsrc={"/pranshu.jpg"}/>
                 <Card name={"Arpita Kadel"} designation={"HOD"} employeeId={"EIC/2022/007"} qualification={"B.Tech"} joining={"2022-09-01"} phone={"+91 1234567890"} email={"XJ9L8@example.com"} imgsrc={"/pranshu.jpg"}/>
                 <Card name={"Bindu Solanki"} designation={"HOD"} employeeId={"EIC/2022/007"} qualification={"B.Tech"} joining={"2022-09-01"} phone={"+91 1234567890"} email={"XJ9L8@example.com"} imgsrc={"/pranshu.jpg"}/>
+                <Card name={"Girish Soni"} designation={"HOD"} employeeId={"EIC/2022/007"} qualification={"B.Tech"} joining={"2022-09-01"} phone={"+91 1234567890"} email={"XJ9L8@example.com"} imgsrc={"/pranshu.jpg"}/>
+                <Card name={"Keerti Bhargawa"} designation={"HOD"} employeeId={"EIC/2022/007"} qualification={"B.Tech"} joining={"2022-09-01"} phone={"+91 1234567890"} email={"XJ9L8@example.com"} imgsrc={"/pranshu.jpg"}/>
+
             </div>
         </div>
     )
