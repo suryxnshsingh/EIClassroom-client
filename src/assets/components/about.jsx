@@ -36,7 +36,7 @@ export default function About() {
                 </li>
                 <li class="flex items-center py-3 text-sm">
                   <span>Joined On</span>
-                  <span class="ml-auto">Apr 08, 2022</span>
+                  <span class="ml-auto">December 24, 2003</span>
                 </li>
                 <li class="flex items-center py-3 text-sm">
                   <span>Phone</span>
