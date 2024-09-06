@@ -14,7 +14,7 @@ export default function Card({
         <div className="relative w-80 h-96 overflow-hidden shadow-lg rounded-2xl group">
             <img
                 src={imgsrc}
-                className="w-full h-full object-cover transition-all duration-300 group-hover:blur-sm"
+                className="w-full h-full object-cover transition-all duration-300 group-hover:blur-md"
                 alt={name}
             />
             <div className="absolute inset-0 flex flex-col justify-between p-4 bg-gradient-to-t from-black to-transparent transition-all duration-300">
