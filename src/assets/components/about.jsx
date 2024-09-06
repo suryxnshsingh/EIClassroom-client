@@ -1,11 +1,10 @@
 export default function About() {
     return (
-        <div className="flex flex-col items-center justify-center p-10" style={{background: "linear-gradient(0deg, rgba(0,212,255,1) 0%, rgba(1,93,133,1) 0%, rgba(2,6,35,1) 78%)"}}>
-            <h1 class="mb-4 text-3xl chakra-petch-bold text-gray-900 dark:text-white md:text-5xl lg:text-6xl"><span class="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">About the Department</span></h1>
-        <br></br>
-        <div className="flex flex-row-reverse px-5">
-            <div className="w-2/3 p-4">
-                <p class="text-lg chakra-petch-regular text-gray-100 lg:text-2xl py-14 pr-20">
+        <div className="flex flex-col items-center justify-center p-10 pt-16" style={{background: "linear-gradient(0deg, rgba(0,212,255,1) 0%, rgba(1,93,133,1) 0%, rgba(2,6,35,1) 78%)"}}>
+            <h1 class="mb-4 text-3xl chakra-petch-bold text-gray-900 dark:text-white md:text-5xl lg:text-6xl md:py-10 "><span class="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">About the Department</span></h1>
+        <div className="flex md:flex-row-reverse flex-col px-5">
+            <div className="md:w-2/3 p-4">
+                <p class="text-lg chakra-petch-regular text-gray-100 lg:text-2xl py-14 md:pr-20">
                 The Department of Electronics and Instrumentation Engineering was established in 1984.
                 It came out as an offspring of Electronics Engineering due to enormous 
                 development in the field of Electronics and demand of Instrumentation Engineers in the 
