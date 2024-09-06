@@ -1,9 +1,12 @@
-import BackgroundVideo from "./assets/components/land"
 
+import Card from './assets/components/facultyCard'
 function App() {
 
   return (
-      <BackgroundVideo/>
+      <div>
+        <BackgroundVideo/>
+        <Card/>
+      </div>
   )
 }
 
