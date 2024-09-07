@@ -4,10 +4,20 @@ export default function Footer(){
             <footer class="bg-white dark:bg-neutral-900">
                 <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
                     <div class="md:flex md:justify-between">
-                    <div class="mb-6 md:mb-0 w-28 flex">
+                    <div class="mb-6 md:mb-0 w-28 flex items-center">
                         <img
                             src="/GS LOGO.png" alt="logo"></img>
-                        <div></div>
+                        <div className="ml-4">
+                            <div className="text-2xl text-white text-nowrap ">
+                            EI Classroom Connect 
+                                </div>
+                                <div className="text-xl text-white font-thin text-nowrap ">
+                            Shri G. S. Institute of Tech. and Science
+                                </div>
+                                <div className="text-xl text-white font-thin text-nowrap ">
+                            Park Road, Indore
+                                </div>
+                            </div>
                     </div>
                     <div class="grid grid-cols-2 gap-4 sm:gap-6 sm:grid-cols-3">
                         <div>
@@ -40,13 +50,13 @@ export default function Footer(){
                             Developers:
                         </div>
                         <div class="ml-4 text-sm text-gray-500 sm:text-center dark:text-gray-400">
-                            <a href="https://github.com/rajeshkhatri1" class="hover:underline">Rajesh Khatri</a>
+                            <a href="https://www.linkedin.com/in/suryxnshsingh/" target="_blank" class="hover:underline">Suryansh Singh</a>
                         </div>
                         <div class="ml-4 text-sm text-gray-500 sm:text-center dark:text-gray-400">
-                            <a href="https://github.com/rajeshkhatri1" class="hover:underline">Rajesh Khatri</a>
+                            <a href="https://www.linkedin.com/in/pranshuaf/" target="_blank" class="hover:underline">Pranshu Pandey</a>
                         </div>
                         <div class="ml-4 text-sm text-gray-500 sm:text-center dark:text-gray-400">
-                            <a href="https://github.com/rajeshkhatri1" class="hover:underline">Rajesh Khatri</a>
+                            <a href="https://www.linkedin.com/in/anuj-mishra-4330672b6/" target="_blank" class="hover:underline">Anuj Mishra</a>
                         </div>
                     </div>
                 </div>
