@@ -67,7 +67,7 @@ export default function Faculty() {
                     qualification={"M.Tech., Ph.D."}
                     joining={"09/07/2007"}
                     phone={"0731-2582437"}
-                    email={"gireeshsoni[at]gmail.com, gsoni[at]sgsits.ac.in"}
+                    email={"gireeshsoni@gmail.com, gsoni@sgsits.ac.in"}
                     imgsrc={"pranshu.jpg"}
                 />
                 <Card
