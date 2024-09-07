@@ -8,13 +8,13 @@ export default function Footer(){
                         <img
                             src="/GS LOGO.png" alt="logo"></img>
                         <div className="ml-4">
-                            <div className="text-2xl text-white text-nowrap ">
+                            <div className="text-2xl text-white text-nowrap max-sm:hidden">
                             EI Classroom Connect 
                                 </div>
-                                <div className="text-xl text-white font-thin text-nowrap ">
+                                <div className="text-xl text-white font-thin text-nowrap max-sm:hidden">
                             Shri G. S. Institute of Tech. and Science
                                 </div>
-                                <div className="text-xl text-white font-thin text-nowrap ">
+                                <div className="text-xl text-white font-thin text-nowrap max-sm:hidden">
                             Park Road, Indore
                                 </div>
                             </div>
