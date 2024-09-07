@@ -8,7 +8,7 @@ const gradientBackground = {
 };
 
 const Title = () => (
-  <h1 className="md:mb-12 text-3xl chakra-petch-bold text-gray-900 dark:text-white md:text-5xl lg:text-6xl py-10 px-4">
+  <h1 className="mb-4 text-3xl chakra-petch-bold text-gray-900 dark:text-white md:text-5xl lg:text-6xl md:py-10 px-4">
     <div className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400 text-center">
       About the Department
     </div>
@@ -33,6 +33,7 @@ const DepartmentInfo = () => (
 );
 
 const ProfileCard = ({ name, title, department, employeeCode, joinDate, phone, email }) => (
+  <a href='https://sgsits.ac.in/index.php/people-ei/eie-faculty-members/371-mr-rajesh-khatri' target="_blank" rel="noopener noreferrer">
   <div className="max-w-sm mx-auto px-4 md:px-0">
     <div className="rounded-lg border bg-slate-400 px-4 pt-8 pb-10 shadow-xl chakra-petch-regular">
       <div className="relative mx-auto w-36 rounded-full">
@@ -49,6 +50,7 @@ const ProfileCard = ({ name, title, department, employeeCode, joinDate, phone, e
       </ul>
     </div>
   </div>
+  </a>
 );
 
 const ProfileItem = ({ label, value, isCode }) => (
