@@ -8,15 +8,15 @@ const gradientBackground = {
 };
 
 const Title = () => (
-  <h1 className="mb-4 text-3xl chakra-petch-bold text-gray-900 dark:text-white md:text-5xl lg:text-6xl md:py-10 px-4">
-    <span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">
+  <h1 className="md:mb-12 text-3xl chakra-petch-bold text-gray-900 dark:text-white md:text-5xl lg:text-6xl py-10 px-4">
+    <div className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400 text-center">
       About the Department
-    </span>
+    </div>
   </h1>
 );
 
 const DepartmentInfo = () => (
-  <p className="text-lg chakra-petch-regular text-slate-300 lg:text-2xl py-14 px-4 md:pr-20">
+  <p className="text-lg chakra-petch-regular text-slate-300 lg:text-2xl p-4 md:pr-20">
     The Department of Electronics and Instrumentation Engineering was established in 1984.
     It came out as an offspring of Electronics Engineering due to enormous
     development in the field of Electronics and demand of Instrumentation Engineers in the
