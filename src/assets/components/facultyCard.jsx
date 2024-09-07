@@ -18,7 +18,7 @@ export default function Card({
                 alt={name}
             />
             <div className="absolute inset-0 flex flex-col justify-between p-4 bg-gradient-to-t from-black to-transparent transition-all duration-300">
-                <div className="transform translate-y-[480%] transition-transform duration-300 group-hover:translate-y-[200%] ml-2">
+                <div className="transform translate-y-[480%] transition-transform duration-300 group-hover:translate-y-[160%] ml-2">
                     <h2 className="text-white text-2xl poppins-bold">{name}</h2>
                     <p className="text-white text-lg poppins-semibold">{designation}</p>
                 </div>
