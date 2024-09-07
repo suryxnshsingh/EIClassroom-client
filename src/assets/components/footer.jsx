@@ -47,7 +47,7 @@ export default function Footer(){
                 <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
                 <div class="flex justify-center">
                         <div class="text-sm text-gray-500 sm:text-center dark:text-gray-400">
-                            Developers:
+                            Developed by :
                         </div>
                         <div class="ml-4 text-sm text-gray-500 sm:text-center dark:text-gray-400">
                             <a href="https://www.linkedin.com/in/suryxnshsingh/" target="_blank" class="hover:underline">Suryansh Singh</a>

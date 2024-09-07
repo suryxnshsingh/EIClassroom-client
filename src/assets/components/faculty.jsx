@@ -18,7 +18,7 @@ export default function Faculty() {
                     joining={"24/12/2003"}
                     phone={"091-731-2582425"}
                     email={"rajeshkhatri1@rediffmail.com"}
-                    imgsrc={"pranshu.jpg"}
+                    imgsrc={"khatri.jpg"}
                 />
                 <Card
                     name={"R. S. Gamad"}
@@ -28,7 +28,7 @@ export default function Faculty() {
                     joining={"30/01/2006"}
                     phone={"091-731-2582421, 091-731-2582423"}
                     email={"gs3300293@sgsitsindore.in"}
-                    imgsrc={"pranshu.jpg"}
+                    imgsrc={"gamad.jpg"}
                 />
                 <Card
                     name={"P. P. Bansod"}
@@ -38,7 +38,7 @@ export default function Faculty() {
                     joining={"02/04/1993"}
                     phone={"091-731-2582421"}
                     email={"pbansod@sgsits.ac.in"}
-                    imgsrc={"pranshu.jpg"}
+                    imgsrc={"bansod.jpg"}
                 />
                 <Card
                     name={"D. S. Ajnar"}
@@ -48,7 +48,7 @@ export default function Faculty() {
                     joining={"7/4/1995"}
                     phone={"091-731-2582422"}
                     email={"ajnards@gmail.com"}
-                    imgsrc={"pranshu.jpg"}
+                    imgsrc={"ajnar.jpg"}
                 />
                 <Card
                     name={"R. C. Gurjar"}
@@ -58,7 +58,7 @@ export default function Faculty() {
                     joining={"16/07/2007"}
                     phone={"091-731-2582424"}
                     email={"rcgurjar94@gmail.com"}
-                    imgsrc={"pranshu.jpg"}
+                    imgsrc={"gurjar.jpg"}
                 />
                 <Card
                     name={"Gireesh Gaurav Soni"}
@@ -68,7 +68,7 @@ export default function Faculty() {
                     joining={"09/07/2007"}
                     phone={"0731-2582437"}
                     email={"gireeshsoni@gmail.com, gsoni@sgsits.ac.in"}
-                    imgsrc={"pranshu.jpg"}
+                    imgsrc={"gireesh.jpg"}
                 />
                 <Card
                     name={"Anuj Rawat"}
@@ -78,7 +78,7 @@ export default function Faculty() {
                     joining={"09/01/2021"}
                     phone={"091-731-2582429"}
                     email={"anujrawat92@gmail.com"}
-                    imgsrc={"pranshu.jpg"}
+                    imgsrc={"anuj.jpg"}
                 />
                 <Card
                     name={"Tarni Joshi"}
@@ -88,7 +88,7 @@ export default function Faculty() {
                     joining={"18/10/2021"}
                     phone={"0731-2582424"}
                     email={"tarnijoshi88@gmail.com"}
-                    imgsrc={"pranshu.jpg"}
+                    imgsrc={"tarni.jpg"}
                 />
                 <Card
                     name={"Deepali Choudhary"}
@@ -98,7 +98,7 @@ export default function Faculty() {
                     joining={"24/08/2022"}
                     phone={"0731-2582423"}
                     email={"Choudharydeepali11@gmail.com"}
-                    imgsrc={"pranshu.jpg"}
+                    imgsrc={"deepali.jpg"}
                 />
                 <Card
                     name={"Kirti Bhargava"}
@@ -108,7 +108,7 @@ export default function Faculty() {
                     joining={"24/08/2022"}
                     phone={"0731-2582429"}
                     email={"kirtirks@gmail.com"}
-                    imgsrc={"pranshu.jpg"}
+                    imgsrc={"kirti.jpg"}
                 />
                 <Card
                     name={"Arpita Kadel"}
@@ -118,7 +118,7 @@ export default function Faculty() {
                     joining={"01/08/2023"}
                     phone={"0731-2582423"}
                     email={"arpita.kadel88@gmail.com"}
-                    imgsrc={"pranshu.jpg"}
+                    imgsrc={"arpita.jpg"}
                 />
                 <Card
                     name={"Neha Jadon"}
@@ -128,7 +128,7 @@ export default function Faculty() {
                     joining={"14/02/2024"}
                     phone={"0731-2582423"}
                     email={"nehajadon2345@gmail.com"}
-                    imgsrc={"pranshu.jpg"}
+                    imgsrc={"neha.jpg"}
                 />
                 <Card
                     name={"Neha Arya"}
@@ -138,7 +138,7 @@ export default function Faculty() {
                     joining={"11/07/2024"}
                     phone={"0731-2582423"}
                     email={"nehaarya1988@gmail.com"}
-                    imgsrc={"pranshu.jpg"}
+                    imgsrc={"arya.jpg"}
                 />
                 <Card
                     name={"Ankita Pundlik"}
@@ -148,7 +148,7 @@ export default function Faculty() {
                     joining={"11/07/2024"}
                     phone={"0731-2582423"}
                     email={"ankita.mangalmutri10@gmail.com"}
-                    imgsrc={"pranshu.jpg"}
+                    imgsrc={"ankita.jpg"}
                 />
                 <Card
                     name={"Sanchita Dass"}
@@ -158,7 +158,7 @@ export default function Faculty() {
                     joining={"16/07/2024"}
                     phone={"0731-2582423"}
                     email={"mithi.sanchu@gmail.com"}
-                    imgsrc={"pranshu.jpg"}
+                    imgsrc={"sanchita.jpg"}
                 />
                 <Card
                     name={"Bindu Solanki"}
@@ -168,7 +168,7 @@ export default function Faculty() {
                     joining={"15/07/2024"}
                     phone={"0731-2582423"}
                     email={"Bindu.solanki011@gmail.com"}
-                    imgsrc={"pranshu.jpg"}
+                    imgsrc={"bindu.jpg"}
                 />
                 <Card
                     name={"Mansi Jain"}
@@ -178,7 +178,7 @@ export default function Faculty() {
                     joining={"27/09/2023"}
                     phone={"0731-2582423"}
                     email={"jainmansi01@gmail.com"}
-                    imgsrc={"pranshu.jpg"}
+                    imgsrc={"mansi.jpg"}
                 />
                 <Card
                     name={"Ravi Pandit"}
@@ -188,7 +188,7 @@ export default function Faculty() {
                     joining={"11/07/2024"}
                     phone={"0731-2582423"}
                     email={"ravi.pandit85@gmail.com"}
-                    imgsrc={"pranshu.jpg"}
+                    imgsrc={"ravi.jpg"}
                 />
                 <Card
                     name={"Rashmi Shrivastava"}
@@ -198,7 +198,7 @@ export default function Faculty() {
                     joining={"02/08/2024"}
                     phone={"0731-2582423"}
                     email={"06shrivastavarashmi@gmail.com"}
-                    imgsrc={"pranshu.jpg"}
+                    imgsrc={"rashmi.jpg"}
                 />
                 <Card
                     name={"Disha Sharma"}
@@ -208,7 +208,7 @@ export default function Faculty() {
                     joining={"27/09/2024"}
                     phone={"0731-2582423"}
                     email={"1998.dishasharma@gmail.com"}
-                    imgsrc={"pranshu.jpg"}
+                    imgsrc={"disha.jpg"}
                 />
             </motion.div>
         </div>

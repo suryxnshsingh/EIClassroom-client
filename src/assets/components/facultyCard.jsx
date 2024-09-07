@@ -11,10 +11,10 @@ export default function Card({
     imgsrc
 }) {
     return (
-        <div className="relative shadow-gray-500 hover:shadow-none w-80 h-96 overflow-hidden shadow-md rounded-2xl group">
+        <div className="relative shadow-slate-800 hover:shadow-none w-80 h-96 overflow-hidden shadow-md rounded-2xl group">
             <img
                 src={imgsrc}
-                className="w-full h-full object-cover transition-all duration-300 group-hover:blur-md"
+                className="w-full h-full object-cover transition-all duration-300 group-hover:brightness-50 group-hover:blur-md"
                 alt={name}
             />
             <div className='absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-black to-transparent'/>
