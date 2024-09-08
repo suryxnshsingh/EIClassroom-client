@@ -9,7 +9,7 @@ export default function Footer(){
                             src="/GS LOGO.png" alt="logo"></img>
                         <div className="ml-4">
                             <div className="text-2xl text-white text-nowrap max-sm:hidden">
-                            EI Classroom Connect 
+                            EI Classroom Portal
                                 </div>
                                 <div className="text-xl text-white font-thin text-nowrap max-sm:hidden">
                             Shri G. S. Institute of Tech. and Science
