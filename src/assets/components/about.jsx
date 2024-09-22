@@ -3,12 +3,12 @@ import { motion } from "framer-motion";
 
 const gradientBackground = {
   background: "linear-gradient(0deg, rgba(0,212,255,1) 0%, rgba(1,93,133,1) 0%, rgba(2,6,35,1) 78%)",
-  minHeight: '100vh', // Ensure the background covers the full height of the viewport
-  width: '100%', // Ensure the background covers the full width
+  minHeight: '100vh',
+  width: '100%', 
 };
 
 const Title = () => (
-  <h1 className="mb-4 text-3xl chakra-petch-bold text-gray-900 dark:text-white md:text-5xl lg:text-6xl md:py-10 px-4">
+  <h1 className="mb-4 text-3xl chakra-petch-bold text-gray-900 dark:text-white md:text-5xl lg:text-6xl md:py-10 px-4 mt-20">
     <div className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400 text-center">
       About the Department
     </div>
