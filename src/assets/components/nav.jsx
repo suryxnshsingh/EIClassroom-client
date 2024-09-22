@@ -6,7 +6,7 @@ export default function Navbar() {
         <div className="chakra-petch-medium text-white bg-transparent backdrop-blur-lg m-4  w-[92%] md:w-[98%] fixed z-50 rounded-lg border-stone-700 border-2 ">
             <nav className="flex justify-between px-3 py-4">
                 <div>
-                    <h1 className="md:text-2xl text-2xl px-3 font-bold">EI Classroom Connect</h1>
+                    <h1 className="md:text-2xl text-xl px-3 font-bold">EI Classroom Connect</h1>
                 </div>
                 <div className="">
                     <ul className="md:flex py-1 hidden ${menuOpen ? 'show' : ''} ">
