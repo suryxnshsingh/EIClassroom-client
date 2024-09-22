@@ -1,3 +1,5 @@
+import React from "react";
+import { LinkPreview } from "./linkpreview";
 export default function Footer(){
     return(
         <div>
@@ -46,18 +48,37 @@ export default function Footer(){
                 </div>
                 <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
                 <div class="flex justify-center">
-                        <div class="text-sm text-gray-500 sm:text-center dark:text-gray-400">
+                        <div class="text-sm text-white sm:text-center">
                             Crafted by :
                         </div>
-                        <div class="ml-4 text-sm text-gray-500 sm:text-center dark:text-gray-400">
-                            <a href="https://www.linkedin.com/in/suryxnshsingh/" target="_blank" class="hover:underline">Suryansh Singh</a>
-                        </div>
-                        <div class="ml-4 text-sm text-gray-500 sm:text-center dark:text-gray-400">
-                            <a href="https://www.linkedin.com/in/pranshuaf/" target="_blank" class="hover:underline">Pranshu Pandey</a>
-                        </div>
-                        <div class="ml-4 text-sm text-gray-500 sm:text-center dark:text-gray-400">
-                            <a href="https://www.linkedin.com/in/anuj-mishra-4330672b6/" target="_blank" class="hover:underline">Anuj Mishra</a>
-                        </div>
+                        
+                        <LinkPreview 
+                            url="https://www.linkedin.com/in/suryxnshsingh/"
+                            target="_blank"
+                            imageSrc="suryansh.jpg"
+                            isStatic
+                            className="ml-4 text-sm text-gray-400 sm:text-center"
+                            >
+                            Suryansh Singh
+                        </LinkPreview>
+                        <LinkPreview 
+                            url="https://www.linkedin.com/in/pranshuaf/"
+                            target="_blank"
+                            imageSrc="pranshu.jpg"
+                            isStatic
+                            className="ml-4 text-sm text-gray-400 sm:text-center"
+                            >
+                            Pransu Pandey
+                        </LinkPreview>
+                        <LinkPreview 
+                            url="https://www.linkedin.com/in/anuj-mishra-4330672b6/"
+                            target="_blank"
+                            imageSrc="cmg.jpg"
+                            isStatic
+                            className="ml-4 text-sm text-gray-400 sm:text-center"
+                            >
+                            Anuj Mishra
+                        </LinkPreview>
                     </div>
                 </div>
             </footer>
