@@ -68,12 +68,12 @@ export default function Footer(){
                             isStatic
                             className="ml-4 text-sm text-gray-400 sm:text-center"
                             >
-                            Pransu Pandey
+                            Pranshu Pandey
                         </LinkPreview>
                         <LinkPreview 
                             url="https://www.linkedin.com/in/anuj-mishra-4330672b6/"
                             target="_blank"
-                            imageSrc="cmg.jpg"
+                            imageSrc="cmg.png"
                             isStatic
                             className="ml-4 text-sm text-gray-400 sm:text-center"
                             >
