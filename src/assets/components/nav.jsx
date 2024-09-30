@@ -1,5 +1,3 @@
-
-
 export default function Navbar() {
 
     return (
@@ -10,17 +8,15 @@ export default function Navbar() {
                 </div>
                 <div className="">
                     <ul className="md:flex py-1 hidden ${menuOpen ? 'show' : ''} ">
-                        <li className="px-3 md:text-lg font-medium"><a href="/">Home</a></li>
-                        <li className="px-3 md:text-lg font-medium"><a href="/">About</a></li>
-                        <li className="px-3 md:text-lg font-medium"><a href="/">Faculty</a></li>
-                        <li className="px-3 md:text-lg font-medium"><a href="/">Contact</a></li>
+                        <li className="px-3 md:text-lg font-medium"><a href="#home">Home</a></li>
+                        <li className="px-3 md:text-lg font-medium"><a href="#about">About</a></li>
+                        <li className="px-3 md:text-lg font-medium"><a href="#faculty">Faculty</a></li>
                     </ul>
                 </div>
                 <div className='flex justify-center'>
-                    <button className="mx-2 px-4 p-1  bg-cyan-500  rounded-sm ">Sign In</button>
+                    <button className="mx-2 px-4 p-1 bg-cyan-500 rounded-sm ">Sign In</button>
                 </div>
             </nav>
-
         </div>
     )
 }
