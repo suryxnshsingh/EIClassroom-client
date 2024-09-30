@@ -68,6 +68,7 @@ const ProfileItem = ({ label, value, isCode }) => (
 
 const About = () => {
   return (
+    <section id ="about">
     <div className="flex flex-col items-center justify-center w-full pb-10" style={gradientBackground}>
       <div className="w-full max-w-7xl">
         <Title />
@@ -94,6 +95,7 @@ const About = () => {
         </motion.div>
       </div>
     </div>
+    </section>
   );
 };
 

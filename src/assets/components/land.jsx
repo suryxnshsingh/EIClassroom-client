@@ -3,6 +3,7 @@ import React from 'react';
 
 const BackgroundVideo = () => {
     return (
+        <section id="home">
         <div className="relative w-full h-screen overflow-hidden">
             <video
                 className="absolute top-1/2 left-1/2 w-full h-full object-cover transform -translate-x-1/2 -translate-y-1/2"
@@ -27,6 +28,7 @@ const BackgroundVideo = () => {
                 <img src="mouse.png" alt="logo" height={"50rem"} width={"50rem"} className='absolute bottom-10'/>
             </motion.div>
         </div>
+        </section>
     );
 };
 
