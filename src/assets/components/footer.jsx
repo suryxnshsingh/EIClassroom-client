@@ -13,7 +13,7 @@ export default function Footer(){
                             <div className="text-2xl text-white text-nowrap">
                                 EI Classroom Portal
                                 </div>
-                                <div className="text-xl text-white font-thin text-nowrap">
+                                <div className="text-xl text-white font-thin md:text-nowrap">
                                     Shri G. S. Institute of Tech. and Science
                                 </div>
                                 <div className="text-xl text-white font-thin text-nowrap ">
