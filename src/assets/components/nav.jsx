@@ -1,6 +1,10 @@
+import { useNavigate } from "react-router-dom"
 export default function Navbar() {
 
+    const navigate = useNavigate();
+
     return (
+        
         <div className="chakra-petch-medium text-white bg-transparent backdrop-blur-lg m-4  w-[92%] md:w-[98%] fixed z-50 rounded-lg border-stone-700 border-2 ">
             <nav className="flex justify-between px-3 py-4">
                 <div>
@@ -14,7 +18,7 @@ export default function Navbar() {
                     </ul>
                 </div>
                 <div className='flex justify-center'>
-                    <button className="mx-2 px-4 bg-cyan-500 rounded-sm ">Sign In</button>
+                    <button className="mx-2 px-4 bg-cyan-500 rounded-sm " onClick={() => navigate("/signin")}>Sign In</button>
                 </div>
             </nav>
         </div>
