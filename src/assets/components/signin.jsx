@@ -10,7 +10,6 @@ const Signin = () => {
       : "light"
   );
 
-  // Handle theme change
   const handleThemeToggle = () => {
     const newTheme = theme === "dark" ? "light" : "dark";
     setTheme(newTheme);
