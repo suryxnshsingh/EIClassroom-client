@@ -31,11 +31,11 @@ const Signin = () => {
     console.log("Form submitted");
   };
 
-  return ( <div className="bg-white dark:bg-black h-screen flex items-center justify-center">
+  return ( <div className="bg-white dark:bg-black h-screen flex items-center justify-center ">
     <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 border-2 border-neutral-300 dark:border-neutral-700  bg-white dark:bg-black">
       {/* Theme Toggle Button */}
       <div className="flex items-center justify-end">
-  <label className="relative inline-flex items-center cursor-pointer mr-2">
+  <label className="relative inline-flex items-center cursor-pointer mr-2  ">
     <input
       type="checkbox"
       className="sr-only"
