@@ -2,9 +2,6 @@ import React, { useState, useEffect } from "react";
 import Label from "./ui/label";
 import Input from "./ui/input";
 import { cn } from "../../../lib/utils";
-import {  
-  IconBrandGoogle,
-} from "@tabler/icons-react";
 
 const Signin = () => {
   const [theme, setTheme] = useState(
