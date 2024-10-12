@@ -34,7 +34,8 @@ const Signup = () => {
     console.log("Form submitted");
   };
 
-  return ( <div className="bg-white dark:bg-black h-screen flex items-center justify-center">
+  return ( <div className="bg-white dark:bg-black dark:bg-dot-white/[0.2] bg-dot-black/[0.2] h-screen flex items-center justify-center">
+    <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
     <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 border-2 border-neutral-300 dark:border-neutral-700  bg-white dark:bg-black">
       {/* Theme Toggle Button */}
       <div className="flex items-center justify-end">
