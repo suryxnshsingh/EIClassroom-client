@@ -2,9 +2,6 @@ import React, { useState, useEffect } from "react";
 import Label from "./ui/label";
 import Input from "./ui/input";
 import { cn } from "../../../lib/utils";
-import {  
-  IconBrandGoogle,
-} from "@tabler/icons-react";
 
 const Signin = () => {
   const [theme, setTheme] = useState(
@@ -34,11 +31,11 @@ const Signin = () => {
     console.log("Form submitted");
   };
 
-  return ( <div className="bg-white dark:bg-black h-screen flex items-center justify-center">
+  return ( <div className="bg-white dark:bg-black h-screen flex items-center justify-center ">
     <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 border-2 border-neutral-300 dark:border-neutral-700  bg-white dark:bg-black">
       {/* Theme Toggle Button */}
-<div className="flex items-center justify-end">
-  <label className="relative inline-flex items-center cursor-pointer mr-2">
+      <div className="flex items-center justify-end">
+  <label className="relative inline-flex items-center cursor-pointer mr-2  ">
     <input
       type="checkbox"
       className="sr-only"
@@ -57,22 +54,11 @@ const Signin = () => {
   </span>
 </div>
 
-      <h2 className="font-bold text-xl text-neutral-800 dark:text-neutral-200">
-        Welcome to EI Classroom
+      <h2 className="font-bold text-center text-xl text-neutral-800 dark:text-neutral-200">
+        EI Classroom
       </h2>
-      <p className="text-neutral-600 text-sm max-w-sm mt-2 dark:text-neutral-300">
-        Creat a teacher account to get started!
-      </p>
       <form className="my-8" onSubmit={handleSubmit}>
         <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
-          <LabelInputContainer>
-            <Label htmlFor="firstname">First name</Label>
-            <Input id="firstname" placeholder="Tyler" type="text" />
-          </LabelInputContainer>
-          <LabelInputContainer>
-            <Label htmlFor="lastname">Last name</Label>
-            <Input id="lastname" placeholder="Durden" type="text" />
-          </LabelInputContainer>
         </div>
         <LabelInputContainer className="mb-4">
           <Label htmlFor="email">Email Address</Label>
@@ -92,7 +78,9 @@ const Signin = () => {
         </button>
 
         <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
-
+        <p className="text-neutral-600 text-sm max-w-sm mt-2 dark:text-neutral-300 text-center">
+        Don't have an account? <a href="/signup" className="text-blue-500 underline">Create Account</a>
+      </p>
         {/* <div className="flex flex-col space-y-4">
           <SocialButton
             icon={<IconBrandGoogle className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />}
