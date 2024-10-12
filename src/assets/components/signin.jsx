@@ -1,5 +1,5 @@
-import React from "react";
-import  Label  from "./ui/label";
+import React, { useState, useEffect } from "react";
+import Label from "./ui/label";
 import Input from "./ui/input";
 import { cn } from "../../../lib/utils";
 import {
@@ -9,6 +9,28 @@ import {
 } from "@tabler/icons-react";
 
 const Signin = () => {
+  const [theme, setTheme] = useState(
+    typeof window !== "undefined" && window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light"
+  );
+
+  // Handle theme change
+  const handleThemeToggle = () => {
+    const newTheme = theme === "dark" ? "light" : "dark";
+    setTheme(newTheme);
+    document.documentElement.classList.toggle("dark", newTheme === "dark");
+    localStorage.setItem("theme", newTheme);
+  };
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme) {
+      setTheme(savedTheme);
+      document.documentElement.classList.toggle("dark", savedTheme === "dark");
+    }
+  }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form submitted");
@@ -16,6 +38,16 @@ const Signin = () => {
 
   return (
     <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-white dark:bg-black">
+      {/* Theme Toggle Button */}
+      <div className="flex justify-end">
+        <button
+          className="bg-gray-200 dark:bg-gray-800 p-2 rounded-full"
+          onClick={handleThemeToggle}
+        >
+          {theme === "dark" ? "🌙 Dark Mode" : "☀️ Light Mode"}
+        </button>
+      </div>
+
       <h2 className="font-bold text-xl text-neutral-800 dark:text-neutral-200">
         Welcome to EI Classroom
       </h2>
@@ -54,7 +86,10 @@ const Signin = () => {
         <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
 
         <div className="flex flex-col space-y-4">
-        <SocialButton icon={<IconBrandGoogle className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />} text="Google" />
+          <SocialButton
+            icon={<IconBrandGoogle className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />}
+            text="Google"
+          />
         </div>
       </form>
     </div>
