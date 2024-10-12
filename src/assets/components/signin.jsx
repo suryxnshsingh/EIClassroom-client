@@ -2,10 +2,8 @@ import React, { useState, useEffect } from "react";
 import Label from "./ui/label";
 import Input from "./ui/input";
 import { cn } from "../../../lib/utils";
-import {
-  IconBrandGithub,
+import {  
   IconBrandGoogle,
-  IconBrandOnlyfans,
 } from "@tabler/icons-react";
 
 const Signin = () => {
@@ -36,17 +34,28 @@ const Signin = () => {
     console.log("Form submitted");
   };
 
-  return ( <div className="bg-white dark:bg-black h-screen">
+  return ( <div className="bg-white dark:bg-black h-screen flex items-center justify-center">
     <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 border-2 border-neutral-300 dark:border-neutral-700  bg-white dark:bg-black">
       {/* Theme Toggle Button */}
-      <div className="flex justify-end">
-        <button
-          className="bg-gray-200 dark:bg-gray-800 p-2 rounded-full"
-          onClick={handleThemeToggle}
-        >
-          {theme === "dark" ? "🌙 Dark Mode" : "☀️ Light Mode"}
-        </button>
-      </div>
+      <div className="flex items-center justify-end">
+  <label className="relative inline-flex items-center cursor-pointer mr-2">
+    <input
+      type="checkbox"
+      className="sr-only"
+      checked={theme === "dark"}
+      onChange={handleThemeToggle}
+    />
+    <div className="w-12 h-6 bg-gray-200 dark:bg-gray-800 rounded-full shadow-inner"></div>
+    <div
+      className={`absolute w-6 h-6 bg-white rounded-full shadow transition-transform duration-300 ease-in-out ${
+        theme === "dark" ? "translate-x-6" : "translate-x-0"
+      }`}
+    ></div>
+  </label>
+  <span className="text-xl">
+    {theme === "dark" ? "🌙" : "☀️"}
+  </span>
+</div>
 
       <h2 className="font-bold text-xl text-neutral-800 dark:text-neutral-200">
         Welcome to EI Classroom
@@ -84,12 +93,12 @@ const Signin = () => {
 
         <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
 
-        <div className="flex flex-col space-y-4">
+        {/* <div className="flex flex-col space-y-4">
           <SocialButton
             icon={<IconBrandGoogle className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />}
             text="Google"
           />
-        </div>
+        </div> */}
       </form>
     </div>
     </div>
