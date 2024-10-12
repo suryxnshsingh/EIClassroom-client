@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios"; // Import Axios for HTTP requests
 import Label from "./ui/label";
 import Input from "./ui/input";
 import { cn } from "../../../lib/utils";
@@ -9,7 +10,15 @@ const Signup = () => {
       ? "dark"
       : "light"
   );
-  const [loading, setLoading] = useState(true); // Loading state
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: ""
+  });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
 
   const handleThemeToggle = () => {
     const newTheme = theme === "dark" ? "light" : "dark";
@@ -25,15 +34,33 @@ const Signup = () => {
       document.documentElement.classList.toggle("dark", savedTheme === "dark");
     }
 
-    // Simulate loading effect (e.g., fetching data)
     setTimeout(() => {
-      setLoading(false); // Stop loading after 2 seconds
+      setLoading(false);
     }, 2000);
   }, []);
 
-  const handleSubmit = (e) => {
+  // Handle form input changes
+  const handleInputChange = (e) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value });
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted");
+    setError(null);
+    setSuccess(null);
+
+    try {
+      // Send the signup request to the backend
+      const response = await axios.post("http://localhost:6000/api/auth/signup", formData);
+      setSuccess("Signup successful! You can now log in.");
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        setError("User with this email already exists.");
+      } else {
+        setError("Something went wrong. Please try again.");
+      }
+    }
   };
 
   // If loading, display skeleton
@@ -43,7 +70,7 @@ const Signup = () => {
 
   return (
     <div className="bg-white dark:bg-black dark:bg-dot-white/[0.2] bg-dot-black/[0.2] h-screen flex items-center justify-center">
-    <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
+      <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
       <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 border-2 border-neutral-300 dark:border-neutral-700 bg-white dark:bg-black">
         {/* Theme Toggle Button */}
         <div className="flex items-center justify-center mb-6">
@@ -68,24 +95,51 @@ const Signup = () => {
           EI Classroom
         </h2>
         <form className="my-8" onSubmit={handleSubmit}>
-        <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
-          <LabelInputContainer>
-            <Label htmlFor="firstname">First name</Label>
-            <Input id="firstname" placeholder="Tyler" type="text" />
+          <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
+            <LabelInputContainer>
+              <Label htmlFor="firstName">First name</Label>
+              <Input
+                id="firstName"
+                placeholder="Tyler"
+                type="text"
+                value={formData.firstName}
+                onChange={handleInputChange}
+              />
+            </LabelInputContainer>
+            <LabelInputContainer>
+              <Label htmlFor="lastName">Last name</Label>
+              <Input
+                id="lastName"
+                placeholder="Durden"
+                type="text"
+                value={formData.lastName}
+                onChange={handleInputChange}
+              />
+            </LabelInputContainer>
+          </div>
+          <LabelInputContainer className="mb-4">
+            <Label htmlFor="email">Email Address</Label>
+            <Input
+              id="email"
+              placeholder="projectmayhem@fc.com"
+              type="email"
+              value={formData.email}
+              onChange={handleInputChange}
+            />
           </LabelInputContainer>
-          <LabelInputContainer>
-            <Label htmlFor="lastname">Last name</Label>
-            <Input id="lastname" placeholder="Durden" type="text" />
+          <LabelInputContainer className="mb-4">
+            <Label htmlFor="password">Password</Label>
+            <Input
+              id="password"
+              placeholder="••••••••"
+              type="password"
+              value={formData.password}
+              onChange={handleInputChange}
+            />
           </LabelInputContainer>
-        </div>
-        <LabelInputContainer className="mb-4">
-          <Label htmlFor="email">Email Address</Label>
-          <Input id="email" placeholder="projectmayhem@fc.com" type="email" />
-        </LabelInputContainer>
-        <LabelInputContainer className="mb-4">
-          <Label htmlFor="password">Password</Label>
-          <Input id="password" placeholder="••••••••" type="password" />
-        </LabelInputContainer>
+
+          {error && <p className="text-red-500 text-center">{error}</p>}
+          {success && <p className="text-green-500 text-center">{success}</p>}
 
           <button
             className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
@@ -109,23 +163,18 @@ const Signup = () => {
 const SkeletonSignup = () => {
   return (
     <div className="bg-white dark:bg-black dark:bg-dot-white/[0.2] bg-dot-black/[0.2] h-screen flex items-center justify-center">
-    <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
-      <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 border-2 border-neutral-300 dark:border-neutral-700 bg-white dark:bg-black h-[400px]"> {/* Adjusted height */}
+      <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
+      <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 border-2 border-neutral-300 dark:border-neutral-700 bg-white dark:bg-black h-[400px]">
         <div className="animate-pulse">
           <div className="flex items-center justify-end mb-4">
             <div className="w-12 h-6 bg-gray-300 dark:bg-gray-700 rounded-full shadow-inner"></div>
           </div>
 
           <div className="h-8 bg-gray-300 dark:bg-gray-700 mb-6 w-32 mx-auto"></div>
-
           <div className="w-full h-[42px] bg-gray-300 dark:bg-gray-700 rounded mb-4"></div>
-
           <div className="w-full h-[42px] bg-gray-300 dark:bg-gray-700 rounded mb-4"></div>
-
           <div className="w-full h-[40px] bg-gray-300 dark:bg-gray-700 rounded mb-6"></div>
-
           <div className="bg-gray-300 dark:bg-gray-700 h-[1px] w-full mb-8"></div>
-
           <div className="h-4 bg-gray-300 dark:bg-gray-700 w-48 mx-auto"></div>
         </div>
       </div>
