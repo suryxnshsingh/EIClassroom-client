@@ -54,9 +54,7 @@ const Signin = () => {
         <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
 
         <div className="flex flex-col space-y-4">
-          <SocialButton icon={<IconBrandGithub className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />} text="GitHub" />
-          <SocialButton icon={<IconBrandGoogle className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />} text="Google" />
-          <SocialButton icon={<IconBrandOnlyfans className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />} text="OnlyFans" />
+        <SocialButton icon={<IconBrandGoogle className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />} text="Google" />
         </div>
       </form>
     </div>
