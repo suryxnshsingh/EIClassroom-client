@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { motion, useAnimation } from "framer-motion";
-import Label from "./ui/label"; // Adjust path as necessary
-import Input from "./ui/input"; // Adjust path as necessary
+import axios from "axios"; // Import Axios for HTTP requests
+import Label from "./ui/label";
+import Input from "./ui/input";
 import { cn } from "../../../lib/utils";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Signin = () => {
   const [theme, setTheme] = useState(
@@ -11,8 +11,14 @@ const Signin = () => {
       ? "dark"
       : "light"
   );
-
-  const controls = useAnimation();
+  const [loading, setLoading] = useState(true); // Loading state
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+  const [error, setError] = useState(null); // Error state
+  const [success, setSuccess] = useState(null); // Success state
+  const navigate = useNavigate();
 
   const handleThemeToggle = () => {
     const newTheme = theme === "dark" ? "light" : "dark";
@@ -30,33 +36,55 @@ const Signin = () => {
     if (savedTheme) {
       setTheme(savedTheme);
     }
-    controls.set({ backgroundColor: savedTheme === "dark" ? "#000" : "#fff" });
+
+    // Simulate loading effect (e.g., fetching data)
+    setTimeout(() => {
+      setLoading(false); // Stop loading after 2 seconds
+    }, 1000);
   }, []);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Form submitted");
+  // Handle form input changes
+  const handleInputChange = (e) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError(null); // Reset any previous errors
+    setSuccess(null); // Reset success message
+
+    try {
+      // Send sign-in request to the backend
+      const response = await axios.post("http://localhost:8080/api/auth/signin", formData);
+      
+      // Assuming successful login returns a token, store it (in localStorage or state)
+      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("email", response.data.email);
+      localStorage.setItem("firstName", response.data.firstName);
+      setSuccess("Sign-in successful!");
+      navigate("/dashboard");
+
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        setError("Invalid email or password.");
+      } else {
+        setError("Something went wrong. Please try again.");
+      }
+    }
+  };
+
+  // If loading, display skeleton
+  if (loading) {
+    return <SkeletonSignin />;
+  }
+
   return (
-    <motion.div
-      animate={controls}
-      className="h-screen flex items-center justify-center"
-      style={{ backgroundColor: theme === "dark" ? "#000" : "#fff" }} 
-    >
-      <motion.div
-        animate={{
-          backgroundColor: theme === "dark" ? "#1a1a1a" : "#ffffff",
-          color: theme === "dark" ? "#ffffff" : "#000000",
-        }}
-        transition={{ duration: 0.5 }}
-        className={cn(
-          "max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 border-2",
-          theme === "dark" ? "border-neutral-700" : "border-neutral-300" // Dynamic border color for the card
-        )}
-      >
+    <div className="bg-white dark:bg-black dark:bg-dot-white/[0.2] bg-dot-black/[0.2] h-screen flex items-center justify-center">
+      <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
+      <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 border-0 md:border-2 border-neutral-300 dark:border-neutral-700 bg-white dark:bg-black">
         {/* Theme Toggle Button */}
-        <div className="flex items-center justify-end">
+        <div className="flex items-center justify-center mb-6">
           <label className="relative inline-flex items-center cursor-pointer mr-2">
             <input
               type="checkbox"
@@ -74,64 +102,87 @@ const Signin = () => {
           <span className="text-xl">{theme === "dark" ? "🌙" : "☀️"}</span>
         </div>
 
-        <h2 className="font-bold text-xl">
-          Welcome to EI Classroom
+        <h2 className="font-bold text-center text-xl text-neutral-800 dark:text-neutral-200">
+          EI Classroom
         </h2>
-        <p className="text-sm max-w-sm mt-2">
-          Log in to access your classroom.
-        </p>
+
         <form className="my-8" onSubmit={handleSubmit}>
           <LabelInputContainer className="mb-4">
-            <Label htmlFor="email" style={{ color: theme === "dark" ? "#ffffff" : "#000000" }}>Email Address</Label>
+            <Label htmlFor="email">Email Address</Label>
             <Input
               id="email"
               placeholder="projectmayhem@fc.com"
               type="email"
-              className={cn(
-                theme === "dark" ? "bg-zinc-800 border-white text-white placeholder-gray-400" : "bg-gray-50 border-black text-black placeholder-gray-600"
-              )}
+              value={formData.email}
+              onChange={handleInputChange}
             />
           </LabelInputContainer>
+
           <LabelInputContainer className="mb-4">
-            <Label htmlFor="password" style={{ color: theme === "dark" ? "#ffffff" : "#000000" }}>Password</Label>
+            <Label htmlFor="password">Password</Label>
             <Input
               id="password"
               placeholder="••••••••"
               type="password"
-              className={cn(
-                theme === "dark" ? "bg-zinc-800 border-white text-white placeholder-gray-400" : "bg-gray-50 border-black text-black placeholder-gray-600"
-              )}
+              value={formData.password}
+              onChange={handleInputChange}
             />
           </LabelInputContainer>
 
+          {error && <p className="text-red-500 text-center pb-2">{error}</p>}
+          {success && <p className="text-green-500 text-center pb-2">{success}</p>}
+
           <button
-            className={cn(
-              "relative block w-full h-10 rounded-md font-medium transition duration-200 ease-in-out shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]",
-              theme === "dark"
-                ? "bg-gradient-to-br from-black to-zinc-900 text-white"
-                : "bg-gradient-to-br from-neutral-600 to-neutral-800 text-white"
-            )}
+            className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
             type="submit"
           >
-            Log In
+            Sign in &rarr;
             <BottomGradient />
           </button>
+
+          <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
+
+          <p className="text-neutral-600 text-sm max-w-sm mt-2 dark:text-neutral-300 text-center">
+            Don't have an account? <a href="/signup" className="text-blue-500 underline">Create Account</a>
+          </p>
         </form>
-        <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
-        <p className="text-sm max-w-sm mt-2">
-          Don't have an account? <Link to='/signup' className='text-blue-500 underline'>Sign up!</Link>
-        </p>
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   );
 };
 
-// Helper Component for Label and Input Container
-const LabelInputContainer = ({ children, className }) => (
-  <div className={`flex flex-col ${className}`}>
-    {children}
-  </div>
-);
+// Skeleton Loader for the Signin component
+const SkeletonSignin = () => {
+  return (
+    <div className="bg-white dark:bg-black dark:bg-dot-white/[0.2] bg-dot-black/[0.2] h-screen flex items-center justify-center">
+      <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
+      <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 border-2 border-neutral-300 dark:border-neutral-700 bg-white dark:bg-black h-auto">
+        <div className="animate-pulse">
+          <div className="flex items-center justify-center mb-4">
+            <div className="w-12 h-6 bg-gray-300 dark:bg-gray-700 rounded-full shadow-inner"></div>
+            <div className="w-6 h-6 ml-1 bg-gray-300 dark:bg-gray-700 rounded-full shadow-inner"></div>
+          </div>
+
+          <div className="h-8 bg-gray-300 dark:bg-gray-700 mb-6 w-32 mx-auto rounded-md "></div>
+          <div className="flex items-center justify-start mb-4">
+            <div className="w-32 h-6 bg-gray-300 dark:bg-gray-700 rounded-full shadow-inner"></div>
+          </div>
+          <div className="w-full h-[42px] bg-gray-300 dark:bg-gray-700 rounded mb-4"></div>
+          <div className="flex items-center justify-start mb-4">
+            <div className="w-24 h-6 bg-gray-300 dark:bg-gray-700 rounded-full shadow-inner"></div>
+          </div>
+          <div className="w-full h-[42px] bg-gray-300 dark:bg-gray-700 rounded mb-4"></div>
+
+          <div className="w-full h-[32px] bg-gray-300 dark:bg-gray-700 rounded mb-6"></div>
+
+          <div className="bg-gray-300 dark:bg-gray-700 h-[1px] w-full mb-8"></div>
+
+          <div className="h-4 bg-gray-300 dark:bg-gray-700 w-48 mx-auto"></div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const BottomGradient = () => {
   return (
@@ -140,6 +191,10 @@ const BottomGradient = () => {
       <span className="group-hover/btn:opacity-100 blur-sm block transition duration-500 opacity-0 absolute h-px w-1/2 mx-auto -bottom-px inset-x-10 bg-gradient-to-r from-transparent via-indigo-500 to-transparent" />
     </>
   );
+};
+
+const LabelInputContainer = ({ children, className }) => {
+  return <div className={cn("flex flex-col space-y-2 w-full", className)}>{children}</div>;
 };
 
 export default Signin;
