@@ -23,18 +23,15 @@ const Signin = () => {
   const handleThemeToggle = () => {
     const newTheme = theme === "dark" ? "light" : "dark";
     setTheme(newTheme);
+    document.documentElement.classList.toggle("dark", newTheme === "dark");
     localStorage.setItem("theme", newTheme);
-
-    controls.start({
-      backgroundColor: newTheme === "dark" ? "#000" : "#fff",
-      transition: { duration: 0.5 },
-    });
   };
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme) {
       setTheme(savedTheme);
+      document.documentElement.classList.toggle("dark", savedTheme === "dark");
     }
 
     // Simulate loading effect (e.g., fetching data)
