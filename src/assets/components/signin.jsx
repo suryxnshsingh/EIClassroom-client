@@ -37,7 +37,7 @@ const Signin = () => {
     // Simulate loading effect (e.g., fetching data)
     setTimeout(() => {
       setLoading(false); // Stop loading after 2 seconds
-    }, 1000);
+    }, 200);
   }, []);
 
   // Handle form input changes
