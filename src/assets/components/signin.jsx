@@ -48,14 +48,14 @@ const Signin = () => {
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(null); // Reset any previous errors
-    setSuccess(null); // Reset success message
+    setError(null);
+    setSuccess(null);
 
     try {
       // Send sign-in request to the backend
       const response = await axios.post("http://localhost:8080/api/auth/signin", formData);
       
-      // Assuming successful login returns a token, store it (in localStorage or state)
+
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("email", response.data.email);
       localStorage.setItem("firstName", response.data.firstName);
