@@ -38,7 +38,7 @@ const Signup = () => {
 
     setTimeout(() => {
       setLoading(false);
-    }, 2000);
+    }, 1000);
   }, []);
 
   // Handle form input changes
