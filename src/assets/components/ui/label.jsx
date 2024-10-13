@@ -2,13 +2,14 @@ import React, { forwardRef } from 'react';
 import * as LabelPrimitive from "@radix-ui/react-label";
 import { cn } from "../../../../lib/utils";
 
-const Label = forwardRef(({ className, ...props }, ref) => (
+const Label = forwardRef(({ className, style, ...props }, ref) => (
   <LabelPrimitive.Root
     ref={ref}
     className={cn(
-      "text-sm font-medium text-black dark:text-white leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
+      "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
       className
     )}
+    style={style} // Apply dynamic style for color
     {...props}
   />
 ));
