@@ -100,19 +100,24 @@ const SkeletonSignin = () => {
   return (
     <div className="bg-white dark:bg-black dark:bg-dot-white/[0.2] bg-dot-black/[0.2] h-screen flex items-center justify-center">
     <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
-      <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 border-2 border-neutral-300 dark:border-neutral-700 bg-white dark:bg-black h-[400px]"> {/* Adjusted height */}
+      <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 border-2 border-neutral-300 dark:border-neutral-700 bg-white dark:bg-black h-auto">
         <div className="animate-pulse">
-          <div className="flex items-center justify-end mb-4">
+          <div className="flex items-center justify-center mb-4">
             <div className="w-12 h-6 bg-gray-300 dark:bg-gray-700 rounded-full shadow-inner"></div>
+            <div className="w-6 h-6 ml-1 bg-gray-300 dark:bg-gray-700 rounded-full shadow-inner"></div>
           </div>
 
-          <div className="h-8 bg-gray-300 dark:bg-gray-700 mb-6 w-32 mx-auto"></div>
-
+          <div className="h-8 bg-gray-300 dark:bg-gray-700 mb-6 w-32 mx-auto rounded-md "></div>
+          <div className="flex items-center justify-start mb-4">
+            <div className="w-32 h-6 bg-gray-300 dark:bg-gray-700 rounded-full shadow-inner"></div>
+          </div>
+          <div className="w-full h-[42px] bg-gray-300 dark:bg-gray-700 rounded mb-4"></div>
+          <div className="flex items-center justify-start mb-4">
+            <div className="w-24 h-6 bg-gray-300 dark:bg-gray-700 rounded-full shadow-inner"></div>
+          </div>
           <div className="w-full h-[42px] bg-gray-300 dark:bg-gray-700 rounded mb-4"></div>
 
-          <div className="w-full h-[42px] bg-gray-300 dark:bg-gray-700 rounded mb-4"></div>
-
-          <div className="w-full h-[40px] bg-gray-300 dark:bg-gray-700 rounded mb-6"></div>
+          <div className="w-full h-[32px] bg-gray-300 dark:bg-gray-700 rounded mb-6"></div>
 
           <div className="bg-gray-300 dark:bg-gray-700 h-[1px] w-full mb-8"></div>
 
