@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios"; // Import Axios for HTTP requests
 import Label from "./ui/label";
 import Input from "./ui/input";
 import { cn } from "../../../lib/utils";
+import { useNavigate } from "react-router-dom";
 
 const Signin = () => {
   const [theme, setTheme] = useState(
@@ -10,6 +12,13 @@ const Signin = () => {
       : "light"
   );
   const [loading, setLoading] = useState(true); // Loading state
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+  const [error, setError] = useState(null); // Error state
+  const [success, setSuccess] = useState(null); // Success state
+  const navigate = useNavigate();
 
   const handleThemeToggle = () => {
     const newTheme = theme === "dark" ? "light" : "dark";
@@ -31,9 +40,35 @@ const Signin = () => {
     }, 1000);
   }, []);
 
-  const handleSubmit = (e) => {
+  // Handle form input changes
+  const handleInputChange = (e) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value });
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted");
+    setError(null); // Reset any previous errors
+    setSuccess(null); // Reset success message
+
+    try {
+      // Send sign-in request to the backend
+      const response = await axios.post("http://localhost:8080/api/auth/signin", formData);
+      
+      // Assuming successful login returns a token, store it (in localStorage or state)
+      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("email", response.data.email);
+      localStorage.setItem("firstName", response.data.firstName);
+      setSuccess("Sign-in successful!");
+      navigate("/dashboard");
+
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        setError("Invalid email or password.");
+      } else {
+        setError("Something went wrong. Please try again.");
+      }
+    }
   };
 
   // If loading, display skeleton
@@ -43,10 +78,10 @@ const Signin = () => {
 
   return (
     <div className="bg-white dark:bg-black dark:bg-dot-white/[0.2] bg-dot-black/[0.2] h-screen flex items-center justify-center">
-    <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
-      <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 border-0 md:border-2 border-neutral-300 dark:border-neutral-700  bg-white dark:bg-black">
-      {/* Theme Toggle Button */}
-      <div className="flex items-center justify-center mb-6">
+      <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
+      <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 border-0 md:border-2 border-neutral-300 dark:border-neutral-700 bg-white dark:bg-black">
+        {/* Theme Toggle Button */}
+        <div className="flex items-center justify-center mb-6">
           <label className="relative inline-flex items-center cursor-pointer mr-2">
             <input
               type="checkbox"
@@ -67,15 +102,32 @@ const Signin = () => {
         <h2 className="font-bold text-center text-xl text-neutral-800 dark:text-neutral-200">
           EI Classroom
         </h2>
+
         <form className="my-8" onSubmit={handleSubmit}>
           <LabelInputContainer className="mb-4">
             <Label htmlFor="email">Email Address</Label>
-            <Input id="email" placeholder="projectmayhem@fc.com" type="email" />
+            <Input
+              id="email"
+              placeholder="projectmayhem@fc.com"
+              type="email"
+              value={formData.email}
+              onChange={handleInputChange}
+            />
           </LabelInputContainer>
+
           <LabelInputContainer className="mb-4">
             <Label htmlFor="password">Password</Label>
-            <Input id="password" placeholder="••••••••" type="password" />
+            <Input
+              id="password"
+              placeholder="••••••••"
+              type="password"
+              value={formData.password}
+              onChange={handleInputChange}
+            />
           </LabelInputContainer>
+
+          {error && <p className="text-red-500 text-center pb-2">{error}</p>}
+          {success && <p className="text-green-500 text-center pb-2">{success}</p>}
 
           <button
             className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
@@ -86,6 +138,7 @@ const Signin = () => {
           </button>
 
           <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
+
           <p className="text-neutral-600 text-sm max-w-sm mt-2 dark:text-neutral-300 text-center">
             Don't have an account? <a href="/signup" className="text-blue-500 underline">Create Account</a>
           </p>
@@ -99,7 +152,7 @@ const Signin = () => {
 const SkeletonSignin = () => {
   return (
     <div className="bg-white dark:bg-black dark:bg-dot-white/[0.2] bg-dot-black/[0.2] h-screen flex items-center justify-center">
-    <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
+      <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
       <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 border-2 border-neutral-300 dark:border-neutral-700 bg-white dark:bg-black h-auto">
         <div className="animate-pulse">
           <div className="flex items-center justify-center mb-4">
