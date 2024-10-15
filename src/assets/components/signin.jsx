@@ -34,25 +34,22 @@ const Signin = () => {
       document.documentElement.classList.toggle("dark", savedTheme === "dark");
     }
 
-    // Simulate loading effect (e.g., fetching data)
     setTimeout(() => {
-      setLoading(false); // Stop loading after 2 seconds
+      setLoading(false);
     }, 200);
   }, []);
 
-  // Handle form input changes
+
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
     setSuccess(null);
 
     try {
-      // Send sign-in request to the backend
       const response = await axios.post("http://localhost:8080/api/auth/signin", formData);
       
 
