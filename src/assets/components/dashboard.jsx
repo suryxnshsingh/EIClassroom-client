@@ -2,6 +2,7 @@ import { SubjectCard } from "./SubjectCard"
 import { useState, useEffect } from "react"
 import axios from 'axios';
 import Navbar from "./navbar";
+import { useNavigate } from "react-router-dom";
 
 const refreshPage = () => {
   window.location.reload();
@@ -16,6 +17,7 @@ const Loading = () => {
 }
 
 const Error = ({ error }) => {
+  const navigate = useNavigate();
   return (
     <div className="flex justify-center flex-col items-center h-screen bg-black text-white text-2xl ">
       <div>{error}</div>
@@ -23,7 +25,7 @@ const Error = ({ error }) => {
         <button 
         onClick={() => {
           localStorage.clear();
-          navigate("/")
+          navigate("/signin")
         }}
         className="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded my-5"
         >Re-Login</button>

@@ -19,11 +19,7 @@ export default function Navbar() {
       setTheme(savedTheme);
       document.documentElement.classList.toggle("dark", savedTheme === "dark");
     }
-
-    setTimeout(() => {
-      setLoading(false);
-    }, 200);
-    }, []);
+  }, []);
 
   return (
     <div className="chakra-petch-medium dark:text-white bg-transparent backdrop-blur-lg m-4 w-[92%] md:w-[98%] fixed z-50 rounded-lg border-stone-700 border-2">
