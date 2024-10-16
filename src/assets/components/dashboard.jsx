@@ -17,7 +17,7 @@ const Loading = () => {
 
 const Error = ({ error }) => {
   return (
-    <div className="flex justify-center items-center h-screen bg-black text-white text-2xl flex flex-col">
+    <div className="flex justify-center flex-col items-center h-screen bg-black text-white text-2xl ">
       <div>{error}</div>
       <div>
         <button 
