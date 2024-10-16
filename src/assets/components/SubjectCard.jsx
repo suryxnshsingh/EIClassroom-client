@@ -6,7 +6,10 @@ export function SubjectCard({ name, code }) {
   return (
     <div 
     className=" w-64 group/card poppins-regular"
-    onClick={() => navigate(`/subject/${code}`)}
+    onClick={() => {
+      navigate(`/subject/${code}`)
+    }
+  }
     >
       <div
         className={cn(
