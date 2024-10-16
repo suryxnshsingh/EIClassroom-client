@@ -55,11 +55,10 @@ const List = ({ subjectCode }) => {
       }
     };
 
-    // Call the fetch function if we have a subjectCode
     if (subjectCode) {
       fetchData();
     }
-  }, [subjectCode]); // Only re-run if subjectCode changes
+  }, [subjectCode]);
 
   if (loading) {
     return (
@@ -268,5 +267,4 @@ const AddStudentPopup = ({ setCreate, subjectCode }) => {
       </div>
     );
   };
-
 export default SubDash;
