@@ -56,7 +56,7 @@ export default function Navbar() {
 
         <div className="flex-1 flex justify-end">
           <button
-            className="mx-2 py-1 px-4 bg-cyan-500 rounded-sm"
+            className="mx-2 py-1 px-4 bg-blue-500 rounded-sm"
             onClick={() => {
                 localStorage.clear();
                 navigate("/")

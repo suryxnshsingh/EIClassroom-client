@@ -1,8 +1,13 @@
 import { cn } from "../../../utils/cn.js";
+import { useNavigate } from "react-router-dom";
 
 export function SubjectCard({ name, code }) {
+  const navigate = useNavigate();
   return (
-    <div className=" w-64 group/card poppins-regular">
+    <div 
+    className=" w-64 group/card poppins-regular"
+    onClick={() => navigate(`/subject/${code}`)}
+    >
       <div
         className={cn(
           "cursor-pointer overflow-hidden relative card h-96 rounded-md shadow-xl max-w-sm mx-auto backgroundImage flex flex-col justify-between p-4",
