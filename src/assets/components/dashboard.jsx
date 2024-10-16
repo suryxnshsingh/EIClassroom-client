@@ -66,7 +66,7 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="bg-white dark:bg-black dark:bg-dot-white/[0.2] bg-dot-black/[0.2] h-full pb-20 poppins">
+    <div className="bg-white dark:bg-black dark:bg-dot-white/[0.2] bg-dot-black/[0.2] min-h-screen h-full pb-20 poppins">
       {create && <CreateSubject create={create} setCreate={setCreate} />}
       <Navbar/>
       <div className=" text-5xl flex justify-center items-center poppins-semibold pt-28 pb-3 dark:text-white">
