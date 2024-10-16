@@ -4,10 +4,10 @@ export default function Footer(){
     return(
         <div>
             <section id ="contact">
-            <footer class="bg-neutral-900">
-                <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
-                    <div class="md:flex md:justify-between">
-                    <div class="mb-6 md:mb-0 w-28 flex items-center">
+            <footer className="bg-neutral-900">
+                <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
+                    <div className="md:flex md:justify-between">
+                    <div className="mb-6 md:mb-0 w-28 flex items-center">
                         <img
                             src="/GS LOGO.png" alt="logo"></img>
                         <div className="ml-4">
@@ -22,34 +22,34 @@ export default function Footer(){
                                 </div>
                             </div>
                     </div>
-                    <div class="grid grid-cols-2 gap-4 sm:gap-6 sm:grid-cols-3">
+                    <div className="grid grid-cols-2 gap-4 sm:gap-6 sm:grid-cols-3">
                         <div>
-                            <h2 class="mb-6 text-sm font-semibold  uppercase text-white">Resources</h2>
-                            <ul class="text-gray-500 dark:text-gray-400 font-medium">
-                                <li class="mb-4">
-                                    <a href="/" class="hover:underline">Notes</a>
+                            <h2 className="mb-6 text-sm font-semibold  uppercase text-white">Resources</h2>
+                            <ul className="text-gray-500 dark:text-gray-400 font-medium">
+                                <li className="mb-4">
+                                    <a href="/" className="hover:underline">Notes</a>
                                 </li>
                                 <li>
-                                    <a href="/" class="hover:underline">Books</a>
+                                    <a href="/" className="hover:underline">Books</a>
                                 </li>
                             </ul>
                         </div>
                         <div>
-                            <h2 class="mb-6 text-sm font-semibold uppercase text-white">Contact Us</h2>
-                            <ul class="text-gray-400 font-medium">
-                                <li class="mb-4">
-                                    <a href="#" class="hover:underline">+91 987654321</a>
+                            <h2 className="mb-6 text-sm font-semibold uppercase text-white">Contact Us</h2>
+                            <ul className="text-gray-400 font-medium">
+                                <li className="mb-4">
+                                    <a href="#" className="hover:underline">+91 987654321</a>
                                 </li>
                                 <li>
-                                    <a href="#" class="hover:underline">ei.dept@sgsits.com</a>
+                                    <a href="#" className="hover:underline">ei.dept@sgsits.com</a>
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </div>
-                <hr class="my-6  sm:mx-auto border-gray-700 lg:my-8" />
-                <div class="flex justify-center">
-                        <div class="text-sm text-white sm:text-center">
+                <hr className="my-6  sm:mx-auto border-gray-700 lg:my-8" />
+                <div className="flex justify-center">
+                        <div className="text-sm text-white sm:text-center">
                             Crafted by :
                         </div>
                         
