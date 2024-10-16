@@ -155,7 +155,7 @@ const AddStudentPopup = ({ setCreate, subjectCode }) => {
     setError('');
 
     try {
-      const response = await axios.post(`http://localhost:8080/api/subjects/${subjectCode}/submit-form`, formData, {
+      const response = await axios.post(`http://localhost:8080/api/operation/submit-form`, formData, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`,
           'Content-Type': 'application/json',
