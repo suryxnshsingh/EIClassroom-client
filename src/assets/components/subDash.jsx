@@ -43,13 +43,10 @@ const List = ({ subjectCode }) => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(`http://localhost:8080/api/operation/sheets?subjectCode=${subjectCode}`, {
-          // headers: {
-          //   'Authorization': `Bearer ${localStorage.getItem('token')}`
-          // }
-        });
+        const response = await axios.get(`http://localhost:8080/api/operation/sheets?subjectCode=${subjectCode}`);
         console.log(response.data);
         setSheets(response.data);
+        console.log(sheets);
         setError(null);
         setLoading(false);
       } catch (err) {
@@ -103,13 +100,13 @@ const List = ({ subjectCode }) => {
             ) : (
               sheets.map((sheet) => (
                 <ListItem
-                  key={sheet.enrollmentNo}
-                  Enrollment={sheet.enrollmentNo}
-                  Name={sheet.studentName}
-                  MST1={sheet.mst1}
-                  MST2={sheet.mst2}
-                  AssQuiz={sheet.assQuiz}
-                  Endsem={sheet.endsem}
+                  key={sheet.id}
+                  Enrollment={sheet.id}
+                  Name={sheet.name}
+                  MST1={sheet.MST1}
+                  MST2={sheet.MST2}
+                  AssQuiz={sheet.Quiz_Assignment}
+                  Endsem={sheet.EndSem}
                 />
               ))
             )}
