@@ -58,11 +58,10 @@ const List = ({ subjectCode }) => {
       }
     };
 
-    // Call the fetch function if we have a subjectCode
     if (subjectCode) {
       fetchData();
     }
-  }, [subjectCode]); // Only re-run if subjectCode changes
+  }, [subjectCode]);
 
   if (loading) {
     return (
@@ -138,12 +137,12 @@ const ListItem = ({Enrollment, Name, MST1, MST2, AssQuiz, Endsem}) => {
 
 const AddStudentPopup = ({ setCreate, subjectCode }) => {
   const [formData, setFormData] = useState({
-    enrollmentNo: '',
-    studentName: '',
-    mst1: 0,
-    mst2: 0,
-    assQuiz: 0,
-    endsem: 0,
+    id: '',
+    Name: '',
+    MST1: 0,
+    MST2: 0,
+    Quiz_Assignment: 0,
+    EndSem: 0,
   });
   const [error, setError] = useState('');
 
@@ -156,7 +155,7 @@ const AddStudentPopup = ({ setCreate, subjectCode }) => {
     setError('');
 
     try {
-      const response = await axios.post(`http://localhost:8080/api/subjects/${subjectCode}/add-student`, formData, {
+      const response = await axios.post(`http://localhost:8080/api/subjects/${subjectCode}/submit-form`, formData, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`,
           'Content-Type': 'application/json',
@@ -179,12 +178,12 @@ const AddStudentPopup = ({ setCreate, subjectCode }) => {
           </div>
 
           <div className="mb-4">
-            <label htmlFor="enrollmentNo" className="block mb-2 dark:text-white">Enrollment Number</label>
+            <label htmlFor="id" className="block mb-2 dark:text-white">Enrollment Number</label>
             <input
               type="text"
-              name="enrollmentNo"
-              id="enrollmentNo"
-              value={formData.enrollmentNo}
+              name="id"
+              id="id"
+              value={formData.id}
               onChange={handleChange}
               required
               className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300 dark:bg-gray-800 dark:text-white"
@@ -192,12 +191,12 @@ const AddStudentPopup = ({ setCreate, subjectCode }) => {
           </div>
 
           <div className="mb-4">
-            <label htmlFor="studentName" className="block mb-2 dark:text-white">Student Name</label>
+            <label htmlFor="name" className="block mb-2 dark:text-white">Student Name</label>
             <input
               type="text"
-              name="studentName"
-              id="studentName"
-              value={formData.studentName}
+              name="name"
+              id="name"
+              value={formData.name}
               onChange={handleChange}
               required
               className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300 dark:bg-gray-800 dark:text-white"
@@ -206,12 +205,12 @@ const AddStudentPopup = ({ setCreate, subjectCode }) => {
 
           {/* MST1 Field */}
           <div className="mb-4">
-            <label htmlFor="mst1" className="block mb-2 dark:text-white">MST1</label>
+            <label htmlFor="MST1" className="block mb-2 dark:text-white">MST1</label>
             <input
               type="number"
-              name="mst1"
-              id="mst1"
-              value={formData.mst1}
+              name="MST1"
+              id="MST1"
+              value={formData.MST1}
               onChange={handleChange}
               required
               className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300 dark:bg-gray-800 dark:text-white"
@@ -220,12 +219,12 @@ const AddStudentPopup = ({ setCreate, subjectCode }) => {
 
           {/* MST2 Field */}
           <div className="mb-4">
-            <label htmlFor="mst2" className="block mb-2 dark:text-white">MST2</label>
+            <label htmlFor="MST2" className="block mb-2 dark:text-white">MST2</label>
             <input
               type="number"
-              name="mst2"
-              id="mst2"
-              value={formData.mst2}
+              name="MST2"
+              id="MST2"
+              value={formData.MST2}
               onChange={handleChange}
               required
               className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300 dark:bg-gray-800 dark:text-white"
@@ -234,12 +233,12 @@ const AddStudentPopup = ({ setCreate, subjectCode }) => {
 
           {/* Assignment/Quiz (AssQuiz) Field */}
           <div className="mb-4">
-            <label htmlFor="assQuiz" className="block mb-2 dark:text-white">Assignment / Quiz</label>
+            <label htmlFor="Quiz_Assignment" className="block mb-2 dark:text-white">Assignment / Quiz</label>
             <input
               type="number"
-              name="assQuiz"
-              id="assQuiz"
-              value={formData.assQuiz}
+              name="Quiz_Assignment"
+              id="Quiz_Assignment"
+              value={formData.Quiz_Assignment}
               onChange={handleChange}
               required
               className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300 dark:bg-gray-800 dark:text-white"
@@ -248,12 +247,12 @@ const AddStudentPopup = ({ setCreate, subjectCode }) => {
 
           {/* Endsem Field */}
           <div className="mb-4">
-            <label htmlFor="endsem" className="block mb-2 dark:text-white">End Semester</label>
+            <label htmlFor="Endsem" className="block mb-2 dark:text-white">End Semester</label>
             <input
               type="number"
-              name="endsem"
-              id="endsem"
-              value={formData.endsem}
+              name="Endsem"
+              id="Endsem"
+              value={formData.Endsem}
               onChange={handleChange}
               required
               className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300 dark:bg-gray-800 dark:text-white"
