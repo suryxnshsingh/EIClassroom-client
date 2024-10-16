@@ -5,6 +5,7 @@ import axios from 'axios'
 
 const SubDash = () => {
   const { subjectCode } = useParams();
+  console.log(subjectCode)
   const [create , setCreate] = useState(false);
   return (
     <div className="bg-white dark:bg-black dark:bg-dot-white/[0.2] bg-dot-black/[0.2] min-h-screen h-full pb-20 poppins">
@@ -15,11 +16,12 @@ const SubDash = () => {
         <div className='flex justify-center gap-5 pt-5'>
           <button 
           className='bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded'
-          onClick={() => setCreate(true)} 
+          onClick={() => setCreate(true)}
           >
             Add Student
           </button>
-          <button className='bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded'>
+          <button className='bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded'
+          onClick={() => console.log(subjectCode)}>
             Download Report
           </button>  
         </div>
@@ -41,12 +43,12 @@ const List = ({ subjectCode }) => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const response = await axios.get('http://localhost:8080/api/operation/sheets', {
-          params: { subjectCode },
-          headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`
-          }
+        const response = await axios.get(`http://localhost:8080/api/operation/sheets?subjectCode=${subjectCode}`, {
+          // headers: {
+          //   'Authorization': `Bearer ${localStorage.getItem('token')}`
+          // }
         });
+        console.log(response.data);
         setSheets(response.data);
         setError(null);
         setLoading(false);
