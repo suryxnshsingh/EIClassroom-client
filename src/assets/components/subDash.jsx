@@ -137,10 +137,10 @@ const AddStudentPopup = ({ setCreate, subjectCode }) => {
       id: '',
       subjectCode,
       name: '',
-      MST1: '',
-      MST2: '',
-      Quiz_Assignment: '',
-      EndSem: '',
+      MST1: 0,
+      MST2: 0,
+      Quiz_Assignment: 0,
+      EndSem: 0,
     });
     const [error, setError] = useState('');
   
