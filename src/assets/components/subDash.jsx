@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Navbar from './navbar'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 const SubDash = () => {
   const { subjectCode } = useParams();
@@ -21,7 +22,7 @@ const SubDash = () => {
             Add Student
           </button>
           <button className='bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded'
-          onClick={() => console.log(subjectCode)}>
+          onClick={() => downloadExcel(subjectCode)}>
             Download Report
           </button>  
         </div>
@@ -133,6 +134,7 @@ const ListItem = ({Enrollment, Name, MST1, MST2, AssQuiz, Endsem}) => {
 };
 
 const AddStudentPopup = ({ setCreate, subjectCode }) => {
+  const navigate = useNavigate();
     const [formData, setFormData] = useState({
       id: '',
       subjectCode,
@@ -161,6 +163,7 @@ const AddStudentPopup = ({ setCreate, subjectCode }) => {
         });
         console.log('Student added:', response.data);
         setCreate(false);  // Close popup on success
+        navigate(0);
       } catch (err) {
         console.error('Error adding student:', err);
         setError(err.response?.data?.error || 'Failed to add student. Please try again.');
@@ -267,4 +270,24 @@ const AddStudentPopup = ({ setCreate, subjectCode }) => {
       </div>
     );
   };
+
+  const downloadExcel = (subjectCode) => {
+    axios.get(`http://localhost:8080/api/operation/download-sheets?subjectCode=${subjectCode}`, {
+      responseType: 'blob', // Important to set response type as blob for file download
+    })
+    .then((response) => {
+      // Create a URL for the blob
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'sheets.xlsx';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    })
+    .catch((error) => {
+      console.error('Error downloading the Excel sheet:', error);
+    });
+  };
+
 export default SubDash;
