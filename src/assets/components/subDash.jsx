@@ -171,8 +171,8 @@ const AddExamSchema = ({ setSchema, subjectCode }) => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     subjectCode,
-    mst1: { Q1: '', Q2: '', Q3: '' }, // Correct structure for mst1
-    mst2: { Q1: '', Q2: '', Q3: '' }, // Correct structure for mst2
+    mst1: { Q1: '', Q2: '', Q3: '' }, // Keep the structure but initialize with empty strings
+    mst2: { Q1: '', Q2: '', Q3: '' }, // Keep the structure but initialize with empty strings
     Quiz_Assignment: [], // Store the quiz assignments here
   });
   const [error, setError] = useState('');
@@ -263,6 +263,7 @@ const AddExamSchema = ({ setSchema, subjectCode }) => {
                   onChange={handleChange}
                   className="w-full p-2.5 border border-gray-300 rounded-lg dark:bg-gray-700 dark:text-white dark:border-gray-600"
                 >
+                  <option value="">Select CO</option> {/* Default empty option */}
                   {['CO1', 'CO2', 'CO3', 'CO4', 'CO5'].map((co, idx) => (
                     <option key={idx} value={co}>{co}</option>
                   ))}
@@ -286,6 +287,7 @@ const AddExamSchema = ({ setSchema, subjectCode }) => {
                   onChange={handleChange}
                   className="w-full p-2.5 border border-gray-300 rounded-lg dark:bg-gray-700 dark:text-white dark:border-gray-600"
                 >
+                  <option value="">Select CO</option> {/* Default empty option */}
                   {['CO1', 'CO2', 'CO3', 'CO4', 'CO5'].map((co, idx) => (
                     <option key={idx} value={co}>{co}</option>
                   ))}
