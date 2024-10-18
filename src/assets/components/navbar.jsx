@@ -22,7 +22,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <div className="chakra-petch-medium dark:text-white bg-transparent backdrop-blur-lg m-4 w-[92%] md:w-[98%] fixed z-50 rounded-lg border-stone-700 border-2">
+    <div className="chakra-petch-medium dark:text-white bg-transparent backdrop-blur-lg m-4 w-[92%] md:w-[98%] fixed z-30 rounded-lg border-stone-700 border-2">
       <nav className="flex justify-between items-center px-3 py-3">
         <div className="flex-1">
           <h1 className="md:text-2xl text-nowrap text-xl px-3 font-bold text-black dark:text-white">

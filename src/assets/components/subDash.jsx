@@ -80,58 +80,86 @@ const List = ({ subjectCode }) => {
   return (
     <div className="m-4 p-3 bg-[#F5F5F5] dark:bg-zinc-800 rounded-lg mt-8">
       <div className="relative overflow-x-auto mx-2">
-        <table className="w-full text-sm text-left rtl:text-right text-gray-500">
-          <thead className="text-gray-700 dark:text-white uppercase bg-grey-500">
-            <tr className="rounded-lg">
-              <th scope="col" className="px-6 py-3">Enrollment No.</th>
-              <th scope="col" className="px-6 py-3">Name</th>
-              <th scope="col" className="px-6 py-3">MST1</th>
-              <th scope="col" className="px-6 py-3">MST2</th>
-              <th scope="col" className="px-6 py-3">Ass / Quiz</th>
-              <th scope="col" className="px-6 py-3">Endsem</th>
+      <table className="w-full text-sm text-left rtl:text-right text-gray-500">
+        <thead className="text-gray-700 dark:text-white uppercase bg-grey-500 ">
+          <tr className="rounded-lg">
+            <th scope="col" className="px-6 py-3 text-lg">Enrollment No.</th>
+            <th scope="col" className="px-6 py-3 text-lg">Name</th>
+
+            {/* Main columns for MST1 and MST2 with sub-columns */}
+            <th scope="col" colSpan="3" className="px-6 py-3 text-lg">MST1</th>
+            <th scope="col" colSpan="3" className="px-6 py-3 text-lg">MST2</th>
+
+            <th scope="col" className="px-6 py-3 text-lg">Ass / Quiz</th>
+
+            {/* Main column for Endsem with sub-columns */}
+            <th scope="col" colSpan="5" className="px-6 py-3 text-lg">Endsem</th>
+          </tr>
+          <tr className="rounded-lg">
+            {/* Sub-columns for Enrollment No. */}
+          <th scope="col" className="px-6 py-3 "></th>
+          <th scope="col" className="px-6 py-3"></th>
+            {/* Sub-columns for MST1 */}
+            <th scope="col" className="px-6 py-3">Q1</th>
+            <th scope="col" className="px-6 py-3">Q2</th>
+            <th scope="col" className="px-6 py-3">Q3</th>
+
+            {/* Sub-columns for MST2 */}
+            <th scope="col" className="px-6 py-3">Q1</th>
+            <th scope="col" className="px-6 py-3">Q2</th>
+            <th scope="col" className="px-6 py-3">Q3</th>
+
+            {/* Sub-columns for Ass / Quiz */}
+            <th scope="col" className="px-6 py-3"></th>
+            {/* Sub-columns for Endsem */}
+            <th scope="col" className="px-6 py-3">Q1</th>
+            <th scope="col" className="px-6 py-3">Q2</th>
+            <th scope="col" className="px-6 py-3">Q3</th>
+            <th scope="col" className="px-6 py-3">Q4</th>
+            <th scope="col" className="px-6 py-3">Q5</th>
+          </tr>
+        </thead>
+        <tbody>
+          {sheets.length === 0 ? (
+            <tr className="bg-white border-b dark:bg-black dark:text-gray-300">
+              <td colSpan="14" className="px-6 py-4 text-center">
+                No sheets found
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {sheets.length === 0 ? (
-              <tr className="bg-white border-b dark:bg-black dark:text-gray-300">
-                <td colSpan="6" className="px-6 py-4 text-center">
-                  No sheets found
-                </td>
+          ) : (
+            sheets.map((sheet) => (
+              <tr key={sheet.id} className="bg-white border-b dark:bg-black dark:text-gray-300">
+                <td className="px-6 py-3">{sheet.id}</td>
+                <td className="px-6 py-3">{sheet.name}</td>
+
+                {/* MST1 Sub-columns */}
+                <td className="px-6 py-3">{sheet.MST1_Q1 ?? '-'}</td>
+                <td className="px-6 py-3">{sheet.MST1_Q2 ?? '-'}</td>
+                <td className="px-6 py-3">{sheet.MST1_Q3 ?? '-'}</td>
+
+                {/* MST2 Sub-columns */}
+                <td className="px-6 py-3">{sheet.MST2_Q1 ?? '-'}</td>
+                <td className="px-6 py-3">{sheet.MST2_Q2 ?? '-'}</td>
+                <td className="px-6 py-3">{sheet.MST2_Q3 ?? '-'}</td>
+
+                <td className="px-6 py-3">{sheet.Quiz_Assignment ?? '-'}</td>
+
+                {/* Endsem Sub-columns */}
+                <td className="px-6 py-3">{sheet.EndSem_Q1 ?? '-'}</td>
+                <td className="px-6 py-3">{sheet.EndSem_Q2 ?? '-'}</td>
+                <td className="px-6 py-3">{sheet.EndSem_Q3 ?? '-'}</td>
+                <td className="px-6 py-3">{sheet.EndSem_Q4 ?? '-'}</td>
+                <td className="px-6 py-3">{sheet.EndSem_Q5 ?? '-'}</td>
               </tr>
-            ) : (
-              sheets.map((sheet) => (
-                <ListItem
-                  key={sheet.id}
-                  Enrollment={sheet.id}
-                  Name={sheet.name}
-                  MST1={sheet.MST1}
-                  MST2={sheet.MST2}
-                  AssQuiz={sheet.Quiz_Assignment}
-                  Endsem={sheet.EndSem}
-                />
-              ))
-            )}
-          </tbody>
-        </table>
+            ))
+          )}
+        </tbody>
+      </table>
       </div>
     </div>
   );
 };
 
-const ListItem = ({Enrollment, Name, MST1, MST2, AssQuiz, Endsem}) => {
-  return (
-    <tr className="bg-white border-b dark:bg-black dark:text-gray-300">
-      <th scope="row" className="px-6 py-4 font-medium text-blue-500 whitespace-nowrap">
-        {Enrollment}
-      </th>
-      <td className="px-6 py-4">{Name}</td>
-      <td className="px-6 py-4">{MST1}</td>
-      <td className="px-6 py-4">{MST2}</td>
-      <td className="px-6 py-4">{AssQuiz}</td>
-      <td className="px-6 py-4">{Endsem}</td>
-    </tr>
-  );
-};
 
 const AddStudentPopup = ({ setCreate, subjectCode }) => {
   const navigate = useNavigate();
@@ -139,10 +167,21 @@ const AddStudentPopup = ({ setCreate, subjectCode }) => {
       id: '',
       subjectCode,
       name: '',
-      MST1: 0,
-      MST2: 0,
+      MST1_Q1: 0,
+      MST1_Q2: 0,
+      MST1_Q3: 0,
+
+      MST2_Q1: 0,
+      MST2_Q2: 0,
+      MST2_Q3: 0,
+
       Quiz_Assignment: 0,
-      EndSem: 0,
+
+      EndSem_Q1: 0,
+      EndSem_Q2: 0,
+      EndSem_Q3: 0,
+      EndSem_Q4: 0,
+      EndSem_Q5: 0,
     });
     const [error, setError] = useState('');
   
@@ -171,7 +210,7 @@ const AddStudentPopup = ({ setCreate, subjectCode }) => {
     };
   
     return (
-      <div className="absolute h-screen w-full flex items-center justify-center z-10 poppins-regular backdrop-brightness-50">
+      <div className="absolute h-screen w-full flex items-center justify-center z-50 poppins-regular backdrop-brightness-50">
         <form className="max-w-md mx-auto bg-white dark:bg-black rounded-xl p-2 w-1/3" onSubmit={handleSubmit}>
           <div className="p-4">
             <div className="flex justify-end text-white cursor-pointer" onClick={() => setCreate(false)}>
@@ -179,7 +218,7 @@ const AddStudentPopup = ({ setCreate, subjectCode }) => {
             </div>
   
             <div className="mb-4">
-              <label htmlFor="id" className="block mb-2 dark:text-white">Enrollment Number</label>
+              <label htmlFor="id" className="block mb-2 dark:text-white text-lg font-semibold">Enrollment Number</label>
               <input
                 type="text"
                 name="id"
@@ -192,7 +231,7 @@ const AddStudentPopup = ({ setCreate, subjectCode }) => {
             </div>
   
             <div className="mb-4">
-              <label htmlFor="name" className="block mb-2 dark:text-white">Student Name</label>
+              <label htmlFor="name" className="block mb-2 dark:text-white text-lg font-semibold">Student Name</label>
               <input
                 type="text"
                 name="name"
@@ -204,37 +243,91 @@ const AddStudentPopup = ({ setCreate, subjectCode }) => {
               />
             </div>
   
-            {/* MST1 Field */}
-            <div className="mb-4">
-              <label htmlFor="MST1" className="block mb-2 dark:text-white">MST1</label>
-              <input
-                type="number"
-                name="MST1"
-                id="MST1"
-                value={formData.MST1}
-                onChange={handleChange}
-                required
-                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300 dark:bg-gray-800 dark:text-white"
-              />
-            </div>
+            {/* MST1 Field */}  
+            <div className='block mb-2 dark:text-white text-lg font-semibold'> MID SEMESTER EXAM - 1 MARKS</div>
+            <div className='flex'>
+              <div className="mb-4">
+                <label htmlFor="MST1_Q1" className="block mb-2 ml-2 dark:text-white">Q1</label>
+                <input
+                  type="number"
+                  name="MST1_Q1"
+                  id="MST1_Q1"
+                  value={formData.MST1_Q1}
+                  onChange={handleChange}
+                  required
+                  className="w-32 mr-1 px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300 dark:bg-gray-800 dark:text-white"
+                />
+              </div>
+              <div className="mb-4">
+                <label htmlFor="MST1_Q2" className="block mb-2 ml-2 dark:text-white">Q2</label>
+                <input
+                  type="number"
+                  name="MST1_Q2"
+                  id="MST1_Q2"
+                  value={formData.MST1_Q2}
+                  onChange={handleChange}
+                  required
+                  className="w-32 mx-1 px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300 dark:bg-gray-800 dark:text-white"
+                />
+              </div>
+            <div className="mb-4">
+                <label htmlFor="MST1_Q3" className="block mb-2 ml-2 dark:text-white">Q3</label>
+                <input
+                  type="number"
+                  name="MST1_Q3"
+                  id="MST1_Q3"
+                  value={formData.MST1_Q3}
+                  onChange={handleChange}
+                  required
+                  className="w-32 mx-1 px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300 dark:bg-gray-800 dark:text-white"
+                />
+              </div>
+            </div>
   
-            {/* MST2 Field */}
-            <div className="mb-4">
-              <label htmlFor="MST2" className="block mb-2 dark:text-white">MST2</label>
-              <input
-                type="number"
-                name="MST2"
-                id="MST2"
-                value={formData.MST2}
-                onChange={handleChange}
-                required
-                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300 dark:bg-gray-800 dark:text-white"
-              />
-            </div>
+                      {/* MST2 Field */}  
+            <div className='block mb-2 dark:text-white text-lg font-semibold'> MID SEMESTER EXAM - 2 MARKS</div>
+            <div className='flex'>
+              <div className="mb-4">
+                <label htmlFor="MST2_Q1" className="block mb-2 ml-2 dark:text-white">Q1</label>
+                <input
+                  type="number"
+                  name="MST2_Q1"
+                  id="MST2_Q1"
+                  value={formData.MST2_Q1}
+                  onChange={handleChange}
+                  required
+                  className="w-32 mr-1 px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300 dark:bg-gray-800 dark:text-white"
+                />
+              </div>
+              <div className="mb-4">
+                <label htmlFor="MST2_Q2" className="block mb-2 ml-2 dark:text-white">Q2</label>
+                <input
+                  type="number"
+                  name="MST2_Q2"
+                  id="MST2_Q2"
+                  value={formData.MST2_Q2}
+                  onChange={handleChange}
+                  required
+                  className="w-32 mx-1 px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300 dark:bg-gray-800 dark:text-white"
+                />
+              </div>
+            <div className="mb-4">
+                <label htmlFor="MST2_Q3" className="block mb-2 ml-2 dark:text-white">Q3</label>
+                <input
+                  type="number"
+                  name="MST2_Q3"
+                  id="MST2_Q3"
+                  value={formData.MST2_Q3}
+                  onChange={handleChange}
+                  required
+                  className="w-32 mx-1 px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300 dark:bg-gray-800 dark:text-white"
+                />
+              </div>
+            </div>
   
             {/* Assignment/Quiz (AssQuiz) Field */}
             <div className="mb-4">
-              <label htmlFor="Quiz_Assignment" className="block mb-2 dark:text-white">Assignment / Quiz</label>
+              <label htmlFor="Quiz_Assignment" className="block mb-2 dark:text-white text-lg font-semibold">Assignment / Quiz</label>
               <input
                 type="number"
                 name="Quiz_Assignment"
@@ -242,23 +335,74 @@ const AddStudentPopup = ({ setCreate, subjectCode }) => {
                 value={formData.Quiz_Assignment}
                 onChange={handleChange}
                 required
-                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300 dark:bg-gray-800 dark:text-white"
+                className="w-1/2 px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300 dark:bg-gray-800 dark:text-white"
               />
             </div>
   
             {/* Endsem Field */}
-            <div className="mb-4">
-              <label htmlFor="Endsem" className="block mb-2 dark:text-white">End Semester</label>
-              <input
-                type="number"
-                name="EndSem"
-                id="EndSem"
-                value={formData.EndSem}
-                onChange={handleChange}
-                required
-                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300 dark:bg-gray-800 dark:text-white"
-              />
-            </div>
+            <div className='block mb-2 dark:text-white text-lg font-semibold'> END SEMESTER EXAM MARKS</div>
+            <div className='flex gap-1'>
+              <div className="mb-4">
+                <label htmlFor="Endsem_Q1" className="block mb-2 dark:text-white">Q1</label>
+                <input
+                  type="number"
+                  name="EndSem_Q1"
+                  id="EndSem_Q1"
+                  value={formData.EndSem_Q1}
+                  onChange={handleChange}
+                  required
+                  className="w-full mr-1 px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300 dark:bg-gray-800 dark:text-white"
+                />
+              </div>
+              <div className="mb-4">
+                <label htmlFor="Endsem_Q2" className="block mb-2 dark:text-white">Q2</label>
+                <input
+                  type="number"
+                  name="EndSem_Q2"
+                  id="EndSem_Q2"
+                  value={formData.EndSem_Q2}
+                  onChange={handleChange}
+                  required
+                  className="w-full mr-1 px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300 dark:bg-gray-800 dark:text-white"
+                />
+              </div>
+              <div className="mb-4">
+                <label htmlFor="Endsem_Q3" className="block mb-2 dark:text-white">Q3</label>
+                <input
+                  type="number"
+                  name="EndSem_Q3"
+                  id="EndSem_Q3"
+                  value={formData.EndSem_Q3}
+                  onChange={handleChange}
+                  required
+                  className="w-full mr-1 px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300 dark:bg-gray-800 dark:text-white"
+                />
+              </div>
+              <div className="mb-4">
+                <label htmlFor="Endsem_Q4" className="block mb-2 dark:text-white">Q4</label>
+                <input
+                  type="number"
+                  name="EndSem_Q4"
+                  id="EndSem_Q4"
+                  value={formData.EndSem_Q4}
+                  onChange={handleChange}
+                  required
+                  className="w-full mr-1 px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300 dark:bg-gray-800 dark:text-white"
+                />
+              </div>
+              <div className="mb-4">
+                <label htmlFor="Endsem_Q5" className="block mb-2 dark:text-white">Q5</label>
+                <input
+                  type="number"
+                  name="EndSem_Q5"
+                  id="EndSem_Q5"
+                  value={formData.EndSem_Q5}
+                  onChange={handleChange}
+                  required
+                  className="w-full mr-1 px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300 dark:bg-gray-800 dark:text-white"
+                />
+              </div>
+            </div>
   
             {error && <div className="text-red-500 mb-3">{error}</div>}
   
