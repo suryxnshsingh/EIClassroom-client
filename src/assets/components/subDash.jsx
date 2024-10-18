@@ -6,15 +6,22 @@ import { useNavigate } from 'react-router-dom'
 
 const SubDash = () => {
   const { subjectCode } = useParams();
-  console.log(subjectCode)
   const [create, setCreate] = useState(false);
+  const [schema, setSchema] = useState(false);
   return (
     <div className="bg-white dark:bg-black dark:bg-dot-white/[0.2] bg-dot-black/[0.2] min-h-screen h-full pb-20 poppins">
       {create && <AddStudentPopup setCreate={setCreate} subjectCode={subjectCode} />}
+      {schema && <AddExamSchema setSchema={setSchema} subjectCode={subjectCode} />}
       <Navbar/>
       <div>
-        <h1 className='text-3xl font-bold dark:text-white pt-28 text-center'>Subject Name</h1>
+        <h1 className='text-3xl font-bold dark:text-white pt-28 text-center'>{subjectCode}</h1>
         <div className='flex justify-center gap-5 pt-5'>
+        <button 
+          className='bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded'
+          onClick={() => setSchema(true)}
+          >
+            Define Exam Schema
+          </button>
           <button 
           className='bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded'
           onClick={() => setCreate(true)}
@@ -45,9 +52,7 @@ const List = ({ subjectCode }) => {
       try {
         setLoading(true);
         const response = await axios.get(`http://localhost:8080/api/operation/sheets?subjectCode=${subjectCode}`);
-        console.log(response.data);
         setSheets(response.data);
-        console.log(sheets);
         setError(null);
         setLoading(false);
       } catch (err) {
@@ -161,6 +166,173 @@ const List = ({ subjectCode }) => {
 };
 
 
+
+const AddExamSchema = ({ setSchema, subjectCode }) => {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    subjectCode,
+    mst1: { Q1: '', Q2: '', Q3: '' }, // Correct structure for mst1
+    mst2: { Q1: '', Q2: '', Q3: '' }, // Correct structure for mst2
+    Quiz_Assignment: [], // Store the quiz assignments here
+  });
+  const [error, setError] = useState('');
+
+  // Handle change for dropdowns
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    // Update the corresponding mst1 or mst2 based on the input name
+    if (name.startsWith('MST1_')) {
+      const question = name.split('_')[1]; // Extract Q1, Q2, or Q3
+      setFormData((prevData) => ({
+        ...prevData,
+        mst1: { ...prevData.mst1, [question]: value }, // Update the specific question
+      }));
+    } else if (name.startsWith('MST2_')) {
+      const question = name.split('_')[1];
+      setFormData((prevData) => ({
+        ...prevData,
+        mst2: { ...prevData.mst2, [question]: value }, // Update the specific question
+      }));
+    }
+  };
+
+  // Handle checkbox changes
+  const handleCheckboxChange = (e) => {
+    const value = e.target.value;
+    const updatedQuizAssignment = formData.Quiz_Assignment.includes(value)
+      ? formData.Quiz_Assignment.filter((co) => co !== value)
+      : [...formData.Quiz_Assignment, value];
+
+    setFormData((prevData) => ({ ...prevData, Quiz_Assignment: updatedQuizAssignment }));
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Prepare the data according to your specified structure
+    const dataToSubmit = {
+      subjectCode: formData.subjectCode,
+      mst1: {
+        Q1: formData.mst1.Q1,
+        Q2: formData.mst1.Q2,
+        Q3: formData.mst1.Q3,
+      },
+      mst2: {
+        Q1: formData.mst2.Q1,
+        Q2: formData.mst2.Q2,
+        Q3: formData.mst2.Q3,
+      },
+      quizAssignment: formData.Quiz_Assignment, // Make sure this is sent correctly
+    };
+
+    console.log('Data to Submit:', dataToSubmit); // Debug log to check the final form data
+
+    try {
+      const response = await axios.post('http://localhost:8080/api/operation/co-form', dataToSubmit);
+      alert('Form submitted successfully!');
+      console.log(response.data);
+      setSchema(false); // Optionally close the form
+    } catch (err) {
+      console.error('Error submitting form:', err);
+      setError('Failed to submit the form. Please try again.');
+    }
+  };
+
+  return (
+    <div className="absolute h-screen w-full flex items-center justify-center z-10 poppins-regular backdrop-brightness-50">
+      <form className="max-w-md w-1/3 mx-auto bg-white dark:bg-black rounded-xl p-2" onSubmit={handleSubmit}>
+        <div className="p-4">
+          <div className="flex justify-end text-white cursor-pointer" onClick={() => setSchema(false)}>
+            ❌
+          </div>
+
+          {/* MST1 Schema */}
+          <h3 className="text-xl font-semibold text-gray-700 dark:text-gray-200 mb-2">MST 1 Schema</h3>
+          <div className="mb-4 flex gap-4">
+            {['Q1', 'Q2', 'Q3'].map((question, index) => (
+              <div key={index} className="mb-3">
+                <label htmlFor={`MST1_${question}`} className="block mb-2 text-sm font-medium text-gray-900 dark:text-white ml-2">
+                  {question}
+                </label>
+                <select
+                  id={`MST1_${question}`}
+                  name={`MST1_${question}`} // Ensure name matches what you handle in handleChange
+                  value={formData.mst1[question]} // Use the correct state property
+                  onChange={handleChange}
+                  className="w-full p-2.5 border border-gray-300 rounded-lg dark:bg-gray-700 dark:text-white dark:border-gray-600"
+                >
+                  {['CO1', 'CO2', 'CO3', 'CO4', 'CO5'].map((co, idx) => (
+                    <option key={idx} value={co}>{co}</option>
+                  ))}
+                </select>
+              </div>
+            ))}
+          </div>
+
+          {/* MST2 Schema */}
+          <h3 className="text-xl font-semibold text-gray-700 dark:text-gray-200 mb-2">MST 2 Schema</h3>
+          <div className="mb-4 flex gap-4">
+            {['Q1', 'Q2', 'Q3'].map((question, index) => (
+              <div key={index} className="mb-3">
+                <label htmlFor={`MST2_${question}`} className="block mb-2 text-sm font-medium text-gray-900 dark:text-white ml-2">
+                  {question}
+                </label>
+                <select
+                  id={`MST2_${question}`}
+                  name={`MST2_${question}`} // Ensure name matches what you handle in handleChange
+                  value={formData.mst2[question]} // Use the correct state property
+                  onChange={handleChange}
+                  className="w-full p-2.5 border border-gray-300 rounded-lg dark:bg-gray-700 dark:text-white dark:border-gray-600"
+                >
+                  {['CO1', 'CO2', 'CO3', 'CO4', 'CO5'].map((co, idx) => (
+                    <option key={idx} value={co}>{co}</option>
+                  ))}
+                </select>
+              </div>
+            ))}
+          </div>
+
+          {/* Quiz/Assignment Schema */}
+          <h3 className="text-xl font-semibold text-gray-700 dark:text-gray-200 mb-2">Quiz/Assignment</h3>
+          <div className="mb-4 flex">
+            {['CO1', 'CO2', 'CO3', 'CO4', 'CO5'].map((co, index) => (
+              <div key={index} className="flex items-center mb-2 mr-6">
+                <input
+                  id={`quiz-${co}`}
+                  name="Quiz_Assignment"
+                  type="checkbox"
+                  value={co}
+                  checked={formData.Quiz_Assignment.includes(co)}
+                  onChange={handleCheckboxChange}
+                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600"
+                />
+                <label
+                  htmlFor={`quiz-${co}`}
+                  className="ml-2 text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  {co}
+                </label>
+              </div>
+            ))}
+          </div>
+
+          {error && <div className="text-red-500 mb-3">{error}</div>}
+
+          <button
+            type="submit"
+            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg w-full sm:w-auto px-5 py-2.5 mt-5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+};
+
+ 
 const AddStudentPopup = ({ setCreate, subjectCode }) => {
   const navigate = useNavigate();
     const [formData, setFormData] = useState({

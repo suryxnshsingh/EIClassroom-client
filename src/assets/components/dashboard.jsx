@@ -131,8 +131,8 @@ const CreateSubject = ({create, setCreate}) => {
   };
 
   return (
-    <div className="absolute h-screen w-full flex items-center justify-center z-10 poppins-regular backdrop-brightness-50">
-      <form className="max-w-md mx-auto bg-white dark:bg-black rounded-xl p-2 w-1/3 h-1/3" onSubmit={handleSubmit}>
+    <div className="absolute h-full w-full flex items-center justify-center z-10 poppins-regular backdrop-brightness-50">
+      <form className="max-w-md mx-auto bg-white dark:bg-black rounded-xl p-2 w-1/3 h-auto" onSubmit={handleSubmit}>
         <div className="p-4">
           <div 
             className="flex justify-end text-white cursor-pointer"
