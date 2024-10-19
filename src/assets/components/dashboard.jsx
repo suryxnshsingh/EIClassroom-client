@@ -42,7 +42,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchSubjects = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/api/subjects/subjects", {
+        const response = await axios.get(`http://${process.env.BACKEND_URL}:8080/api/subjects/subjects`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`
           }
@@ -115,7 +115,7 @@ const CreateSubject = ({create, setCreate}) => {
     setError('');
 
     try {
-      const response = await axios.post("http://localhost:8080/api/subjects/newsubject", formData, {
+      const response = await axios.post(`http://${process.env.BACKEND_URL}:8080/api/subjects/newsubject`, formData, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem('token')}` // Assuming you store the token in localStorage

@@ -4,6 +4,7 @@ import Signin from './assets/components/signin'
 import Signup from './assets/components/signup'
 import Dashbard from './assets/components/dashboard'
 import SubDash from './assets/components/subDash'
+import HOD from './assets/components/HOD'
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
             <Route path="/signup" element={<Signup/>}/>
             <Route path="/dashboard" element={<Dashbard/>}/>
             <Route path="/subject/:subjectCode" element={<SubDash />} />
+            <Route path='/allsubs' element={<HOD />} />
           </Routes>
         </BrowserRouter>
       </div>
