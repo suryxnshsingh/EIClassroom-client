@@ -30,8 +30,24 @@ const SubDash = () => {
           </button>
           <button className='bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded'
           onClick={() => downloadExcel(subjectCode)}>
-            Download Report
+            Overall Report
           </button>  
+          <button className='bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded'
+          onClick={() => downloadMST1(subjectCode)}>
+            MST1
+          </button>  
+          <button className='bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded'
+          onClick={() => downloadMST2(subjectCode)}>
+            MST2
+          </button>  
+          <button className='bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded'
+          onClick={() => downloadExcelEnd(subjectCode)}>
+            EndSem
+          </button>  
+          <button className='bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded'
+          onClick={() => downloadCOSheet(subjectCode)}>
+            CO Analysis
+          </button> 
         </div>
         <List subjectCode={subjectCode}/>
       </div>
@@ -602,6 +618,80 @@ const AddStudentPopup = ({ setCreate, subjectCode }) => {
       document.body.appendChild(a);
       a.click();
       a.remove();
+    })
+    .catch((error) => {
+      console.error('Error downloading the Excel sheet:', error);
+    });
+  };
+
+  const downloadMST1 = (subjectCode) => {
+    axios.get(`http://localhost:8080/api/operation/downloadmst1/${subjectCode}`, {
+      responseType: 'blob', // Important to set response type as blob for file download
+    })
+    .then((response) => {
+      // Create a URL for the blob
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'sheets.xlsx';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    })
+    .catch((error) => {
+      console.error('Error downloading the Excel sheet:', error);
+    });
+  };
+
+  const downloadMST2 = (subjectCode) => {
+    axios.get(`http://localhost:8080/api/operation/downloadmst2/${subjectCode}`, {
+      responseType: 'blob', // Important to set response type as blob for file download
+    })
+    .then((response) => {
+      // Create a URL for the blob
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'sheets.xlsx';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    })
+    .catch((error) => {
+      console.error('Error downloading the Excel sheet:', error);
+    });
+  };
+
+  const downloadExcelEnd = (subjectCode) => {
+    axios.get(`http://localhost:8080/api/operation/end-excel/${subjectCode}`, {
+      responseType: 'blob',
+    })
+    .then((response) => {
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'student_co_data.xlsx');
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+    })
+    .catch((error) => {
+      console.error('Error downloading the Excel sheet:', error);
+    });
+  };
+
+  const downloadCOSheet = (subjectCode) => {
+    axios.get(`http://localhost:8080/api/operation/generate-co-attainment/${subjectCode}`, {
+      responseType: 'blob',
+    })
+    .then((response) => {
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'student_co_data.xlsx');
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
     })
     .catch((error) => {
       console.error('Error downloading the Excel sheet:', error);
