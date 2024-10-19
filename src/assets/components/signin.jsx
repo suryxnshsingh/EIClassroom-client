@@ -50,7 +50,7 @@ const Signin = () => {
     setSuccess(null);
 
     try {
-      const response = await axios.post(`http://${process.env.BACKEND_URL}:8080/api/auth/signin`, formData);
+      const response = await axios.post(`http://10.25.201.227:8080/api/auth/signin`, formData);
       
 
       localStorage.setItem("token", response.data.token);
