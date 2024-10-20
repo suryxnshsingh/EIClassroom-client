@@ -22,16 +22,6 @@ export default function Faculty() {
                     imgsrc={"khatri.jpg"}
                 />
                 <Card
-                    name={"R. S. Gamad"}
-                    designation={"Professor"}
-                    employeeId={"3300293"}
-                    qualification={"Ph.D."}
-                    joining={"30/01/2006"}
-                    phone={"091-731-2582421, 091-731-2582423"}
-                    email={"gs3300293@sgsitsindore.in"}
-                    imgsrc={"gamad.jpg"}
-                />
-                <Card
                     name={"P. P. Bansod"}
                     designation={"Professor"}
                     employeeId={"3300221"}
@@ -72,6 +62,46 @@ export default function Faculty() {
                     imgsrc={"gireesh.jpg"}
                 />
                 <Card
+                    name={"R. S. Gamad"}
+                    designation={"Professor"}
+                    employeeId={"3300293"}
+                    qualification={"Ph.D."}
+                    joining={"30/01/2006"}
+                    phone={"091-731-2582421, 091-731-2582423"}
+                    email={"gs3300293@sgsitsindore.in"}
+                    imgsrc={"gamad.jpg"}
+                />
+                <Card
+                    name={"Sanchita Dass"}
+                    designation={"Assistant Professor"}
+                    employeeId={"3305233"}
+                    qualification={"M. Tech"}
+                    joining={"16/07/2024"}
+                    phone={"0731-2582423"}
+                    email={"mithi.sanchu@gmail.com"}
+                    imgsrc={"sanchita.jpg"}
+                />
+                <Card
+                    name={"Bindu Solanki"}
+                    designation={"Assistant Professor"}
+                    employeeId={"3305247"}
+                    qualification={"M. Tech"}
+                    joining={"15/07/2024"}
+                    phone={"0731-2582423"}
+                    email={"Bindu.solanki011@gmail.com"}
+                    imgsrc={"bindu.jpg"}
+                />
+                <Card
+                    name={"Kirti Bhargava"}
+                    designation={"Assistant Professor"}
+                    employeeId={"3305127"}
+                    qualification={"M.E."}
+                    joining={"24/08/2022"}
+                    phone={"0731-2582429"}
+                    email={"kirtirks@gmail.com"}
+                    imgsrc={"kirti.jpg"}
+                />
+                <Card
                     name={"Anuj Rawat"}
                     designation={"Assistant Professor"}
                     employeeId={"3305114"}
@@ -90,26 +120,6 @@ export default function Faculty() {
                     phone={"0731-2582424"}
                     email={"tarnijoshi88@gmail.com"}
                     imgsrc={"tarni.jpg"}
-                />
-                <Card
-                    name={"Deepali Choudhary"}
-                    designation={"Assistant Professor"}
-                    employeeId={"3305126"}
-                    qualification={"M.E."}
-                    joining={"24/08/2022"}
-                    phone={"0731-2582423"}
-                    email={"Choudharydeepali11@gmail.com"}
-                    imgsrc={"deepali.jpg"}
-                />
-                <Card
-                    name={"Kirti Bhargava"}
-                    designation={"Assistant Professor"}
-                    employeeId={"3305127"}
-                    qualification={"M.E."}
-                    joining={"24/08/2022"}
-                    phone={"0731-2582429"}
-                    email={"kirtirks@gmail.com"}
-                    imgsrc={"kirti.jpg"}
                 />
                 <Card
                     name={"Arpita Kadel"}
@@ -152,36 +162,6 @@ export default function Faculty() {
                     imgsrc={"ankita.jpg"}
                 />
                 <Card
-                    name={"Sanchita Dass"}
-                    designation={"Assistant Professor"}
-                    employeeId={"3305233"}
-                    qualification={"M. Tech"}
-                    joining={"16/07/2024"}
-                    phone={"0731-2582423"}
-                    email={"mithi.sanchu@gmail.com"}
-                    imgsrc={"sanchita.jpg"}
-                />
-                <Card
-                    name={"Bindu Solanki"}
-                    designation={"Assistant Professor"}
-                    employeeId={"3305247"}
-                    qualification={"M. Tech"}
-                    joining={"15/07/2024"}
-                    phone={"0731-2582423"}
-                    email={"Bindu.solanki011@gmail.com"}
-                    imgsrc={"bindu.jpg"}
-                />
-                <Card
-                    name={"Mansi Jain"}
-                    designation={"Project Associate (C2S)"}
-                    employeeId={"3305537"}
-                    qualification={"M. Tech"}
-                    joining={"27/09/2023"}
-                    phone={"0731-2582423"}
-                    email={"jainmansi01@gmail.com"}
-                    imgsrc={"mansi.jpg"}
-                />
-                <Card
                     name={"Ravi Pandit"}
                     designation={"Project Associate (C2S)"}
                     employeeId={"3305537"}
@@ -210,6 +190,26 @@ export default function Faculty() {
                     phone={"0731-2582423"}
                     email={"1998.dishasharma@gmail.com"}
                     imgsrc={"disha.jpg"}
+                />
+                <Card
+                    name={"Mansi Jain"}
+                    designation={"Project Associate (C2S)"}
+                    employeeId={"3305537"}
+                    qualification={"M. Tech"}
+                    joining={"27/09/2023"}
+                    phone={"0731-2582423"}
+                    email={"jainmansi01@gmail.com"}
+                    imgsrc={"mansi.jpg"}
+                />
+                <Card
+                    name={"Deepali Choudhary"}
+                    designation={"Assistant Professor"}
+                    employeeId={"3305126"}
+                    qualification={"M.E."}
+                    joining={"24/08/2022"}
+                    phone={"0731-2582423"}
+                    email={"Choudharydeepali11@gmail.com"}
+                    imgsrc={"deepali.jpg"}
                 />
             </motion.div>
         </div>
