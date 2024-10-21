@@ -105,6 +105,7 @@ const CreateSubject = ({create, setCreate}) => {
     code: '',
   });
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -123,7 +124,12 @@ const CreateSubject = ({create, setCreate}) => {
       });
 
       console.log('Subject created:', response.data);
-      setCreate(false);
+      setSuccess("Subject added Successfully")
+      setTimeout(() => {
+        
+        window.location.reload();
+      }, 1500);
+      
     } catch (error) {
       console.error('Error:', error);
       setError(error.response?.data?.error || 'Failed to create subject. Please try again.');
@@ -176,10 +182,10 @@ const CreateSubject = ({create, setCreate}) => {
             </label>
           </div>
           {error && <div className="text-red-500 mb-3">{error}</div>}
+          {success && <div className="text-green-500 mb-3">{success}</div>}
           <button
             type="submit"
             className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg w-full sm:w-auto px-5 py-2.5 mt-5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            onClick={refreshPage}
           >
             Submit
           </button>

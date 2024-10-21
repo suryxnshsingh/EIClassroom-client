@@ -17,19 +17,19 @@ export function SubjectCard({ name, code }) {
           "bg-[url(https://images.unsplash.com/photo-1631376178637-392efc9e356b?q=80&w=3173&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)] bg-cover"
         )}
       >
-        <div className="absolute w-full h-full top-0 left-0 transition duration-300 backdrop-blur-sm hover:backdrop-brightness-50"></div>
+        <div className="absolute w-full h-full top-0 left-0 transition duration-300 backdrop-blur-sm backdrop-brightness-[0.7] hover:backdrop-brightness-[0.3]"></div>
         <div className="flex flex-row items-center space-x-4">
           <div className="p-2 rounded-lg flex flex-col">
             <p className="font-normal text-base text-gray-50 relative">
-              {name}
+              
             </p>
           </div>
         </div>
         <div className="text content-center rounded-lg p-4">
-          <h1 className="font-bold text-2xl text-white relative">
+          <h1 className="font-bold text-3xl text-white relative">
             {name}
           </h1>
-          <p className="font-semibold text-white text-lg relative my-2">
+          <p className="font-semibold text-white text-xl relative my-2">
             {code}.
           </p>
         </div>
