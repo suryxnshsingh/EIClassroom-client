@@ -16,7 +16,7 @@ const Title = () => (
 );
 
 const DepartmentInfo = () => (
-  <p className="text-lg chakra-petch-regular text-slate-300 lg:text-2xl p-4 md:pr-20">
+  <p className="text-lg chakra-petch-regular text-slate-300 lg:text-2xl p-4 md:pr-20 max-md:text-center">
     The Department of Electronics and Instrumentation Engineering was established in 1984.
     It came out as an offspring of Electronics Engineering due to enormous
     development in the field of Electronics and demand of Instrumentation Engineers in the

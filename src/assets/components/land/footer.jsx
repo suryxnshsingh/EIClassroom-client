@@ -48,11 +48,11 @@ export default function Footer(){
                     </div>
                 </div>
                 <hr className="my-6  sm:mx-auto border-gray-700 lg:my-8" />
-                <div className="flex justify-center">
-                        <div className="text-sm text-white sm:text-center">
+                <div className="flex justify-center items-center max-md:flex-col flex-row ">
+                        <div className="text-sm text-white sm:text-center max-md:pb-2">
                             Crafted by :
                         </div>
-                        
+                        <div className="flex justify-center flex-row items-center">
                         <LinkPreview 
                             url="https://www.linkedin.com/in/suryxnshsingh/"
                             target="_blank"
@@ -80,6 +80,7 @@ export default function Footer(){
                             >
                             Anuj Mishra
                         </LinkPreview>
+                        </div>
                     </div>
                 </div>
             </footer>

@@ -7,7 +7,7 @@ import {
   useMotionValue,
   useSpring,
 } from "framer-motion";
-import { cn } from "../../../utils/cn";
+import { cn } from "../../../../utils/cn";
 
 export const LinkPreview = ({
   children,

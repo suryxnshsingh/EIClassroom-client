@@ -1,4 +1,4 @@
-import Card from "./facultyCard"
+import Card from "../facultyCard"
 import { motion } from "framer-motion"
 export default function Faculty() {
     return (
