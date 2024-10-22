@@ -2,22 +2,24 @@ import React, { Children, useState, useEffect } from 'react';
 import { cn } from '../../../../lib/utils';
 import { 
   LayoutDashboard,
-  BookMarked,
+  NotebookPen,
   ListTodo,
+  FlaskConical,
+  LibraryBig,
+  NotepadText,
   FileDown,
   UserCircle, 
   Settings,
   Users,
-
   LogOut 
 } from 'lucide-react';
 import { Sidebar, SidebarBody, SidebarLink } from '../ui/sidebar';
 import {  Routes, Route, Link } from 'react-router-dom';
-import Dash from './Dash';
-import Subjects from './Subjects';
 import Attendance from './Attendance';
-import Assignment from '../student/Assignment';
+import Assignment from './Assignment';
+import Quiz from './Quiz';
 import Profile from './Profile';
+import TeacherDashboard from './TeacherDashboard';
 
 const TeacherSidebar = () => {
   const [theme, setTheme] = useState(
@@ -42,15 +44,30 @@ const TeacherSidebar = () => {
       icon: <LayoutDashboard className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
     },
     {
-        label: "Manage Subjects",
-        href: "/teachers/subjects",
-        icon: <BookMarked className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+      label: "Attendance",
+      href: "/teachers/attendance",
+      icon: <ListTodo className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
     },
-    // {
-    //     label: "Attendence",
-    //     href: "/teachers/students",
-    //     icon: <ListTodo className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
-    // },
+    {
+      label: "Assignment",
+      href: "/teachers/assignment",
+      icon: <NotebookPen className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+    },
+    {
+      label: "Tests",
+      href: "/teachers/tests",
+      icon: <FlaskConical className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+    },
+    {
+      label: "Books",
+      href: "/teachers/books",
+      icon: <LibraryBig className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+    },
+    {
+      label: "Notes",
+      href: "/teachers/notes",
+      icon: <NotepadText className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+    },
     {
         label: "Manage Students",
         href: "/teachers/students",
@@ -121,7 +138,7 @@ const Logo = () => {
       className="font-normal flex space-x-2 items-center text-md text-black dark:text-white py-1 relative z-20"
     >
       <div className="h-5 w-6 bg-black dark:bg-white rounded-br-lg rounded-tr-sm rounded-tl-lg rounded-bl-sm flex-shrink-0" />
-      <span className="font-medium text-black dark:text-white whitespace-pre opacity-0 animate-fadeIn">
+      <span className="font-medium text-black dark:text-white whitespace-pre opacity-1 animate-fadeIn">
         EI Classroom
       </span>
     </a>
@@ -142,14 +159,14 @@ const LogoIcon = () => {
 const Dashboard = () => {
 
   return (
-    <div className="flex flex-1 bg-neutral-100 dark:bg-neutral-950">
-      <div className=" rounded-tl-2xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-black dark:bg-dot-white/[0.2] bg-dot-black/[0.2]">
-        <div className='p-2 md:p-10 rounded-tl-2xl  w-screen h-screen bg-white dark:bg-black [mask-image:radial-gradient(ellipse_at_center,transparent_2%,black)]'>
-        <div className=' flex items-center justify-center text-black  dark:text-white'>
+    <div className="flex flex-1 bg-neutral-100 dark:bg-neutral-950  ">
+      <div className=" rounded-tl-2xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-black dark:bg-dot-white/[0.2] bg-dot-black/[0.2] ">
+        <div className=' rounded-tl-2xl  w-screen h-screen'>
+        <div className=' flex items-center justify-center text-black  dark:text-white  '>
           <Routes>
-            <Route path="/" element={<Dash />} />
+            <Route path="/" element={<TeacherDashboard />} />
             <Route path="/assignment" element={<Assignment />} />
-            <Route path="/subjects" element={<Subjects />} />
+            <Route path="/quiz" element={<Quiz />} />
             <Route path="/Attendance" element={<Attendance />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/settings" element={<SettingsPage />} />

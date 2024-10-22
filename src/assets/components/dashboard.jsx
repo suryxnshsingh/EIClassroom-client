@@ -4,10 +4,6 @@ import axios from 'axios';
 import Navbar from "./auth/navbar";
 import { useNavigate } from "react-router-dom";
 
-const refreshPage = () => {
-  window.location.reload();
-}
-
 const Loading = () => {
   return (
     <div className="flex justify-center items-center h-screen bg-black text-white">
@@ -42,7 +38,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchSubjects = async () => {
       try {
-        const response = await axios.get(`http://10.25.201.227:8080/api/subjects/subjects`, {
+        const response = await axios.get(`http://localhost:8080/api/subjects/subjects`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`
           }
@@ -116,7 +112,7 @@ const CreateSubject = ({create, setCreate}) => {
     setError('');
 
     try {
-      const response = await axios.post(`http://10.25.201.227:8080/api/subjects/newsubject`, formData, {
+      const response = await axios.post(`http://localhost:8080/api/subjects/newsubject`, formData, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem('token')}` // Assuming you store the token in localStorage
