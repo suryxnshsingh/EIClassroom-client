@@ -19,7 +19,7 @@ import Books from './Books';
 import Notes from './Notes';
 import Profile from './Profile';
 
-const StudentSidebar = () => {
+const TeacherSidebar = () => {
 
   const [theme, setTheme] = useState(
     typeof window !== "undefined" && window.matchMedia("(prefers-color-scheme: dark)").matches
@@ -50,37 +50,37 @@ const StudentSidebar = () => {
   const links = [
     {
       label: "Dashboard",
-      href: "/students/",
+      href: "/teachers/",
       icon: <LayoutDashboard className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
     },
     {
       label: "Assignment",
-      href: "/students/assignment",
+      href: "/teachers/assignment",
       icon: <NotebookPen className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
     },
     {
       label: "Tests",
-      href: "/students/tests",
+      href: "/teachers/tests",
       icon: <FlaskConical className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
     },
     {
       label: "Books",
-      href: "/students/books",
+      href: "/teachers/books",
       icon: <LibraryBig className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
     },
     {
       label: "Notes",
-      href: "/students/notes",
+      href: "/teachers/notes",
       icon: <NotepadText className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
     },
     {
       label: "Profile",
-      href: "/students/profile",
+      href: "/teachers/profile",
       icon: <UserCircle className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
     },
     {
       label: "Settings",
-      href: "/students/settings",
+      href: "/teachers/settings",
       icon: <Settings className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
     },
     {
@@ -129,7 +129,7 @@ const StudentSidebar = () => {
             <SidebarLink
               link={{
                 label: "Suryansh Singh",
-                href: "/students/profile",
+                href: "/teachers/profile",
                 icon: (
                   <div className="h-7 w-7 flex-shrink-0 rounded-full bg-neutral-300 dark:bg-neutral-600" />
                 )
@@ -192,4 +192,4 @@ const Dashboard = () => {
 
 const SettingsPage = () => <div>Settings Page</div>;
 
-export default StudentSidebar;
+export default TeacherSidebar;

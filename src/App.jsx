@@ -6,6 +6,7 @@ import Dashbard from './assets/components/dashboard'
 import SubDash from './assets/components/subDash'
 import HOD from './assets/components/HOD'
 import StudentSidebar from './assets/components/student/StudentSidebar'
+import TeacherSidebar from './assets/components/teacher/TeacherSidebar'
 
 function App() {
 
@@ -19,7 +20,10 @@ function App() {
             <Route path="/dashboard" element={<Dashbard/>}/>
             <Route path="/subject/:subjectCode" element={<SubDash />} />
             <Route path='/allsubs' element={<HOD />} />
+
+            
             <Route path='/students/*' element={<StudentSidebar />} />
+            <Route path='/teachers/*' element={<TeacherSidebar />} />
           </Routes>
         </BrowserRouter>
       </div>
