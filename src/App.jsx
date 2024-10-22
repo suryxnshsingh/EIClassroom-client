@@ -1,10 +1,11 @@
 import {BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from './assets/components/land/home'
-import Signin from './assets/components/signin'
-import Signup from './assets/components/signup'
+import Signin from './assets/components/auth/signin'
+import Signup from './assets/components/auth/signup'
 import Dashbard from './assets/components/dashboard'
 import SubDash from './assets/components/subDash'
 import HOD from './assets/components/HOD'
+import StudentSidebar from './assets/components/student/StudentSidebar'
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
             <Route path="/dashboard" element={<Dashbard/>}/>
             <Route path="/subject/:subjectCode" element={<SubDash />} />
             <Route path='/allsubs' element={<HOD />} />
+            <Route path='/students/*' element={<StudentSidebar />} />
           </Routes>
         </BrowserRouter>
       </div>

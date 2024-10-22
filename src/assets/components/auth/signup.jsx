@@ -1,23 +1,25 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios"; // Import Axios for HTTP requests
-import Label from "./ui/label";
-import Input from "./ui/input";
-import { cn } from "../../../lib/utils";
+import Label from "../ui/label";
+import Input from "../ui/input";
+import { cn } from "../../../../lib/utils";
 import { useNavigate } from "react-router-dom";
 
-const Signin = () => {
+const Signup = () => {
   const [theme, setTheme] = useState(
     typeof window !== "undefined" && window.matchMedia("(prefers-color-scheme: dark)").matches
       ? "dark"
       : "light"
   );
-  const [loading, setLoading] = useState(true); // Loading state
   const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
     email: "",
-    password: "",
+    password: ""
   });
-  const [error, setError] = useState(null); // Error state
-  const [success, setSuccess] = useState(null); // Success state
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
   const navigate = useNavigate();
 
   const handleThemeToggle = () => {
@@ -39,29 +41,26 @@ const Signin = () => {
     }, 200);
   }, []);
 
-
+  // Handle form input changes
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
     setSuccess(null);
 
     try {
-      const response = await axios.post(`http://10.25.201.227:8080/api/auth/signin`, formData);
-      
-
-      localStorage.setItem("token", response.data.token);
-      localStorage.setItem("email", response.data.email);
-      localStorage.setItem("firstName", response.data.firstName);
-      setSuccess("Sign-in successful!");
+      // Send the signup request to the backend
+      const response = await axios.post(`http://10.25.201.227:8080/api/auth/signup`, formData);
+      setSuccess("Signup successful!");
       navigate("/dashboard");
 
     } catch (error) {
       if (error.response && error.response.status === 400) {
-        setError("Invalid email or password.");
+        setError("User with this email already exists.");
       } else {
         setError("Something went wrong. Please try again.");
       }
@@ -70,13 +69,13 @@ const Signin = () => {
 
   // If loading, display skeleton
   if (loading) {
-    return <SkeletonSignin />;
+    return <SkeletonSignup />;
   }
 
   return (
     <div className="bg-white dark:bg-black dark:bg-dot-white/[0.2] bg-dot-black/[0.2] h-screen flex items-center justify-center">
       <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
-      <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 border-0 md:border-2 border-neutral-300 dark:border-neutral-700 bg-white dark:bg-black">
+      <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 max-md:border-0 border-2 border-neutral-300 dark:border-neutral-700 bg-white dark:bg-black">
         {/* Theme Toggle Button */}
         <div className="flex items-center justify-center mb-6">
           <label className="relative inline-flex items-center cursor-pointer mr-2">
@@ -99,8 +98,29 @@ const Signin = () => {
         <h2 className="font-bold text-center text-xl text-neutral-800 dark:text-neutral-200">
           EI Classroom
         </h2>
-
         <form className="my-8" onSubmit={handleSubmit}>
+          <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
+            <LabelInputContainer>
+              <Label htmlFor="firstName">First name</Label>
+              <Input
+                id="firstName"
+                placeholder="Tyler"
+                type="text"
+                value={formData.firstName}
+                onChange={handleInputChange}
+              />
+            </LabelInputContainer>
+            <LabelInputContainer>
+              <Label htmlFor="lastName">Last name</Label>
+              <Input
+                id="lastName"
+                placeholder="Durden"
+                type="text"
+                value={formData.lastName}
+                onChange={handleInputChange}
+              />
+            </LabelInputContainer>
+          </div>
           <LabelInputContainer className="mb-4">
             <Label htmlFor="email">Email Address</Label>
             <Input
@@ -111,7 +131,6 @@ const Signin = () => {
               onChange={handleInputChange}
             />
           </LabelInputContainer>
-
           <LabelInputContainer className="mb-4">
             <Label htmlFor="password">Password</Label>
             <Input
@@ -130,31 +149,22 @@ const Signin = () => {
             className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
             type="submit"
           >
-            Sign in &rarr;
+            Sign up &rarr;
             <BottomGradient />
           </button>
 
           <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
-
           <p className="text-neutral-600 text-sm max-w-sm mt-2 dark:text-neutral-300 text-center">
-            Don't have an account? <a href="/signup" className="text-blue-500 underline">Create Account</a>
+            Already have an account? <a href="/signin" className="text-blue-500 underline">Sign In</a>
           </p>
         </form>
-        <button
-            className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
-            type="submit"
-            onClick={()=>(navigate("/allsubs"))}
-          >
-            Login as HOD? &rarr;
-            <BottomGradient />
-          </button>
       </div>
     </div>
   );
 };
 
-// Skeleton Loader for the Signin component
-const SkeletonSignin = () => {
+// Skeleton Loader for the Signup component
+const SkeletonSignup = () => {
   return (
     <div className="bg-white dark:bg-black dark:bg-dot-white/[0.2] bg-dot-black/[0.2] h-screen flex items-center justify-center">
       <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
@@ -164,21 +174,31 @@ const SkeletonSignin = () => {
             <div className="w-12 h-6 bg-gray-300 dark:bg-gray-700 rounded-full shadow-inner"></div>
             <div className="w-6 h-6 ml-1 bg-gray-300 dark:bg-gray-700 rounded-full shadow-inner"></div>
           </div>
-
-          <div className="h-8 bg-gray-300 dark:bg-gray-700 mb-6 w-32 mx-auto rounded-md "></div>
+          <div className="h-8 bg-gray-300 dark:bg-gray-700 mb-6 w-32 mx-auto rounded-md"></div>
+          <div className="flex justify-center">
+            <div>
+              <div className="flex items-center justify-start mb-4">
+                <div className="w-32 h-6 bg-gray-300 dark:bg-gray-700 rounded-full shadow-inner"></div>
+              </div>
+              <div className="w-48 h-[42px] bg-gray-300 dark:bg-gray-700 rounded mb-4"></div>
+            </div>
+            <div>
+              <div className="flex items-center justify-start mb-4">
+                <div className="ml-3 w-32 h-6 bg-gray-300 dark:bg-gray-700 rounded-full shadow-inner"></div>
+              </div>
+              <div className="ml-3 w-44 h-[42px] bg-gray-300 dark:bg-gray-700 rounded mb-4"></div>
+            </div>
+          </div>
           <div className="flex items-center justify-start mb-4">
-            <div className="w-32 h-6 bg-gray-300 dark:bg-gray-700 rounded-full shadow-inner"></div>
+            <div className=" w-32 h-6 bg-gray-300 dark:bg-gray-700 rounded-full shadow-inner"></div>
           </div>
           <div className="w-full h-[42px] bg-gray-300 dark:bg-gray-700 rounded mb-4"></div>
           <div className="flex items-center justify-start mb-4">
             <div className="w-24 h-6 bg-gray-300 dark:bg-gray-700 rounded-full shadow-inner"></div>
           </div>
           <div className="w-full h-[42px] bg-gray-300 dark:bg-gray-700 rounded mb-4"></div>
-
           <div className="w-full h-[32px] bg-gray-300 dark:bg-gray-700 rounded mb-6"></div>
-
           <div className="bg-gray-300 dark:bg-gray-700 h-[1px] w-full mb-8"></div>
-
           <div className="h-4 bg-gray-300 dark:bg-gray-700 w-48 mx-auto"></div>
         </div>
       </div>
@@ -199,4 +219,4 @@ const LabelInputContainer = ({ children, className }) => {
   return <div className={cn("flex flex-col space-y-2 w-full", className)}>{children}</div>;
 };
 
-export default Signin;
+export default Signup;

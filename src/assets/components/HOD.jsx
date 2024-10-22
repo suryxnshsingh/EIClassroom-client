@@ -3,7 +3,7 @@ import { useState, useEffect } from "react"
 import axios from 'axios';
 import Label from "./ui/label";
 import Input from "./ui/input";
-import Navbar from "./navbar";
+import Navbar from "./auth/navbar";
 import { useNavigate } from "react-router-dom";
 import { cn } from "../../../lib/utils";
 
