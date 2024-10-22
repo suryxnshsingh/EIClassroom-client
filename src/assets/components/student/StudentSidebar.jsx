@@ -107,7 +107,23 @@ const SidebarDemo = () => {
                 </Link>
               ))}
             </div>
-            
+            <div className="flex items-center justify-center mt-9">
+          <label className="relative inline-flex items-center cursor-pointer ">
+            <input
+              type="checkbox"
+              className="sr-only"
+              checked={theme === "dark"}
+              onChange={handleThemeToggle}
+            />
+            <div className="w-6 h-4 bg-gray-200 dark:bg-neutral-900 rounded-full shadow-inner"></div>
+            <div
+              className={`absolute w-4 h-4 bg-white rounded-full shadow transition-transform duration-300 ease-in-out ${
+                theme === "dark" ? "translate-x-2" : "translate-x-0"
+              }`}
+            ></div>
+          </label>
+          {/* <span className="text-lg">{theme === "dark" ? "🌙" : "☀️"}</span> */}
+        </div>
           </div>
           <div>
             <SidebarLink
