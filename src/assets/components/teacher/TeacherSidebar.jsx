@@ -2,47 +2,35 @@ import React, { Children, useState, useEffect } from 'react';
 import { cn } from '../../../../lib/utils';
 import { 
   LayoutDashboard,
-  NotebookPen,
-  FlaskConical,
-  LibraryBig,
-  NotepadText,
+  BookMarked,
+  ListTodo,
+  FileDown,
   UserCircle, 
-  Settings, 
+  Settings,
+  Users,
+
   LogOut 
 } from 'lucide-react';
 import { Sidebar, SidebarBody, SidebarLink } from '../ui/sidebar';
 import {  Routes, Route, Link } from 'react-router-dom';
 import Dash from './Dash';
-import Assignment from './Assignment';
-import Tests from './Tests';
-import Books from './Books';
-import Notes from './Notes';
+import Subjects from './Subjects';
+import Attendance from './Attendance';
+import Assignment from '../student/Assignment';
 import Profile from './Profile';
 
 const TeacherSidebar = () => {
-
   const [theme, setTheme] = useState(
     typeof window !== "undefined" && window.matchMedia("(prefers-color-scheme: dark)").matches
       ? "dark"
       : "light"
   );
-
-  const handleThemeToggle = () => {
-    const newTheme = theme === "dark" ? "light" : "dark";
-    setTheme(newTheme);
-    document.documentElement.classList.toggle("dark", newTheme === "dark");
-    localStorage.setItem("theme", newTheme);
-  };
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme) {
       setTheme(savedTheme);
       document.documentElement.classList.toggle("dark", savedTheme === "dark");
     }
-
-    setTimeout(() => {
-      setLoading(false);
-    }, 50);
   }, []);
 
   const [open, setOpen] = useState(false);
@@ -54,24 +42,24 @@ const TeacherSidebar = () => {
       icon: <LayoutDashboard className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
     },
     {
-      label: "Assignment",
-      href: "/teachers/assignment",
-      icon: <NotebookPen className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+        label: "Manage Subjects",
+        href: "/teachers/subjects",
+        icon: <BookMarked className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+    },
+    // {
+    //     label: "Attendence",
+    //     href: "/teachers/students",
+    //     icon: <ListTodo className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+    // },
+    {
+        label: "Manage Students",
+        href: "/teachers/students",
+        icon: <Users className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
     },
     {
-      label: "Tests",
-      href: "/teachers/tests",
-      icon: <FlaskConical className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
-    },
-    {
-      label: "Books",
-      href: "/teachers/books",
-      icon: <LibraryBig className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
-    },
-    {
-      label: "Notes",
-      href: "/teachers/notes",
-      icon: <NotepadText className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+        label: "Download Reports",
+        href: "/teachers/reports",
+        icon: <FileDown className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
     },
     {
       label: "Profile",
@@ -99,7 +87,7 @@ const TeacherSidebar = () => {
         <SidebarBody className="justify-between gap-10">
           <div className="flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
             {open ? <Logo /> : <LogoIcon />}
-            <div className="mt-14 flex flex-col gap-2">
+            <div className="mt-14 flex flex-col gap-2 text-nowrap">
               {links.map((link, idx) => (
                 <Link to={link.href} key={idx} className="flex items-center gap-2 p-2 hover:bg-neutral-200 dark:hover:bg-neutral-700 rounded-lg">
                 {link.icon}
@@ -107,23 +95,6 @@ const TeacherSidebar = () => {
                 </Link>
               ))}
             </div>
-            <div className="flex items-center justify-center mt-9">
-          <label className="relative inline-flex items-center cursor-pointer ">
-            <input
-              type="checkbox"
-              className="sr-only"
-              checked={theme === "dark"}
-              onChange={handleThemeToggle}
-            />
-            <div className="w-6 h-4 bg-gray-200 dark:bg-neutral-900 rounded-full shadow-inner"></div>
-            <div
-              className={`absolute w-4 h-4 bg-white rounded-full shadow transition-transform duration-300 ease-in-out ${
-                theme === "dark" ? "translate-x-2" : "translate-x-0"
-              }`}
-            ></div>
-          </label>
-          {/* <span className="text-lg">{theme === "dark" ? "🌙" : "☀️"}</span> */}
-        </div>
           </div>
           <div>
             <SidebarLink
@@ -169,17 +140,17 @@ const LogoIcon = () => {
 };
 
 const Dashboard = () => {
+
   return (
-    <div className="flex flex-1">
-      <div className=" rounded-tl-2xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 dark:bg-dot-white/[0.2] bg-dot-black/[0.2]">
-        <div className='p-2 md:p-10 rounded-tl-2xl  w-screen h-screen bg-white dark:bg-neutral-900 [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]'>
+    <div className="flex flex-1 bg-neutral-100 dark:bg-neutral-950">
+      <div className=" rounded-tl-2xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-black dark:bg-dot-white/[0.2] bg-dot-black/[0.2]">
+        <div className='p-2 md:p-10 rounded-tl-2xl  w-screen h-screen bg-white dark:bg-black [mask-image:radial-gradient(ellipse_at_center,transparent_2%,black)]'>
         <div className=' flex items-center justify-center text-black  dark:text-white'>
           <Routes>
             <Route path="/" element={<Dash />} />
             <Route path="/assignment" element={<Assignment />} />
-            <Route path="/tests" element={<Tests />} />
-            <Route path="/books" element={<Books />} />
-            <Route path="/notes" element={<Notes />} />
+            <Route path="/subjects" element={<Subjects />} />
+            <Route path="/Attendance" element={<Attendance />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/settings" element={<SettingsPage />} />
           </Routes>
@@ -190,6 +161,50 @@ const Dashboard = () => {
   );
 };
 
-const SettingsPage = () => <div>Settings Page</div>;
+const SettingsPage = () => {
+    const [theme, setTheme] = useState(
+        typeof window !== "undefined" && window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light"
+      );
+    
+      const handleThemeToggle = () => {
+        const newTheme = theme === "dark" ? "light" : "dark";
+        setTheme(newTheme);
+        document.documentElement.classList.toggle("dark", newTheme === "dark");
+        localStorage.setItem("theme", newTheme);
+      };
+      useEffect(() => {
+        const savedTheme = localStorage.getItem("theme");
+        if (savedTheme) {
+          setTheme(savedTheme);
+          document.documentElement.classList.toggle("dark", savedTheme === "dark");
+        }
+      }, []);
+
+  return    (
+    <div>
+        <h1 className='text-3xl py-10'>Settings</h1>
+        <div>
+            <h1>Change Theme : </h1>
+            <div className="flex items-center justify-center z-50">
+            <label className="relative inline-flex items-center cursor-pointer mr-2">
+                <input
+                type="checkbox"
+                className="sr-only"
+                checked={theme === "dark"}
+                onChange={handleThemeToggle}
+                />
+                <div className="w-12 h-6 bg-gray-200 dark:bg-gray-800 rounded-full shadow-inner"></div>
+                <div
+                className={`absolute w-6 h-6 bg-white rounded-full shadow transition-transform duration-300 ease-in-out ${
+                    theme === "dark" ? "translate-x-6" : "translate-x-0"
+                }`}
+                ></div>
+            </label>
+            <span className="text-xl">{theme === "dark" ? "🌙" : "☀️"}</span>
+            </div>
+        </div>
+    </div>)};
 
 export default TeacherSidebar;

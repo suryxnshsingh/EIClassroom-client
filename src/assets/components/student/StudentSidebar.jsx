@@ -107,23 +107,6 @@ const StudentSidebar = () => {
                 </Link>
               ))}
             </div>
-            <div className="flex items-center justify-center mt-9">
-          <label className="relative inline-flex items-center cursor-pointer ">
-            <input
-              type="checkbox"
-              className="sr-only"
-              checked={theme === "dark"}
-              onChange={handleThemeToggle}
-            />
-            <div className="w-6 h-4 bg-gray-200 dark:bg-neutral-900 rounded-full shadow-inner"></div>
-            <div
-              className={`absolute w-4 h-4 bg-white rounded-full shadow transition-transform duration-300 ease-in-out ${
-                theme === "dark" ? "translate-x-2" : "translate-x-0"
-              }`}
-            ></div>
-          </label>
-          {/* <span className="text-lg">{theme === "dark" ? "🌙" : "☀️"}</span> */}
-        </div>
           </div>
           <div>
             <SidebarLink
@@ -170,9 +153,9 @@ const LogoIcon = () => {
 
 const Dashboard = () => {
   return (
-    <div className="flex flex-1">
-      <div className=" rounded-tl-2xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 dark:bg-dot-white/[0.2] bg-dot-black/[0.2]">
-        <div className='p-2 md:p-10 rounded-tl-2xl  w-screen h-screen bg-white dark:bg-neutral-900 [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]'>
+    <div className="flex flex-1 bg-neutral-100 dark:bg-neutral-950">
+      <div className=" rounded-tl-2xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-black dark:bg-dot-white/[0.2] bg-dot-black/[0.2]">
+        <div className='p-2 md:p-10 rounded-tl-2xl  w-screen h-screen bg-white dark:bg-black [mask-image:radial-gradient(ellipse_at_center,transparent_2%,black)]'>
         <div className=' flex items-center justify-center text-black  dark:text-white'>
           <Routes>
             <Route path="/" element={<Dash />} />
@@ -190,6 +173,50 @@ const Dashboard = () => {
   );
 };
 
-const SettingsPage = () => <div>Settings Page</div>;
+const SettingsPage = () => {
+  const [theme, setTheme] = useState(
+      typeof window !== "undefined" && window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light"
+    );
+  
+    const handleThemeToggle = () => {
+      const newTheme = theme === "dark" ? "light" : "dark";
+      setTheme(newTheme);
+      document.documentElement.classList.toggle("dark", newTheme === "dark");
+      localStorage.setItem("theme", newTheme);
+    };
+    useEffect(() => {
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme) {
+        setTheme(savedTheme);
+        document.documentElement.classList.toggle("dark", savedTheme === "dark");
+      }
+    }, []);
+
+  return    (
+    <div>
+        <h1 className='text-3xl py-10'>Settings</h1>
+        <div>
+            <h1>Change Theme : </h1>
+            <div className="flex items-center justify-center z-50">
+            <label className="relative inline-flex items-center cursor-pointer mr-2">
+                <input
+                type="checkbox"
+                className="sr-only"
+                checked={theme === "dark"}
+                onChange={handleThemeToggle}
+                />
+                <div className="w-12 h-6 bg-gray-200 dark:bg-gray-800 rounded-full shadow-inner"></div>
+                <div
+                className={`absolute w-6 h-6 bg-white rounded-full shadow transition-transform duration-300 ease-in-out ${
+                    theme === "dark" ? "translate-x-6" : "translate-x-0"
+                }`}
+                ></div>
+            </label>
+            <span className="text-xl">{theme === "dark" ? "🌙" : "☀️"}</span>
+            </div>
+        </div>
+  </div>)};
 
 export default StudentSidebar;
