@@ -57,7 +57,7 @@ const Signin = () => {
       localStorage.setItem("email", response.data.email);
       localStorage.setItem("firstName", response.data.firstName);
       setSuccess("Sign-in successful!");
-      navigate("/dashboard");
+      navigate("/teachers");
 
     } catch (error) {
       if (error.response && error.response.status === 400) {

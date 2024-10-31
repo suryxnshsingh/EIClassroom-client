@@ -13,36 +13,36 @@ const SubDash = () => {
       {schema && <AddExamSchema setSchema={setSchema} subjectCode={subjectCode} />}
       <div>
         <h1 className='text-3xl font-bold dark:text-white pt-10 text-center'>{subjectCode}</h1>
-        <div className='flex justify-center gap-5 pt-5'>
+        <div className='md:flex justify-center grid grid-cols-2 mx-5 gap-5 pt-5 '>
         <button 
-          className='bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded'
+          className='px-4 py-2 text-white border-2 border-neutral-200 dark:border-neutral-700 rounded-md bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-indigo-500 hover:to-violet-500 transition-colors duration-800'
           onClick={() => setSchema(true)}
           >
             Define Exam Schema
           </button>
           <button 
-          className='bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded'
+          className='px-4 py-2 text-white border-2 border-neutral-200 dark:border-neutral-700 rounded-md bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-indigo-500 hover:to-violet-500 transition-colors duration-800'
           onClick={() => setCreate(true)}
           >
             Add Student
           </button>
-          <button className='bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded'
+          <button className='px-4 py-2 text-white border-2 border-neutral-200 dark:border-neutral-700 rounded-md bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-indigo-500 hover:to-violet-500 transition-colors duration-800'
           onClick={() => downloadExcel(subjectCode)}>
             Overall Report
           </button>  
-          <button className='bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded'
+          <button className='px-4 py-2 text-white border-2 border-neutral-200 dark:border-neutral-700 rounded-md bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-indigo-500 hover:to-violet-500 transition-colors duration-800'
           onClick={() => downloadMST1(subjectCode)}>
             MST1
           </button>  
-          <button className='bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded'
+          <button className='px-4 py-2 text-white border-2 border-neutral-200 dark:border-neutral-700 rounded-md bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-indigo-500 hover:to-violet-500 transition-colors duration-800'
           onClick={() => downloadMST2(subjectCode)}>
             MST2
           </button>  
-          <button className='bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded'
+          <button className='px-4 py-2 text-white border-2 border-neutral-200 dark:border-neutral-700 rounded-md bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-indigo-500 hover:to-violet-500 transition-colors duration-800'
           onClick={() => downloadExcelEnd(subjectCode)}>
             EndSem
           </button>  
-          <button className='bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded'
+          <button className='px-4 py-2 text-white border-2 border-neutral-200 dark:border-neutral-700 rounded-md bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-indigo-500 hover:to-violet-500 transition-colors duration-800'
           onClick={() => downloadCOSheet(subjectCode)}>
             CO Analysis
           </button> 
@@ -97,7 +97,7 @@ const List = ({ subjectCode }) => {
   }
 
   return (
-    <div className="m-4 p-3 bg-[#F5F5F5] dark:bg-zinc-800 rounded-lg mt-8">
+    <div className="m-4 md:mr-20 p-3 bg-[#F5F5F5] dark:bg-zinc-800 rounded-lg mt-8">
       <div className="relative overflow-x-auto mx-2">
       <table className="w-full text-sm text-left rtl:text-right text-neutral-900">
         <thead className="text-gray-700 dark:text-white uppercase bg-grey-500 ">
@@ -255,8 +255,8 @@ const AddExamSchema = ({ setSchema, subjectCode }) => {
   };
 
   return (
-    <div className="absolute h-screen w-full flex items-center justify-center z-10 poppins-regular backdrop-brightness-50">
-      <form className="max-w-md w-1/3 mx-auto bg-white dark:bg-black rounded-xl p-2" onSubmit={handleSubmit}>
+    <div className="absolute h-screen w-full flex items-center justify-center z-10 poppins-regular backdrop-blur-md backdrop-brightness-50">
+      <form className="max-w-md w-1/3 mx-auto bg-white dark:bg-black rounded-xl p-2 border-2 border-neutral-300 dark:border-neutral-700" onSubmit={handleSubmit}>
         <div className="p-4">
           <div className="flex justify-end text-white cursor-pointer" onClick={() => setSchema(false)}>
             ❌
@@ -338,7 +338,7 @@ const AddExamSchema = ({ setSchema, subjectCode }) => {
 
           <button
             type="submit"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg w-full sm:w-auto px-5 py-2.5 mt-5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            className="w-full px-4 py-2 text-white border-2 border-neutral-200 dark:border-neutral-700 rounded-md bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-indigo-500 hover:to-violet-500 transition-colors duration-800"
           >
             Submit
           </button>
@@ -398,13 +398,13 @@ const AddStudentPopup = ({ setCreate, subjectCode }) => {
     };
   
     return (
-      <div className="absolute h-screen w-full flex items-center justify-center z-50 poppins-regular backdrop-brightness-50">
-        <form className="max-w-md mx-auto bg-white dark:bg-black rounded-xl p-2 w-1/3" onSubmit={handleSubmit}>
+      <div className="absolute h-screen w-full flex items-center justify-center z-50 poppins-regular backdrop-blur-md backdrop-brightness-50">
+        <form className="w-1/2 mx-auto bg-white dark:bg-black rounded-xl p-2 border-2 border-neutral-300 dark:border-neutral-700" onSubmit={handleSubmit}>
           <div className="p-4">
             <div className="flex justify-end text-white cursor-pointer" onClick={() => setCreate(false)}>
               <div>❌</div>
             </div>
-  
+            <div className='grid grid-cols-2 gap-6'>
             <div className="mb-4">
               <label htmlFor="id" className="block mb-2 dark:text-white text-lg font-semibold">Enrollment Number</label>
               <input
@@ -432,8 +432,9 @@ const AddStudentPopup = ({ setCreate, subjectCode }) => {
             </div>
   
             {/* MST1 Field */}  
+            <div>
             <div className='block mb-2 dark:text-white text-lg font-semibold'> MID SEMESTER EXAM - 1 MARKS</div>
-            <div className='flex'>
+            <div className='flex gap-3'>
               <div className="mb-4">
                 <label htmlFor="MST1_Q1" className="block mb-2 ml-2 dark:text-white">Q1</label>
                 <input
@@ -443,7 +444,7 @@ const AddStudentPopup = ({ setCreate, subjectCode }) => {
                   value={formData.MST1_Q1}
                   onChange={handleChange}
                   required
-                  className="w-32 mr-1 px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300 dark:bg-gray-800 dark:text-white"
+                  className="w-full mx-1 px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300 dark:bg-gray-800 dark:text-white"
                 />
               </div>
               <div className="mb-4">
@@ -455,7 +456,7 @@ const AddStudentPopup = ({ setCreate, subjectCode }) => {
                   value={formData.MST1_Q2}
                   onChange={handleChange}
                   required
-                  className="w-32 mx-1 px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300 dark:bg-gray-800 dark:text-white"
+                  className="w-full mx-1 px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300 dark:bg-gray-800 dark:text-white"
                 />
               </div>
             <div className="mb-4">
@@ -467,14 +468,16 @@ const AddStudentPopup = ({ setCreate, subjectCode }) => {
                   value={formData.MST1_Q3}
                   onChange={handleChange}
                   required
-                  className="w-32 mx-1 px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300 dark:bg-gray-800 dark:text-white"
+                  className="w-full mx-1 px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300 dark:bg-gray-800 dark:text-white"
                 />
               </div>
             </div>
+            </div>
   
                       {/* MST2 Field */}  
+            <div>
             <div className='block mb-2 dark:text-white text-lg font-semibold'> MID SEMESTER EXAM - 2 MARKS</div>
-            <div className='flex'>
+            <div className='flex gap-3'>
               <div className="mb-4">
                 <label htmlFor="MST2_Q1" className="block mb-2 ml-2 dark:text-white">Q1</label>
                 <input
@@ -484,7 +487,7 @@ const AddStudentPopup = ({ setCreate, subjectCode }) => {
                   value={formData.MST2_Q1}
                   onChange={handleChange}
                   required
-                  className="w-32 mr-1 px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300 dark:bg-gray-800 dark:text-white"
+                  className="w-full mx-1 px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300 dark:bg-gray-800 dark:text-white"
                 />
               </div>
               <div className="mb-4">
@@ -496,7 +499,7 @@ const AddStudentPopup = ({ setCreate, subjectCode }) => {
                   value={formData.MST2_Q2}
                   onChange={handleChange}
                   required
-                  className="w-32 mx-1 px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300 dark:bg-gray-800 dark:text-white"
+                  className="w-full mx-1 px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300 dark:bg-gray-800 dark:text-white"
                 />
               </div>
             <div className="mb-4">
@@ -508,13 +511,15 @@ const AddStudentPopup = ({ setCreate, subjectCode }) => {
                   value={formData.MST2_Q3}
                   onChange={handleChange}
                   required
-                  className="w-32 mx-1 px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300 dark:bg-gray-800 dark:text-white"
+                  className="w-full mx-1 px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300 dark:bg-gray-800 dark:text-white"
                 />
               </div>
             </div>
+            </div>
   
             {/* Assignment/Quiz (AssQuiz) Field */}
-            <div className="mb-4">
+            
+            <div className="mb-4 mt-8">
               <label htmlFor="Quiz_Assignment" className="block mb-2 dark:text-white text-lg font-semibold">Assignment / Quiz</label>
               <input
                 type="number"
@@ -523,11 +528,12 @@ const AddStudentPopup = ({ setCreate, subjectCode }) => {
                 value={formData.Quiz_Assignment}
                 onChange={handleChange}
                 required
-                className="w-1/2 px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300 dark:bg-gray-800 dark:text-white"
+                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300 dark:bg-gray-800 dark:text-white"
               />
             </div>
   
             {/* Endsem Field */}
+            <div>
             <div className='block mb-2 dark:text-white text-lg font-semibold'> END SEMESTER EXAM MARKS</div>
             <div className='flex gap-1'>
               <div className="mb-4">
@@ -591,13 +597,15 @@ const AddStudentPopup = ({ setCreate, subjectCode }) => {
                 />
               </div>
             </div>
+            </div>
   
             {error && <div className="text-red-500 mb-3">{error}</div>}
-  
-            <button type="submit" className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-700">
+            </div>
+            <button type="submit" className="w-full px-4 py-2 mt-2 text-white border-2 border-neutral-200 dark:border-neutral-700 rounded-md bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-indigo-500 hover:to-violet-500 transition-colors duration-800">
               Submit
             </button>
-          </div>
+          
+        </div>
         </form>
       </div>
     );
