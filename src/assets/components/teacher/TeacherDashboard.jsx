@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import GradientButton from '../ui/gradientbutton';
 import { LayoutDashboard } from 'lucide-react';
-import HoverCard  from '../ui/hovercard';
+import SubCard  from '../ui/subcard';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -79,7 +79,7 @@ const TeacherDashbard = () => {
             </div>
             <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:mx-10 mx-5">
                 {subjects.map((sub) => (
-                    <HoverCard key={sub.code} code={sub.code} name={sub.name} />
+                    <SubCard key={sub.code} code={sub.code} name={sub.name}/>
                 ))}
             </div>
         </div>

@@ -1,9 +1,14 @@
 import { Book } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
-const HoverCard = ({ code, name, href }) => {
+const SubCard = ({ code, name }) => {
+  const navigate = useNavigate();
     return (
       <div
-        href={href}
+        onClick={() => {
+          navigate(`${code}`)
+          }
+        }
         className="w-full p-4 rounded border-[1px] border-slate-300 dark:border-neutral-700 relative overflow-hidden group bg-white dark:bg-neutral-950"
       >
         <div className="absolute inset-0 bg-gradient-to-r from-violet-600 to-indigo-600 translate-y-[100%] group-hover:translate-y-[0%] transition-transform duration-300" />
@@ -19,4 +24,4 @@ const HoverCard = ({ code, name, href }) => {
     );
   };
 
-  export default HoverCard;
+  export default SubCard;

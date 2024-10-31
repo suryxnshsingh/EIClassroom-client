@@ -16,10 +16,9 @@ import {
 import { Sidebar, SidebarBody, SidebarLink } from '../ui/sidebar';
 import {  Routes, Route, Link } from 'react-router-dom';
 import Attendance from './Attendance';
-import Assignment from './Assignment';
-import Quiz from './Quiz';
 import Profile from './Profile';
 import TeacherDashboard from './TeacherDashboard';
+import SubjectDashboard from './SubjectDashboard';
 
 const TeacherSidebar = () => {
   const [theme, setTheme] = useState(
@@ -49,24 +48,9 @@ const TeacherSidebar = () => {
       icon: <ListTodo className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
     },
     {
-      label: "Assignment",
-      href: "/teachers/assignment",
-      icon: <NotebookPen className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
-    },
-    {
       label: "Tests",
       href: "/teachers/tests",
       icon: <FlaskConical className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
-    },
-    {
-      label: "Books",
-      href: "/teachers/books",
-      icon: <LibraryBig className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
-    },
-    {
-      label: "Notes",
-      href: "/teachers/notes",
-      icon: <NotepadText className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
     },
     {
         label: "Manage Students",
@@ -165,8 +149,7 @@ const Dashboard = () => {
         <div className=' flex items-center justify-center text-black  dark:text-white  '>
           <Routes>
             <Route path="/" element={<TeacherDashboard />} />
-            <Route path="/assignment" element={<Assignment />} />
-            <Route path="/quiz" element={<Quiz />} />
+            <Route path="/:subjectCode" element={<SubjectDashboard />} />
             <Route path="/Attendance" element={<Attendance />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/settings" element={<SettingsPage />} />

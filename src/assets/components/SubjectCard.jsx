@@ -8,8 +8,8 @@ export function SubjectCard({ name, code }) {
     className=" w-64 group/card poppins-regular"
     onClick={() => {
       navigate(`/subject/${code}`)
+      }
     }
-  }
     >
       <div
         className={cn(

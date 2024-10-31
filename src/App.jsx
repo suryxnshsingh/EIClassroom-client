@@ -19,6 +19,7 @@ function App() {
             <Route path="/signup" element={<Signup/>}/>
             <Route path="/dashboard" element={<Dashbard/>}/>
             <Route path="/subject/:subjectCode" element={<SubDash />} />
+            {/* <Route path="/teachers/subjects/:subjectCode" element={<SubDash />} /> */}
             <Route path='/allsubs' element={<HOD />} />
 
             
