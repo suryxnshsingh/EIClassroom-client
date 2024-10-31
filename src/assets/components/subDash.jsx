@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import Navbar from './auth/navbar'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
@@ -9,12 +8,11 @@ const SubDash = () => {
   const [create, setCreate] = useState(false);
   const [schema, setSchema] = useState(false);
   return (
-    <div className="bg-white dark:bg-black dark:bg-dot-white/[0.2] bg-dot-black/[0.2] min-h-screen h-full pb-20 poppins">
+    <div className=" w-full min-h-screen h-full pb-20 poppins">
       {create && <AddStudentPopup setCreate={setCreate} subjectCode={subjectCode} />}
       {schema && <AddExamSchema setSchema={setSchema} subjectCode={subjectCode} />}
-      <Navbar/>
       <div>
-        <h1 className='text-3xl font-bold dark:text-white pt-28 text-center'>{subjectCode}</h1>
+        <h1 className='text-3xl font-bold dark:text-white pt-10 text-center'>{subjectCode}</h1>
         <div className='flex justify-center gap-5 pt-5'>
         <button 
           className='bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded'
@@ -101,7 +99,7 @@ const List = ({ subjectCode }) => {
   return (
     <div className="m-4 p-3 bg-[#F5F5F5] dark:bg-zinc-800 rounded-lg mt-8">
       <div className="relative overflow-x-auto mx-2">
-      <table className="w-full text-sm text-left rtl:text-right text-gray-500">
+      <table className="w-full text-sm text-left rtl:text-right text-neutral-900">
         <thead className="text-gray-700 dark:text-white uppercase bg-grey-500 ">
           <tr className="rounded-lg">
             <th scope="col" className="px-6 py-3 text-lg">Enrollment No.</th>

@@ -1,4 +1,4 @@
-import { SubjectCard } from "./SubjectCard"
+import SubCard  from './ui/subcard';
 import { useState, useEffect } from "react"
 import axios from 'axios';
 import Navbar from "./auth/navbar";
@@ -83,7 +83,7 @@ const Dashboard = () => {
       <div className="grid justify-center">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-5">
           {subjects.map((subject) => (
-            <SubjectCard
+            <SubCard
               key={subject.code}
               name={subject.name}
               code={subject.code}

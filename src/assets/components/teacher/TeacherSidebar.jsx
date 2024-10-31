@@ -19,6 +19,11 @@ import Attendance from './Attendance';
 import Profile from './Profile';
 import TeacherDashboard from './TeacherDashboard';
 import SubjectDashboard from './SubjectDashboard';
+import Books from './Books';
+import Reports from './Reports';
+import Students from './Students';
+import subDash from '../subDash';
+import SubDash from '../subDash';
 
 const TeacherSidebar = () => {
   const [theme, setTheme] = useState(
@@ -43,9 +48,9 @@ const TeacherSidebar = () => {
       icon: <LayoutDashboard className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
     },
     {
-      label: "Attendance",
-      href: "/teachers/attendance",
-      icon: <ListTodo className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+      label: "Library",
+      href: "/teachers/library",
+      icon: <LibraryBig className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
     },
     {
       label: "Tests",
@@ -150,7 +155,10 @@ const Dashboard = () => {
           <Routes>
             <Route path="/" element={<TeacherDashboard />} />
             <Route path="/:subjectCode" element={<SubjectDashboard />} />
-            <Route path="/Attendance" element={<Attendance />} />
+            <Route path="/library" element={<Books />} />
+            <Route path="/students" element={<Students />} />
+            <Route path="/reports" element={<Reports />} />
+            <Route path="/reports/:subjectCode" element={<SubDash />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/settings" element={<SettingsPage />} />
           </Routes>
