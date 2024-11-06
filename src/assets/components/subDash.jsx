@@ -82,7 +82,7 @@ const List = ({ subjectCode }) => {
 
   if (loading) {
     return (
-      <div className="m-4 p-3 bg-[#F5F5F5] dark:bg-zinc-800 rounded-lg mt-8 flex justify-center items-center">
+      <div className="m-4 p-3 bg-[#F5F5F5] dark:bg-neutral-800 rounded-lg mt-8 flex justify-center items-center">
         <div className="dark:text-white">Loading...</div>
       </div>
     );
@@ -90,16 +90,16 @@ const List = ({ subjectCode }) => {
 
   if (error) {
     return (
-      <div className="m-4 p-3 bg-[#F5F5F5] dark:bg-zinc-800 rounded-lg mt-8">
+      <div className="m-4 p-3 bg-[#F5F5F5] dark:bg-neutral-800 rounded-lg mt-8">
         <div className="text-red-500 text-center">{error}</div>
       </div>
     );
   }
 
   return (
-    <div className="m-4 md:mr-20 p-3 bg-[#F5F5F5] dark:bg-zinc-800 rounded-lg mt-8">
+    <div className="m-4 md:mr-20 p-3 bg-[#F5F5F5] dark:bg-neutral-900 rounded-lg mt-8 border-[1px] dark:border-neutral-700">
       <div className="relative overflow-x-auto mx-2">
-      <table className="w-full text-sm text-left rtl:text-right text-neutral-900">
+      <table className="w-full text-sm text-left rtl:text-right text-neutral-900 ">
         <thead className="text-gray-700 dark:text-white uppercase bg-grey-500 ">
           <tr className="rounded-lg">
             <th scope="col" className="px-6 py-3 text-lg">Enrollment No.</th>
@@ -140,14 +140,14 @@ const List = ({ subjectCode }) => {
         </thead>
         <tbody>
           {sheets.length === 0 ? (
-            <tr className="bg-white border-b dark:bg-black dark:text-gray-300">
+            <tr className="bg-white border-[1px] dark:bg-black dark:text-gray-300">
               <td colSpan="14" className="px-6 py-4 text-center">
-                No sheets found
+                No students found
               </td>
             </tr>
           ) : (
             sheets.map((sheet) => (
-              <tr key={sheet.id} className="bg-white border-b dark:bg-black dark:text-gray-300">
+              <tr key={sheet.id} className="bg-white border-[1px] dark:border-neutral-700  dark:bg-black dark:text-gray-300">
                 <td className="px-6 py-3">{sheet.id}</td>
                 <td className="px-6 py-3">{sheet.name}</td>
 
@@ -255,7 +255,7 @@ const AddExamSchema = ({ setSchema, subjectCode }) => {
   };
 
   return (
-    <div className="absolute h-screen w-full flex items-center justify-center z-10 poppins-regular backdrop-blur-md backdrop-brightness-50">
+    <div className="fixed h-full w-full flex items-center justify-center rounded-tl-2xl z-50 poppins-regular backdrop-brightness-50 dark:backdrop-brightness-50 backdrop-blur-sm">
       <form className="max-w-md w-1/3 mx-auto bg-white dark:bg-black rounded-xl p-2 border-2 border-neutral-300 dark:border-neutral-700" onSubmit={handleSubmit}>
         <div className="p-4">
           <div className="flex justify-end text-white cursor-pointer" onClick={() => setSchema(false)}>

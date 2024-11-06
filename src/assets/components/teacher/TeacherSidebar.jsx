@@ -24,6 +24,7 @@ import Reports from './Reports';
 import Students from './Students';
 import subDash from '../subDash';
 import SubDash from '../subDash';
+import Tests from './Tests';
 
 const TeacherSidebar = () => {
   const [theme, setTheme] = useState(
@@ -48,12 +49,7 @@ const TeacherSidebar = () => {
       icon: <LayoutDashboard className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
     },
     {
-      label: "Library",
-      href: "/teachers/library",
-      icon: <LibraryBig className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
-    },
-    {
-      label: "Tests",
+      label: "Manage Tests",
       href: "/teachers/tests",
       icon: <FlaskConical className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
     },
@@ -84,6 +80,9 @@ const TeacherSidebar = () => {
     }
   ];
 
+  const firstName = localStorage.getItem("firstName");
+  const lastName = localStorage.getItem("lastName");
+
   return (
     <div className={cn(
       " flex flex-col md:flex-row bg-gray-100 dark:bg-neutral-800 w-full flex-1 mx-auto border border-neutral-200 dark:border-neutral-700 overflow-hidden",
@@ -105,7 +104,7 @@ const TeacherSidebar = () => {
           <div>
             <SidebarLink
               link={{
-                label: "Suryansh Singh",
+                label: `${firstName} ${lastName}`,
                 href: "/teachers/profile",
                 icon: (
                   <div className="h-7 w-7 flex-shrink-0 rounded-full bg-neutral-300 dark:bg-neutral-600" />
@@ -123,7 +122,7 @@ const TeacherSidebar = () => {
 const Logo = () => {
   return (
     <a
-      href="#"
+      href="/teachers/"
       className="font-normal flex space-x-2 items-center text-md text-black dark:text-white py-1 relative z-20"
     >
       <div className="h-5 w-6 bg-black dark:bg-white rounded-br-lg rounded-tr-sm rounded-tl-lg rounded-bl-sm flex-shrink-0" />
@@ -148,15 +147,15 @@ const LogoIcon = () => {
 const Dashboard = () => {
 
   return (
-    <div className="flex flex-1 bg-neutral-100 dark:bg-neutral-950  ">
+    <div className="flex flex-1 bg-neutral-100 dark:bg-neutral-950">
       <div className=" rounded-tl-2xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-black dark:bg-dot-white/[0.2] bg-dot-black/[0.2] ">
-        <div className=' rounded-tl-2xl  w-screen h-screen'>
-        <div className=' flex items-center justify-center text-black  dark:text-white  '>
+        <div className=' rounded-tl-2xl  w-screen h-screen overflow-scroll'>
+        <div className=' flex items-center justify-center text-black  dark:text-white'>
           <Routes>
             <Route path="/" element={<TeacherDashboard />} />
             <Route path="/:subjectCode" element={<SubjectDashboard />} />
-            <Route path="/library" element={<Books />} />
             <Route path="/students" element={<Students />} />
+            <Route path="/tests" element={<Tests />} />
             <Route path="/reports" element={<Reports />} />
             <Route path="/reports/:subjectCode" element={<SubDash />} />
             <Route path="/profile" element={<Profile />} />
@@ -170,49 +169,51 @@ const Dashboard = () => {
 };
 
 const SettingsPage = () => {
-    const [theme, setTheme] = useState(
-        typeof window !== "undefined" && window.matchMedia("(prefers-color-scheme: dark)").matches
-          ? "dark"
-          : "light"
-      );
+  const [theme, setTheme] = useState(() => {
+    if (typeof window === 'undefined') return 'light';
     
-      const handleThemeToggle = () => {
-        const newTheme = theme === "dark" ? "light" : "dark";
-        setTheme(newTheme);
-        document.documentElement.classList.toggle("dark", newTheme === "dark");
-        localStorage.setItem("theme", newTheme);
-      };
-      useEffect(() => {
-        const savedTheme = localStorage.getItem("theme");
-        if (savedTheme) {
-          setTheme(savedTheme);
-          document.documentElement.classList.toggle("dark", savedTheme === "dark");
-        }
-      }, []);
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) return savedTheme;
+    
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  });
 
-  return    (
-    <div>
-        <h1 className='text-3xl py-10'>Settings</h1>
-        <div>
-            <h1>Change Theme : </h1>
-            <div className="flex items-center justify-center z-50">
-            <label className="relative inline-flex items-center cursor-pointer mr-2">
-                <input
+  useEffect(() => {
+    document.documentElement.classList.toggle('dark', theme === 'dark');
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const handleThemeToggle = () => {
+    setTheme(prevTheme => prevTheme === 'dark' ? 'light' : 'dark');
+  };
+
+  return (
+    <div className="p-6 text-start">
+      <h1 className="text-3xl font-semibold mb-8">Settings</h1>
+      
+      <div className="space-y-6">
+        <div className="flex items-center justify-between max-w-md">
+          <h2 className="text-lg font-medium pr-2">Theme Preference :</h2>
+          
+          <div className="flex items-center space-x-3">
+            <label className="relative inline-flex items-center cursor-pointer">
+              <input
                 type="checkbox"
-                className="sr-only"
+                className="sr-only peer"
                 checked={theme === "dark"}
                 onChange={handleThemeToggle}
-                />
-                <div className="w-12 h-6 bg-gray-200 dark:bg-gray-800 rounded-full shadow-inner"></div>
-                <div
-                className={`absolute w-6 h-6 bg-white rounded-full shadow transition-transform duration-300 ease-in-out ${
-                    theme === "dark" ? "translate-x-6" : "translate-x-0"
-                }`}
-                ></div>
+                aria-label="Toggle theme"
+              />
+              <div className="w-14 h-7 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
             </label>
-            <span className="text-xl">{theme === "dark" ? "🌙" : "☀️"}</span>
-            </div>
+            <span className="text-xl" aria-hidden="true">
+              {theme === "dark" ? "🌙" : "☀️"}
+            </span>
+          </div>
         </div>
-    </div>)};
+      </div>
+    </div>
+  );
+};
 
 export default TeacherSidebar;

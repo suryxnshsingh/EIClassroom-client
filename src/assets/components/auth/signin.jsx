@@ -6,11 +6,15 @@ import { cn } from "../../../../lib/utils";
 import { useNavigate } from "react-router-dom";
 
 const Signin = () => {
-  const [theme, setTheme] = useState(
-    typeof window !== "undefined" && window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? "dark"
-      : "light"
-  );
+  localStorage.clear();
+  const [theme, setTheme] = useState(() => {
+    if (typeof window === 'undefined') return 'dark';
+    
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) return savedTheme;
+    
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  });
   const [loading, setLoading] = useState(true); // Loading state
   const [formData, setFormData] = useState({
     email: "",
@@ -53,9 +57,15 @@ const Signin = () => {
       const response = await axios.post(`http://localhost:8080/api/auth/signin`, formData);
       
 
-      localStorage.setItem("token", response.data.token);
-      localStorage.setItem("email", response.data.email);
-      localStorage.setItem("firstName", response.data.firstName);
+      // Decode the JWT token
+      const tokenParts = response.data.token.split('.');
+      const payload = JSON.parse(atob(tokenParts[1]));
+
+      // Save token and user info to localStorage
+      localStorage.setItem('token', response.data.token);
+      localStorage.setItem('firstName', payload.firstName);
+      localStorage.setItem('lastName', payload.lastName);
+      localStorage.setItem('teacherId', payload.teacherId);
       setSuccess("Sign-in successful!");
       navigate("/teachers");
 

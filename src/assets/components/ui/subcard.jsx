@@ -9,7 +9,7 @@ const SubCard = ({ code, name }) => {
           navigate(`${code}`)
           }
         }
-        className="w-full p-4 rounded border-[1px] border-slate-300 dark:border-neutral-700 relative overflow-hidden group bg-white dark:bg-neutral-950"
+        className="w-full p-4 rounded border-[1px] border-slate-300 dark:border-neutral-700 relative overflow-hidden group bg-neutral-100 dark:bg-neutral-950"
       >
         <div className="absolute inset-0 bg-gradient-to-r from-violet-600 to-indigo-600 translate-y-[100%] group-hover:translate-y-[0%] transition-transform duration-300" />
   

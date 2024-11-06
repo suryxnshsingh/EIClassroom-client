@@ -99,6 +99,7 @@ const MobileSidebar = ({ className, children, ...props }) => {
               "fixed h-full w-full inset-0 bg-white dark:bg-neutral-950 p-10 z-[100] flex flex-col justify-between",
               className
             )}
+            onClick={() => setOpen(!open)}
           >
             <div
               className="absolute right-10 top-10 z-50 text-neutral-800 dark:text-neutral-200"

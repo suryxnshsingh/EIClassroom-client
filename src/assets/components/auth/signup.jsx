@@ -55,7 +55,11 @@ const Signup = () => {
     try {
       // Send the signup request to the backend
       const response = await axios.post(`http://localhost:8080/api/auth/signup`, formData);
+
+      
       setSuccess("Signup successful!");
+      localStorage.setItem('firstName', response.data.firstName);
+      localStorage.setItem('lastName', response.data.lastName);
       navigate("/teachers");
 
     } catch (error) {

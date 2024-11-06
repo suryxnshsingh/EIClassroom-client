@@ -66,7 +66,7 @@ const TeacherDashbard = () => {
 
 
   return (
-        <div className=" w-full md:mr-16 ">
+        <div className=" w-full md:mr-16 pb-16 ">
             <div className='flex justify-between mb-4'>
             <p className="text-4xl font-semibold md:m-10 m-5 ">Courses</p>
             {create && <CreateSubject create={create} setCreate={setCreate} />}

@@ -8,8 +8,9 @@ import Attendance from './Attendance';
 import Assignments from './Assignment';
 import Notes from './Notes';
 import Tests from './Tests';
+import Books from './Books';
 
-const tabs = ["Attendance", "Assignments", "Tests", "Notes"];
+const tabs = ["Attendance", "Assignments", "Tests", "Notes", "Books"];
 const SubjectDashboard = () => {
     const { subjectCode } = useParams();
     const [selected, setSelected] = useState(tabs[0]);
@@ -31,6 +32,7 @@ const SubjectDashboard = () => {
         {selected === "Assignments" && <Assignments/>}
         {selected === "Notes" && <Notes/>}
         {selected === "Tests" && <Tests/>}
+        {selected === "Books" && <Books/>}
         </div>
     </div>
   )
