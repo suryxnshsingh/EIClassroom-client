@@ -9,7 +9,7 @@ const Signin = () => {
   localStorage.clear();
   const [theme, setTheme] = useState(() => {
     if (typeof window === 'undefined') return 'dark';
-    
+    localStorage.setItem('theme', 'dark');
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme) return savedTheme;
     return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
@@ -174,14 +174,6 @@ const Signin = () => {
             Don't have an account? <a href="/signup" className="text-blue-500 underline">Create Account</a>
           </p>
         </form>
-        <button
-            className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
-            type="submit"
-            onClick={()=>(navigate("/allsubs"))}
-          >
-            Login as HOD? &rarr;
-            <BottomGradient />
-          </button>
       </div>
     </div>
   );

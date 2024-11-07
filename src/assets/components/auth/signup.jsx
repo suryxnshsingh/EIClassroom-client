@@ -105,7 +105,7 @@ const Signup = () => {
       <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
       <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 max-md:border-0 border-2 border-neutral-300 dark:border-neutral-700 bg-white dark:bg-black">
 
-        <h2 className="font-bold text-center text-xl text-neutral-800 dark:text-neutral-200">
+        <h2 className="font-bold text-center text-xl text-neutral-950 dark:text-neutral-200">
           EI Classroom
         </h2>
         <form className="my-8" onSubmit={handleSubmit}>
@@ -113,14 +113,14 @@ const Signup = () => {
             <Label htmlFor="role">Sign up as</Label>
             <select
               id="role"
-              className="w-full rounded-md border-2 border-neutral-300 dark:border-neutral-700 p-2 text-neutral-900 dark:text-neutral-100 bg-white dark:bg-black"
+              className="w-full rounded-md border border-neutral-300 dark:border-neutral-700 p-2 text-neutral-900 dark:text-neutral-100 bg-gray-50 dark:bg-black"
               value={formData.role}
               onChange={handleInputChange}
               required
             >
               <option value="STUDENT">Student</option>
               <option value="TEACHER">Teacher</option>
-              <option value="ADMIN">Admin</option>
+              <option value="ADMIN">Head</option>
             </select>
           </LabelInputContainer>
 
@@ -129,7 +129,7 @@ const Signup = () => {
               <Label htmlFor="enrollmentNumber">Enrollment Number</Label>
               <Input
                 id="enrollmentNumber"
-                placeholder="Enter your enrollment number"
+                placeholder="0801FC69420"
                 type="text"
                 value={formData.enrollmentNumber}
                 onChange={handleInputChange}
@@ -143,7 +143,7 @@ const Signup = () => {
               <Label htmlFor="secretKey">Secret Key</Label>
               <Input
                 id="secretKey"
-                placeholder="Enter secret key"
+                placeholder="Contact Head for key"
                 type="password"
                 value={formData.secretKey}
                 onChange={handleInputChange}
