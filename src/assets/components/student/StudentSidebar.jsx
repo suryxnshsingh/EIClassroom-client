@@ -6,7 +6,9 @@ import {
   FlaskConical,
   LibraryBig,
   NotepadText,
-  UserCircle, 
+  UserCircle,
+  AudioLines,
+  ArrowUp01,
   Settings, 
   LogOut 
 } from 'lucide-react';
@@ -74,9 +76,14 @@ const StudentSidebar = () => {
       icon: <NotepadText className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
     },
     {
-      label: "Profile",
-      href: "/students/profile",
-      icon: <UserCircle className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+      label: "Analog Simulator",
+      href: "/teachers/",
+      icon: <AudioLines className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+    },
+    {
+      label: "Digital Simulator",
+      href: "/teachers/",
+      icon: <ArrowUp01 className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
     },
     {
       label: "Settings",
@@ -89,6 +96,8 @@ const StudentSidebar = () => {
       icon: <LogOut className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
     }
   ];
+  const firstName = localStorage.getItem("firstName") || "Profile";
+  const lastName = localStorage.getItem("lastName") || ""; 
 
   return (
     <div className={cn(
@@ -103,7 +112,7 @@ const StudentSidebar = () => {
               {links.map((link, idx) => (
                 <Link to={link.href} key={idx} className="flex items-center gap-2 p-2 hover:bg-neutral-200 dark:hover:bg-neutral-700 rounded-lg">
                 {link.icon}
-                <span className='text-neutral-700 dark:text-neutral-200 text-md'>{link.label}</span>
+                <span className='text-neutral-700 dark:text-neutral-200 text-md text-nowrap'>{link.label}</span>
                 </Link>
               ))}
             </div>
@@ -111,7 +120,7 @@ const StudentSidebar = () => {
           <div>
             <SidebarLink
               link={{
-                label: "Suryansh Singh",
+                label: `${firstName} ${lastName}`,
                 href: "/students/profile",
                 icon: (
                   <div className="h-7 w-7 flex-shrink-0 rounded-full bg-neutral-300 dark:bg-neutral-600" />
@@ -155,7 +164,7 @@ const Dashboard = () => {
   return (
     <div className="flex flex-1 bg-neutral-100 dark:bg-neutral-950">
       <div className=" rounded-tl-2xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-black dark:bg-dot-white/[0.2] bg-dot-black/[0.2]">
-        <div className='p-2 md:p-10 rounded-tl-2xl  w-screen h-screen bg-white dark:bg-black [mask-image:radial-gradient(ellipse_at_center,transparent_2%,black)]'>
+        <div className='p-2 md:p-10 rounded-tl-2xl  w-screen h-screen '>
         <div className=' flex items-center justify-center text-black  dark:text-white'>
           <Routes>
             <Route path="/" element={<Dash />} />

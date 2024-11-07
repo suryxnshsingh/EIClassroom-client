@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios"; // Import Axios for HTTP requests
+import axios from "axios";
 import Label from "../ui/label";
 import Input from "../ui/input";
 import { cn } from "../../../../lib/utils";
@@ -12,16 +12,15 @@ const Signin = () => {
     
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme) return savedTheme;
-    
     return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   });
-  const [loading, setLoading] = useState(true); // Loading state
+  const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
-  const [error, setError] = useState(null); // Error state
-  const [success, setSuccess] = useState(null); // Success state
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
   const navigate = useNavigate();
 
   const handleThemeToggle = () => {
@@ -43,7 +42,6 @@ const Signin = () => {
     }, 200);
   }, []);
 
-
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
@@ -54,26 +52,52 @@ const Signin = () => {
     setSuccess(null);
 
     try {
-      const response = await axios.post(`http://localhost:8080/api/auth/signin`, formData);
+      const response = await axios.post(`http://localhost:8080/api/auth/login`, formData);
       
-
-      // Decode the JWT token
-      const tokenParts = response.data.token.split('.');
-      const payload = JSON.parse(atob(tokenParts[1]));
+      const { token, user } = response.data;
 
       // Save token and user info to localStorage
-      localStorage.setItem('token', response.data.token);
-      localStorage.setItem('firstName', payload.firstName);
-      localStorage.setItem('lastName', payload.lastName);
-      localStorage.setItem('teacherId', payload.teacherId);
+      localStorage.setItem('token', token);
+      localStorage.setItem('userId', user.id);
+      localStorage.setItem('userEmail', user.email);
+      localStorage.setItem('firstName', user.firstName);
+      localStorage.setItem('lastName', user.lastName);
+      localStorage.setItem('userRole', user.role);
+
       setSuccess("Sign-in successful!");
-      navigate("/teachers");
+
+      // Redirect based on role
+      switch(user.role) {
+        case 'STUDENT':
+          navigate("/students");
+          break;
+        case 'TEACHER':
+          navigate("/teachers");
+          break;
+        case 'ADMIN':
+          navigate("/admin");
+          break;
+        default:
+          navigate("/");
+      }
 
     } catch (error) {
-      if (error.response && error.response.status === 400) {
-        setError("Invalid email or password.");
+      if (error.response) {
+        switch (error.response.status) {
+          case 400:
+            setError("Email and password are required.");
+            break;
+          case 401:
+            setError("Invalid credentials.");
+            break;
+          case 500:
+            setError("Server error. Please try again later.");
+            break;
+          default:
+            setError("Something went wrong. Please try again.");
+        }
       } else {
-        setError("Something went wrong. Please try again.");
+        setError("Network error. Please check your connection.");
       }
     }
   };

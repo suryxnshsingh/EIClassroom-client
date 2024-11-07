@@ -66,6 +66,16 @@ const TeacherSidebar = () => {
         icon: <FileDown className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
     },
     {
+      label: "Analog Simulator",
+      href: "/teachers/",
+      icon: <AudioLines className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+    },
+    {
+      label: "Digital Simulator",
+      href: "/teachers/",
+      icon: <ArrowUp01 className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+    },
+    {
       label: "Settings",
       href: "/teachers/settings",
       icon: <Settings className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
@@ -74,17 +84,8 @@ const TeacherSidebar = () => {
       label: "Logout",
       href: "/signin",
       icon: <LogOut className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
-    },
-    {
-      label: "Analog Simulator",
-      href: "/#",
-      icon: <AudioLines className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
-    },
-    {
-      label: "Digital Simulator",
-      href: "/#",
-      icon: <ArrowUp01 className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
     }
+    
   ];
   const firstName = localStorage.getItem("firstName") || "Profile";
   const lastName = localStorage.getItem("lastName") || ""; 
