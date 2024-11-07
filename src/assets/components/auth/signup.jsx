@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios"; // Import Axios for HTTP requests
+import axios from "axios";
 import Label from "../ui/label";
 import Input from "../ui/input";
 import { cn } from "../../../../lib/utils";
@@ -15,19 +15,19 @@ const Signup = () => {
     firstName: "",
     lastName: "",
     email: "",
-    password: ""
+    password: "",
+    role: "STUDENT", // Default role
+    enrollmentNumber: "",
+    secretKey: ""
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const navigate = useNavigate();
 
-  const handleThemeToggle = () => {
-    const newTheme = theme === "dark" ? "light" : "dark";
-    setTheme(newTheme);
-    document.documentElement.classList.toggle("dark", newTheme === "dark");
-    localStorage.setItem("theme", newTheme);
-  };
+  // Secret keys for teacher and admin
+  const TEACHER_KEY = "teacher123";
+  const ADMIN_KEY = "admin123";
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
@@ -52,21 +52,45 @@ const Signup = () => {
     setError(null);
     setSuccess(null);
 
+    // Verify secret key for teacher and admin roles
+    if (formData.role === "TEACHER" && formData.secretKey !== TEACHER_KEY) {
+      setError("Invalid teacher secret key");
+      return;
+    }
+    if (formData.role === "ADMIN" && formData.secretKey !== ADMIN_KEY) {
+      setError("Invalid admin secret key");
+      return;
+    }
+
     try {
       // Send the signup request to the backend
-      const response = await axios.post(`http://localhost:8080/api/auth/signup`, formData);
+      const response = await axios.post(`http://localhost:8080/api/auth/register`, formData);
 
-      
       setSuccess("Signup successful!");
-      localStorage.setItem('firstName', response.data.firstName);
-      localStorage.setItem('lastName', response.data.lastName);
-      navigate("/teachers");
+      
+      // Store the JWT token
+      localStorage.setItem('token', response.data.token);
+      
+      // Store user info
+      localStorage.setItem('userId', response.data.user.id);
+      localStorage.setItem('userRole', response.data.user.role);
+      
+      navigate("/signin");
 
     } catch (error) {
-      if (error.response && error.response.status === 400) {
-        setError("User with this email already exists.");
+      if (error.response) {
+        switch (error.response.status) {
+          case 400:
+            setError(error.response.data.message || "User with this email already exists.");
+            break;
+          case 422:
+            setError("Invalid input data. Please check your entries.");
+            break;
+          default:
+            setError("Something went wrong. Please try again.");
+        }
       } else {
-        setError("Something went wrong. Please try again.");
+        setError("Network error. Please check your connection.");
       }
     }
   };
@@ -80,29 +104,53 @@ const Signup = () => {
     <div className="bg-white dark:bg-black dark:bg-dot-white/[0.2] bg-dot-black/[0.2] h-screen flex items-center justify-center">
       <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
       <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 max-md:border-0 border-2 border-neutral-300 dark:border-neutral-700 bg-white dark:bg-black">
-        {/* Theme Toggle Button */}
-        <div className="flex items-center justify-center mb-6">
-          <label className="relative inline-flex items-center cursor-pointer mr-2">
-            <input
-              type="checkbox"
-              className="sr-only"
-              checked={theme === "dark"}
-              onChange={handleThemeToggle}
-            />
-            <div className="w-12 h-6 bg-gray-200 dark:bg-gray-800 rounded-full shadow-inner"></div>
-            <div
-              className={`absolute w-6 h-6 bg-white rounded-full shadow transition-transform duration-300 ease-in-out ${
-                theme === "dark" ? "translate-x-6" : "translate-x-0"
-              }`}
-            ></div>
-          </label>
-          <span className="text-xl">{theme === "dark" ? "🌙" : "☀️"}</span>
-        </div>
 
         <h2 className="font-bold text-center text-xl text-neutral-800 dark:text-neutral-200">
           EI Classroom
         </h2>
         <form className="my-8" onSubmit={handleSubmit}>
+        <LabelInputContainer className="mb-4">
+            <Label htmlFor="role">Sign up as</Label>
+            <select
+              id="role"
+              className="w-full rounded-md border-2 border-neutral-300 dark:border-neutral-700 p-2 text-neutral-900 dark:text-neutral-100 bg-white dark:bg-black"
+              value={formData.role}
+              onChange={handleInputChange}
+              required
+            >
+              <option value="STUDENT">Student</option>
+              <option value="TEACHER">Teacher</option>
+              <option value="ADMIN">Admin</option>
+            </select>
+          </LabelInputContainer>
+
+          {formData.role === "STUDENT" && (
+            <LabelInputContainer className="mb-4">
+              <Label htmlFor="enrollmentNumber">Enrollment Number</Label>
+              <Input
+                id="enrollmentNumber"
+                placeholder="Enter your enrollment number"
+                type="text"
+                value={formData.enrollmentNumber}
+                onChange={handleInputChange}
+                required
+              />
+            </LabelInputContainer>
+          )}
+
+          {(formData.role === "TEACHER" || formData.role === "ADMIN") && (
+            <LabelInputContainer className="mb-4">
+              <Label htmlFor="secretKey">Secret Key</Label>
+              <Input
+                id="secretKey"
+                placeholder="Enter secret key"
+                type="password"
+                value={formData.secretKey}
+                onChange={handleInputChange}
+                required
+              />
+            </LabelInputContainer>
+          )}
           <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
             <LabelInputContainer>
               <Label htmlFor="firstName">First name</Label>
@@ -112,6 +160,7 @@ const Signup = () => {
                 type="text"
                 value={formData.firstName}
                 onChange={handleInputChange}
+                required
               />
             </LabelInputContainer>
             <LabelInputContainer>
@@ -122,6 +171,7 @@ const Signup = () => {
                 type="text"
                 value={formData.lastName}
                 onChange={handleInputChange}
+                required
               />
             </LabelInputContainer>
           </div>
@@ -133,6 +183,7 @@ const Signup = () => {
               type="email"
               value={formData.email}
               onChange={handleInputChange}
+              required
             />
           </LabelInputContainer>
           <LabelInputContainer className="mb-4">
@@ -143,6 +194,7 @@ const Signup = () => {
               type="password"
               value={formData.password}
               onChange={handleInputChange}
+              required
             />
           </LabelInputContainer>
 
@@ -179,6 +231,8 @@ const SkeletonSignup = () => {
             <div className="w-6 h-6 ml-1 bg-gray-300 dark:bg-gray-700 rounded-full shadow-inner"></div>
           </div>
           <div className="h-8 bg-gray-300 dark:bg-gray-700 mb-6 w-32 mx-auto rounded-md"></div>
+          <div className="w-full h-[42px] bg-gray-300 dark:bg-gray-700 rounded mb-4"></div>
+          <div className="w-full h-[32px] bg-gray-300 dark:bg-gray-700 rounded mb-6"></div>
           <div className="flex justify-center">
             <div>
               <div className="flex items-center justify-start mb-4">
@@ -200,8 +254,6 @@ const SkeletonSignup = () => {
           <div className="flex items-center justify-start mb-4">
             <div className="w-24 h-6 bg-gray-300 dark:bg-gray-700 rounded-full shadow-inner"></div>
           </div>
-          <div className="w-full h-[42px] bg-gray-300 dark:bg-gray-700 rounded mb-4"></div>
-          <div className="w-full h-[32px] bg-gray-300 dark:bg-gray-700 rounded mb-6"></div>
           <div className="bg-gray-300 dark:bg-gray-700 h-[1px] w-full mb-8"></div>
           <div className="h-4 bg-gray-300 dark:bg-gray-700 w-48 mx-auto"></div>
         </div>

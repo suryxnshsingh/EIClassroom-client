@@ -11,7 +11,9 @@ import {
   UserCircle, 
   Settings,
   Users,
-  LogOut 
+  LogOut,
+  ArrowUp01,
+  AudioLines
 } from 'lucide-react';
 import { Sidebar, SidebarBody, SidebarLink } from '../ui/sidebar';
 import {  Routes, Route, Link } from 'react-router-dom';
@@ -64,11 +66,6 @@ const TeacherSidebar = () => {
         icon: <FileDown className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
     },
     {
-      label: "Profile",
-      href: "/teachers/profile",
-      icon: <UserCircle className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
-    },
-    {
       label: "Settings",
       href: "/teachers/settings",
       icon: <Settings className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
@@ -77,11 +74,20 @@ const TeacherSidebar = () => {
       label: "Logout",
       href: "/signin",
       icon: <LogOut className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+    },
+    {
+      label: "Analog Simulator",
+      href: "/#",
+      icon: <AudioLines className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+    },
+    {
+      label: "Digital Simulator",
+      href: "/#",
+      icon: <ArrowUp01 className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
     }
   ];
-
-  const firstName = localStorage.getItem("firstName");
-  const lastName = localStorage.getItem("lastName");
+  const firstName = localStorage.getItem("firstName") || "Profile";
+  const lastName = localStorage.getItem("lastName") || ""; 
 
   return (
     <div className={cn(
