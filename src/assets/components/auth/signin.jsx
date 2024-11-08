@@ -6,7 +6,11 @@ import { cn } from "../../../../lib/utils";
 import { useNavigate } from "react-router-dom";
 
 const Signin = () => {
+
+  const theming = localStorage.getItem("theme"); 
   localStorage.clear();
+  localStorage.setItem("theme", theming);
+  
   const [theme, setTheme] = useState(() => {
     if (typeof window === 'undefined') return 'dark';
     localStorage.setItem('theme', 'dark');

@@ -18,7 +18,7 @@ import {
 import { Sidebar, SidebarBody, SidebarLink } from '../ui/sidebar';
 import {  Routes, Route, Link } from 'react-router-dom';
 import Attendance from './Attendance';
-import Profile from './Profile';
+import ManageCourses from './ManageCourses';
 import TeacherDashboard from './TeacherDashboard';
 import SubjectDashboard from './SubjectDashboard';
 import Books from './Books';
@@ -27,6 +27,7 @@ import Students from './Students';
 import subDash from '../subDash';
 import SubDash from '../subDash';
 import Tests from './Tests';
+import People from './People';
 
 const TeacherSidebar = () => {
   const [theme, setTheme] = useState(
@@ -59,6 +60,11 @@ const TeacherSidebar = () => {
         label: "Manage Students",
         href: "/teachers/students",
         icon: <Users className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+    },
+    {
+      label: "Manage Courses",
+      href: "/teachers/managecourses",
+      icon: <LibraryBig className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
     },
     {
         label: "Download Reports",
@@ -165,7 +171,7 @@ const Dashboard = () => {
             <Route path="/tests" element={<Tests />} />
             <Route path="/reports" element={<Reports />} />
             <Route path="/reports/:subjectCode" element={<SubDash />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route path="/managecourses" element={<ManageCourses />} />
             <Route path="/settings" element={<SettingsPage />} />
           </Routes>
           </div>

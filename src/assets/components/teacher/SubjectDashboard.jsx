@@ -16,8 +16,8 @@ const SubjectDashboard = () => {
     const [selected, setSelected] = useState(tabs[0]);
   return (
     <div className='w-full'>
-        <p className="text-4xl font-semibold md:m-10 m-5 ">{subjectCode}</p>
-        <div className="md:px-10 px-5  flex items-center flex-wrap gap-4">
+        <p className="text-4xl font-semibold md:m-10 m-5 ">Subject Name</p>
+        <div className="md:px-10 px-5  flex items-center flex-wrap gap-4 overflow-x-auto">
             {tabs.map((tab) => (
                 <Chip
                 text={tab}

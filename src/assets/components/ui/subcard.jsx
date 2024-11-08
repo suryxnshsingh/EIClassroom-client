@@ -1,12 +1,12 @@
 import { Book } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-const SubCard = ({ code, name }) => {
+const SubCard = ({ code, name, id }) => {
   const navigate = useNavigate();
     return (
       <div
         onClick={() => {
-          navigate(`${code}`)
+          navigate(`${id}`)
           }
         }
         className="w-full p-4 rounded border-[1px] border-slate-300 dark:border-neutral-700 relative overflow-hidden group bg-neutral-100 dark:bg-neutral-950"
