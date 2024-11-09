@@ -21,13 +21,11 @@ import Attendance from './Attendance';
 import ManageCourses from './ManageCourses';
 import TeacherDashboard from './TeacherDashboard';
 import SubjectDashboard from './SubjectDashboard';
-import Books from './Books';
 import Reports from './Reports';
-import Students from './Students';
+import ManageStudents from './ManageStudents';
 import subDash from '../subDash';
 import SubDash from '../subDash';
 import Tests from './Tests';
-import People from './People';
 
 const TeacherSidebar = () => {
   const [theme, setTheme] = useState(
@@ -167,7 +165,7 @@ const Dashboard = () => {
           <Routes>
             <Route path="/" element={<TeacherDashboard />} />
             <Route path="/:subjectCode" element={<SubjectDashboard />} />
-            <Route path="/students" element={<Students />} />
+            <Route path="/students" element={<ManageStudents />} />
             <Route path="/tests" element={<Tests />} />
             <Route path="/reports" element={<Reports />} />
             <Route path="/reports/:subjectCode" element={<SubDash />} />
