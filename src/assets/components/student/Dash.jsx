@@ -85,7 +85,7 @@ const Dash = () => {
         <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:mx-10 mx-5">
           {enrolledCourses.map((course) => (
             <SubCard 
-              key={`${course.id}-${course.code}`}
+              key={course.id}
               code={course.code} 
               name={course.name} 
               id={course.id}

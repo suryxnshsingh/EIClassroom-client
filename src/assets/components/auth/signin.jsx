@@ -4,9 +4,9 @@ import Label from "../ui/label";
 import Input from "../ui/input";
 import { cn } from "../../../../lib/utils";
 import { useNavigate } from "react-router-dom";
+import toast, { Toaster } from 'react-hot-toast';
 
 const Signin = () => {
-
   const theming = localStorage.getItem("theme"); 
   localStorage.clear();
   localStorage.setItem("theme", theming);
@@ -55,6 +55,8 @@ const Signin = () => {
     setError(null);
     setSuccess(null);
 
+    const loadingToast = toast.loading('Signing in...');
+
     try {
       const response = await axios.post(`http://localhost:8080/api/auth/login`, formData);
       
@@ -69,6 +71,9 @@ const Signin = () => {
       localStorage.setItem('userRole', user.role);
 
       setSuccess("Sign-in successful!");
+      toast.success('Successfully signed in!', {
+        id: loadingToast,
+      });
 
       // Redirect based on role
       switch(user.role) {
@@ -86,23 +91,28 @@ const Signin = () => {
       }
 
     } catch (error) {
+      let errorMessage = "Something went wrong. Please try again.";
+      
       if (error.response) {
         switch (error.response.status) {
           case 400:
-            setError("Email and password are required.");
+            errorMessage = "Email and password are required.";
             break;
           case 401:
-            setError("Invalid credentials.");
+            errorMessage = "Invalid credentials.";
             break;
           case 500:
-            setError("Server error. Please try again later.");
+            errorMessage = "Server error. Please try again later.";
             break;
-          default:
-            setError("Something went wrong. Please try again.");
         }
       } else {
-        setError("Network error. Please check your connection.");
+        errorMessage = "Network error. Please check your connection.";
       }
+      
+      setError(errorMessage);
+      toast.error(errorMessage, {
+        id: loadingToast,
+      });
     }
   };
 
@@ -183,7 +193,7 @@ const Signin = () => {
   );
 };
 
-// Skeleton Loader for the Signin component
+// Rest of the component remains the same...
 const SkeletonSignin = () => {
   return (
     <div className="bg-white dark:bg-black dark:bg-dot-white/[0.2] bg-dot-black/[0.2] h-screen flex items-center justify-center">
