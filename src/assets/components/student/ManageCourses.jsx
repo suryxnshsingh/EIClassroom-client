@@ -193,9 +193,10 @@ const ManageCourses = () => {
 
   return (
     <div className="w-full md:mr-16 pb-16">
+        <p className="text-4xl font-semibold md:m-10 m-5 mx-10">My Courses</p>
       <div className="md:m-10 m-5">
         <div className="border-b mb-8">
-          <div className="flex space-x-4">
+          <div className="flex space-x-4 overflow-x-auto">
             {tabs.map(tab => (
               <Tab
                 key={tab.id}
