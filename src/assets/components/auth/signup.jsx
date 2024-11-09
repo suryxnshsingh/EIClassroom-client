@@ -4,6 +4,7 @@ import Label from "../ui/label";
 import Input from "../ui/input";
 import { cn } from "../../../../lib/utils";
 import { useNavigate } from "react-router-dom";
+import { Toaster, toast } from "react-hot-toast";
 
 const Signup = () => {
   const [theme, setTheme] = useState(
@@ -16,13 +17,11 @@ const Signup = () => {
     lastName: "",
     email: "",
     password: "",
-    role: "STUDENT", // Default role
+    role: "STUDENT",
     enrollmentNumber: "",
     secretKey: ""
   });
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(null);
   const navigate = useNavigate();
 
   // Secret keys for teacher and admin
@@ -49,24 +48,35 @@ const Signup = () => {
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(null);
-    setSuccess(null);
+
+    // Loading toast
+    const loadingToast = toast.loading('Creating your account...');
 
     // Verify secret key for teacher and admin roles
     if (formData.role === "TEACHER" && formData.secretKey !== TEACHER_KEY) {
-      setError("Invalid teacher secret key");
+      toast.error('Invalid teacher secret key', {
+        id: loadingToast,
+      });
       return;
     }
     if (formData.role === "ADMIN" && formData.secretKey !== ADMIN_KEY) {
-      setError("Invalid admin secret key");
+      toast.error('Invalid admin secret key', {
+        id: loadingToast,
+      });
       return;
     }
 
     try {
+      // Password validation
+      if (formData.password.length < 6) {
+        toast.error('Password must be at least 6 characters long', {
+          id: loadingToast,
+        });
+        return;
+      }
+
       // Send the signup request to the backend
       const response = await axios.post(`http://localhost:8080/api/auth/register`, formData);
-
-      setSuccess("Signup successful!");
       
       // Store the JWT token
       localStorage.setItem('token', response.data.token);
@@ -75,22 +85,39 @@ const Signup = () => {
       localStorage.setItem('userId', response.data.user.id);
       localStorage.setItem('userRole', response.data.user.role);
       
-      navigate("/signin");
+      // Success toast
+      toast.success('Account created successfully!', {
+        id: loadingToast,
+        duration: 3000,
+      });
+
+      // Short delay before navigation to allow toast to be seen
+      setTimeout(() => {
+        navigate("/signin");
+      }, 1000);
 
     } catch (error) {
       if (error.response) {
         switch (error.response.status) {
           case 400:
-            setError(error.response.data.message || "User with this email already exists.");
+            toast.error(error.response.data.message || "User with this email already exists.", {
+              id: loadingToast,
+            });
             break;
           case 422:
-            setError("Invalid input data. Please check your entries.");
+            toast.error("Invalid input data. Please check your entries.", {
+              id: loadingToast,
+            });
             break;
           default:
-            setError("Something went wrong. Please try again.");
+            toast.error("Something went wrong. Please try again.", {
+              id: loadingToast,
+            });
         }
       } else {
-        setError("Network error. Please check your connection.");
+        toast.error("Network error. Please check your connection.", {
+          id: loadingToast,
+        });
       }
     }
   };
@@ -104,12 +131,11 @@ const Signup = () => {
     <div className="bg-white dark:bg-black dark:bg-dot-white/[0.2] bg-dot-black/[0.2] h-screen flex items-center justify-center">
       <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
       <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 max-md:border-0 border-2 border-neutral-300 dark:border-neutral-700 bg-white dark:bg-black">
-
         <h2 className="font-bold text-center text-xl text-neutral-950 dark:text-neutral-200">
           EI Classroom
         </h2>
         <form className="my-8" onSubmit={handleSubmit}>
-        <LabelInputContainer className="mb-4">
+          <LabelInputContainer className="mb-4">
             <Label htmlFor="role">Sign up as</Label>
             <select
               id="role"
@@ -197,9 +223,6 @@ const Signup = () => {
               required
             />
           </LabelInputContainer>
-
-          {error && <p className="text-red-500 text-center pb-2">{error}</p>}
-          {success && <p className="text-green-500 text-center pb-2">{success}</p>}
 
           <button
             className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"

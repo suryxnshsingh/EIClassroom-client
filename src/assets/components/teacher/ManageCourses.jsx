@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Trash2, Pencil, Users, BookPlus } from 'lucide-react';
+import { Trash2, Pencil, Users, BookPlus, Loader2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const ManageCourses = () => {
@@ -65,14 +65,20 @@ useEffect(() => {
   fetchCourses();
 }, []);
 
-if (loading) return <div>Loading...</div>;
+if (loading) {
+  return (
+    <div className="flex justify-center items-center h-screen">
+      <Loader2 className="h-8 w-8 animate-spin text-gray-900 dark:text-white" />
+    </div>
+  );
+}
 if (error) return <div>Error: {error}</div>;
 
 return (
-  <div className='p-10 text-start'>
-      <div className="my-10 flex flex-col md:flex-row justify-between items-start">
+  <div className='p-10 w-max'>
+      <div className="mb-10 flex flex-col md:flex-row justify-between items-start">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+          <h1 className="text-4xl font-semibold text-gray-900 dark:text-white mb-2">
             Welcome, {teacherData.firstName} {teacherData.lastName} !
           </h1>
           <div className="space-y-1">
@@ -90,7 +96,7 @@ return (
       </div>
 
             {/* Courses Grid */}
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-6">
       {subjects.map((subject) => (
         <div
           key={subject.id}

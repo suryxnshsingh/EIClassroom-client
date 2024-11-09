@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Loader2, Check, X, Users, BookUser } from 'lucide-react';
+import { Loader2, Check, X, Users, BookUser, RotateCw } from 'lucide-react';
 
 const BASE_URL = 'http://localhost:8080';
 
 const ManageStudentsPage = () => {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState({ courses: null, enrollments: null });
   const [activeTab, setActiveTab] = useState(0);
 
@@ -68,6 +69,16 @@ const ManageStudentsPage = () => {
     }
   };
 
+  const handleRefresh = async () => {
+    setRefreshing(true);
+    setError({ courses: null, enrollments: null });
+    await fetchCourses();
+    if (courses.length > 0) {
+      await fetchPendingEnrollments();
+    }
+    setRefreshing(false);
+  };
+
   const handleEnrollmentStatus = async (enrollmentId, status) => {
     try {
       await axios.put(
@@ -111,7 +122,17 @@ const ManageStudentsPage = () => {
     <div className="w-full m-10">
       <div className="container p-4 space-y-6">
         <div className="flex justify-between items-center mb-6">
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Manage Students</h1>
+          <div className="flex items-center gap-4">
+            <h1 className="text-4xl font-semibold text-gray-900 dark:text-white">Manage Students</h1>
+            <button
+              onClick={handleRefresh}
+              disabled={refreshing}
+              className="inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-lg bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-neutral-800 dark:text-gray-300 dark:hover:bg-neutral-700 transition-colors disabled:opacity-50"
+            >
+              <RotateCw className={`h-4 w-4 mr-1.5 ${refreshing ? 'animate-spin' : ''}`} />
+              {refreshing ? 'Refreshing...' : 'Refresh'}
+            </button>
+          </div>
         </div>
 
         {error.courses && (
@@ -141,6 +162,7 @@ const ManageStudentsPage = () => {
 
         {courses[activeTab] && (
           <div className="rounded-lg bg-white dark:bg-neutral-800 shadow-md dark:shadow-none">
+            {/* Rest of the component remains the same */}
             <div className="border-b px-6 py-4 border-gray-200 dark:border-neutral-700">
               <div className="flex items-center gap-2 text-xl font-semibold text-gray-900 dark:text-white">
                 <Users className="h-5 w-5" />

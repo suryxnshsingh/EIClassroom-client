@@ -2,6 +2,19 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 
+const Tab = ({ label, active, onClick }) => (
+  <button
+    onClick={onClick}
+    className={`px-6 py-3 text-lg font-semibold border-b-2 transition-colors duration-200 ${
+      active 
+        ? 'border-purple-500 text-purple-500' 
+        : 'border-transparent text-gray-500 hover:text-gray-700 dark:hover:text-gray-300'
+    }`}
+  >
+    {label}
+  </button>
+);
+
 const Loading = () => (
   <div className="flex justify-center items-center h-screen text-black dark:text-white">
     <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-black dark:border-white"></div>
@@ -42,8 +55,8 @@ const CourseCard = ({ course, onEnroll, status }) => {
   };
 
   return (
-    <div className=" rounded shadow-md p-6 border-[1px] border-slate-300 dark:border-neutral-700 bg-neutral-100 dark:bg-neutral-950">
-      <h3 className="text-2xl font-semibold ">{course.name}</h3>
+    <div className="rounded shadow-md p-6 border-[1px] border-slate-300 dark:border-neutral-700 bg-neutral-100 dark:bg-neutral-950">
+      <h3 className="text-2xl font-semibold">{course.name}</h3>
       <p className="text-xl font-semibold text-gray-600 dark:text-gray-400 mb-2">{course.courseCode}</p>
       <p className="text-gray-600 dark:text-gray-400 mb-2">
         Teacher: {course.teacher.firstName} {course.teacher.lastName}
@@ -56,12 +69,11 @@ const CourseCard = ({ course, onEnroll, status }) => {
   );
 };
 
-const CourseSection = ({ title, courses, onEnroll, status, className }) => (
-  <div className={`mb-12 ${className}`}>
-    <h2 className="text-3xl font-semibold mb-6">{title}</h2>
+const CourseGrid = ({ courses, onEnroll, status }) => (
+  <div>
     {courses.length === 0 ? (
       <div className="text-center text-gray-600 dark:text-gray-400 py-8">
-        <p className="text-xl">No {title.toLowerCase()}.</p>
+        <p className="text-xl">No courses to display.</p>
       </div>
     ) : (
       <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
@@ -79,6 +91,7 @@ const CourseSection = ({ title, courses, onEnroll, status, className }) => (
 );
 
 const ManageCourses = () => {
+  const [activeTab, setActiveTab] = useState('enrolled');
   const [availableCourses, setAvailableCourses] = useState([]);
   const [acceptedCourses, setAcceptedCourses] = useState([]);
   const [pendingCourses, setPendingCourses] = useState([]);
@@ -98,14 +111,9 @@ const ManageCourses = () => {
 
         const enrollments = enrollmentsResponse.data;
         
-        // Separate enrollments by status
         const accepted = enrollments.filter(e => e.status === 'ACCEPTED').map(e => e.course);
         const pending = enrollments.filter(e => e.status === 'PENDING').map(e => e.course);
-        
-        // Get all enrolled course IDs (both accepted and pending)
         const enrolledIds = enrollments.map(e => e.course.id);
-        
-        // Filter available courses to exclude all enrolled ones
         const available = coursesResponse.data.filter(
           course => !enrolledIds.includes(course.id)
         );
@@ -132,12 +140,12 @@ const ManageCourses = () => {
         { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }}
       );
       
-      // Move the course from available to pending
       const courseToMove = availableCourses.find(c => c.id === courseId);
       setPendingCourses([...pendingCourses, courseToMove]);
       setAvailableCourses(availableCourses.filter(c => c.id !== courseId));
       
       toast.success('Enrollment application submitted successfully');
+      setActiveTab('pending');
     } catch (error) {
       console.error('Error enrolling in course:', error);
       toast.error(error.response?.data?.message || 'Failed to apply for enrollment');
@@ -146,31 +154,62 @@ const ManageCourses = () => {
 
   if (loading) return <Loading />;
 
+  const tabs = [
+    { id: 'enrolled', label: 'Enrolled Courses' },
+    { id: 'pending', label: 'Pending Enrollments' },
+    { id: 'available', label: 'Available Courses' },
+  ];
+
+  const renderContent = () => {
+    switch (activeTab) {
+      case 'enrolled':
+        return (
+          <CourseGrid
+            courses={acceptedCourses}
+            onEnroll={handleEnroll}
+            status="ACCEPTED"
+          />
+        );
+      case 'pending':
+        return (
+          <CourseGrid
+            courses={pendingCourses}
+            onEnroll={handleEnroll}
+            status="PENDING"
+          />
+        );
+      case 'available':
+        return (
+          <CourseGrid
+            courses={availableCourses}
+            onEnroll={handleEnroll}
+            status="AVAILABLE"
+          />
+        );
+      default:
+        return null;
+    }
+  };
+
   return (
     <div className="w-full md:mr-16 pb-16">
       <div className="md:m-10 m-5">
-        <CourseSection
-          title="My Enrolled Courses"
-          courses={acceptedCourses}
-          onEnroll={handleEnroll}
-          status="ACCEPTED"
-          className="border-b pb-8"
-        />
+        <div className="border-b mb-8">
+          <div className="flex space-x-4">
+            {tabs.map(tab => (
+              <Tab
+                key={tab.id}
+                label={tab.label}
+                active={activeTab === tab.id}
+                onClick={() => setActiveTab(tab.id)}
+              />
+            ))}
+          </div>
+        </div>
         
-        <CourseSection
-          title="Pending Enrollments"
-          courses={pendingCourses}
-          onEnroll={handleEnroll}
-          status="PENDING"
-          className="border-b pb-8"
-        />
-        
-        <CourseSection
-          title="Available Courses"
-          courses={availableCourses}
-          onEnroll={handleEnroll}
-          status="AVAILABLE"
-        />
+        <div className="mt-8">
+          {renderContent()}
+        </div>
       </div>
     </div>
   );

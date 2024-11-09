@@ -10,7 +10,36 @@ function App() {
 
   return (
       <div>
-        <Toaster position="top-right" />
+        <Toaster 
+        position="top-center"
+        reverseOrder={false}
+        gutter={8}
+        containerClassName=""
+        containerStyle={{}}
+        toastOptions={{
+          // Default options for specific types
+          success: {
+            duration: 3000,
+            style: {
+              background: '#059669',
+              color: 'white',
+            },
+          },
+          error: {
+            duration: 4000,
+            style: {
+              background: '#dc2626',
+              color: 'white',
+            },
+          },
+          // Default options for all toasts
+          style: {
+            maxWidth: '500px',
+            padding: '16px 24px',
+            borderRadius: '8px',
+          },
+        }}
+      />
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home/>}/>
