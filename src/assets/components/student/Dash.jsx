@@ -78,8 +78,9 @@ const Dash = () => {
         <p className="text-4xl font-semibold md:m-10 m-5">My Courses</p>
       </div>
       {enrolledCourses.length === 0 ? (
-        <div className="text-center text-gray-600 dark:text-gray-400 py-8">
-          <p className="text-xl">No enrolled courses yet.</p>
+        <div className="text-center text-gray-600 dark:text-gray-400 py-8 gap-6">
+          <p className="text-xl pb-6">No enrolled courses yet.</p>
+          <a href='/students/managecourses' className='bg-purple-600 hover:bg-purple-800 text-white font-semibold py-2 px-4 rounded'>Manage Courses</a>
         </div>
       ) : (
         <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:mx-10 mx-5">
