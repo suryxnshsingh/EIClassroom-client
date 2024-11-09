@@ -70,8 +70,6 @@ if (error) return <div>Error: {error}</div>;
 
 return (
   <div className='p-10 text-start'>
-
-      {/* Profile Section */}
       <div className="my-10 flex flex-col md:flex-row justify-between items-start">
         <div>
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
@@ -96,7 +94,7 @@ return (
       {subjects.map((subject) => (
         <div
           key={subject.id}
-          className="bg-gray-50 dark:bg-neutral-950 border-[1px] border-neutral-200 dark:border-neutral-700 rounded-sm p-6 shadow-lg hover:shadow-xl transition duration-300"
+          className="bg-gray-50 dark:bg-neutral-950 border-[1px] border-neutral-200 dark:border-neutral-700 rounded-lg p-6 shadow-lg hover:shadow-xl transition duration-300"
         > 
           <p className="text-gray-600 dark:text-gray-300 text-xl ">
               {subject.courseCode}
