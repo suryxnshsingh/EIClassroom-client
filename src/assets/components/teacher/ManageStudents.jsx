@@ -162,7 +162,7 @@ const ManageStudentsPage = () => {
 
         {courses[activeTab] && (
           <div className="rounded-lg bg-white dark:bg-neutral-800 shadow-md dark:shadow-none">
-            {/* Rest of the component remains the same */}
+
             <div className="border-b px-6 py-4 border-gray-200 dark:border-neutral-700">
               <div className="flex items-center gap-2 text-xl font-semibold text-gray-900 dark:text-white">
                 <Users className="h-5 w-5" />
