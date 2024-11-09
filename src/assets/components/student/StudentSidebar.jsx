@@ -20,6 +20,8 @@ import Tests from './Tests';
 import Books from './Books';
 import Notes from './Notes';
 import Profile from './Profile';
+import SubjectDashboard from './SubjectDashboard';
+import ManageCourses from './ManageCourses';
 
 const StudentSidebar = () => {
 
@@ -41,10 +43,6 @@ const StudentSidebar = () => {
       setTheme(savedTheme);
       document.documentElement.classList.toggle("dark", savedTheme === "dark");
     }
-
-    setTimeout(() => {
-      setLoading(false);
-    }, 50);
   }, []);
 
   const [open, setOpen] = useState(false);
@@ -66,23 +64,18 @@ const StudentSidebar = () => {
       icon: <FlaskConical className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
     },
     {
-      label: "Books",
-      href: "/students/books",
+      label: "Manage Courses",
+      href: "/students/managecourses",
       icon: <LibraryBig className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
     },
     {
-      label: "Notes",
-      href: "/students/notes",
-      icon: <NotepadText className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
-    },
-    {
       label: "Analog Simulator",
-      href: "/teachers/",
+      href: "/students/",
       icon: <AudioLines className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
     },
     {
       label: "Digital Simulator",
-      href: "/teachers/",
+      href: "/students/",
       icon: <ArrowUp01 className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
     },
     {
@@ -163,15 +156,15 @@ const LogoIcon = () => {
 const Dashboard = () => {
   return (
     <div className="flex flex-1 bg-neutral-100 dark:bg-neutral-950">
-      <div className=" rounded-tl-2xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-black dark:bg-dot-white/[0.2] bg-dot-black/[0.2]">
+      <div className=" rounded-tl-2xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-black dark:bg-dot-white/[0.2] bg-dot-black/[0.2] overflow-scroll ">
         <div className='p-2 md:p-10 rounded-tl-2xl  w-screen h-screen '>
         <div className=' flex items-center justify-center text-black  dark:text-white'>
           <Routes>
             <Route path="/" element={<Dash />} />
+            <Route path="/:subjectCode" element={<SubjectDashboard />} />
             <Route path="/assignment" element={<Assignment />} />
             <Route path="/tests" element={<Tests />} />
-            <Route path="/books" element={<Books />} />
-            <Route path="/notes" element={<Notes />} />
+            <Route path="/managecourses" element={<ManageCourses />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/settings" element={<SettingsPage />} />
           </Routes>

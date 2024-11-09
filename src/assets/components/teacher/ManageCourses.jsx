@@ -120,7 +120,7 @@ return (
           </div>
           <div className="mt-4 grid grid-cols-2 gap-4">
             <button 
-              className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md transition duration-300"
+              className="flex items-center gap-2 border-[1px] bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-md transition duration-300"
               onClick={() => handleEditCourse(subject)}
             >
               <Pencil className="w-4 h-4" />
@@ -128,7 +128,7 @@ return (
             </button>
 
             <button 
-              className={`flex items-center gap-2 border-[1px] bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-md transition duration-300 ${
+              className={`flex items-center gap-2 border-[1px] bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-md transition duration-300 ${
                 deleteLoading === subject.id ? 'opacity-50 cursor-not-allowed' : ''
               }`}
               onClick={() => handleDeleteCourse(subject.id)}
