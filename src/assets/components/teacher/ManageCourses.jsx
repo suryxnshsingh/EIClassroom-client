@@ -100,7 +100,7 @@ return (
       {subjects.map((subject) => (
         <div
           key={subject.id}
-          className="bg-gray-50 dark:bg-neutral-950 border-[1px] border-neutral-200 dark:border-neutral-700 rounded-lg p-6 shadow-lg hover:shadow-xl transition duration-300"
+          className="bg-gray-50 dark:bg-neutral-800 border-[1px] border-neutral-200 dark:border-neutral-700 rounded-md p-6 shadow-lg hover:shadow-xl transition duration-300"
         > 
           <p className="text-gray-600 dark:text-gray-300 text-xl ">
               {subject.courseCode}
@@ -118,7 +118,7 @@ return (
             </p>
             </div>
             <div className='py-2'></div>
-            <div className='flex items-center gap-2 border-2 text-black dark:text-white border-gray-300 font-regular py-2 px-4 rounded-md transition duration-300'>
+            <div className='flex items-center gap-2 border text-black dark:text-white border-gray-300 font-regular py-2 px-4 rounded-md transition duration-300'>
                   <Users className="w-4 h-4" />Enrolled Students: {subject._count.enrollments}
             </div>
           </div>
@@ -326,7 +326,7 @@ const CreateCourse = ({ create, setCreate, onSuccess }) => {
 
     try {
       await axios.post(
-        'http://localhost:8080/api/courses/courses',
+        `http://localhost:8080/api/courses/courses`,
         {
           name: formData.name,
           courseCode: formData.code,
