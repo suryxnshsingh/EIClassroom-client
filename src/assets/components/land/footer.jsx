@@ -24,13 +24,13 @@ export default function Footer(){
                     </div>
                     <div className="grid grid-cols-2 gap-4 sm:gap-6 sm:grid-cols-3">
                         <div>
-                            <h2 className="mb-6 text-sm font-semibold  uppercase text-white">Resources</h2>
-                            <ul className="text-gray-500 dark:text-gray-400 font-medium">
+                            <h2 className="mb-6 text-sm font-semibold  uppercase text-white">About</h2>
+                            <ul className="text-gray-400 font-medium">
                                 <li className="mb-4">
-                                    <a href="/" className="hover:underline">Notes</a>
+                                    <a href="/" className="hover:underline">Copyright</a>
                                 </li>
                                 <li>
-                                    <a href="/" className="hover:underline">Books</a>
+                                    <a href="/" className="hover:underline">Privacy Policy</a>
                                 </li>
                             </ul>
                         </div>

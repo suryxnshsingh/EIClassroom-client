@@ -14,6 +14,7 @@ export default function Card({
         <div className="relative shadow-slate-800 hover:shadow-none w-80 h-96 overflow-hidden shadow-md rounded-2xl group">
             <img
                 src={imgsrc}
+                loading="lazy"
                 className="w-full h-full object-cover transition-all duration-300 group-hover:brightness-50 group-hover:blur-md"
                 alt={name}
             />
