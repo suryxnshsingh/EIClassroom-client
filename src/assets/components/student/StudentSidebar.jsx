@@ -22,6 +22,7 @@ import Notes from './Notes';
 import Profile from './Profile';
 import SubjectDashboard from './SubjectDashboard';
 import ManageCourses from './ManageCourses';
+import Cookies from 'js-cookie';
 
 const StudentSidebar = () => {
 
@@ -89,8 +90,8 @@ const StudentSidebar = () => {
       icon: <LogOut className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
     }
   ];
-  const firstName = localStorage.getItem("firstName") || "Profile";
-  const lastName = localStorage.getItem("lastName") || ""; 
+  const firstName = Cookies.get("firstName") || "Profile";
+  const lastName = Cookies.get("lastName") || ""; 
 
   return (
     <div className={cn(

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
+import Cookies from 'js-cookie';
 
 const Tab = ({ label, active, onClick }) => (
   <button
@@ -102,10 +103,10 @@ const ManageCourses = () => {
       try {
         const [coursesResponse, enrollmentsResponse] = await Promise.all([
           axios.get('http://localhost:8080/api/courses/all-courses', {
-            headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+            headers: { Authorization: `Bearer ${Cookies.get('token')}` }
           }),
           axios.get('http://localhost:8080/api/enrollment/enrollments/my-courses', {
-            headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+            headers: { Authorization: `Bearer ${Cookies.get('token')}` }
           })
         ]);
 
@@ -137,7 +138,7 @@ const ManageCourses = () => {
       await axios.post(
         'http://localhost:8080/api/enrollment/enrollments',
         { courseId },
-        { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }}
+        { headers: { Authorization: `Bearer ${Cookies.get('token')}` }}
       );
       
       const courseToMove = availableCourses.find(c => c.id === courseId);

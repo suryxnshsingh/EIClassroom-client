@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Trash2, Pencil, Users, BookPlus, Loader2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 const ManageCourses = () => {
   const [subjects, setSubjects] = useState([]);
@@ -21,7 +22,7 @@ const fetchCourses = async () => {
   try {
     const response = await axios.get(`http://localhost:8080/api/courses/teacher-courses`, {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`
+        Authorization: `Bearer ${Cookies.get("token")}`
       }
     });
     setSubjects(response.data);
@@ -42,7 +43,7 @@ const handleDeleteCourse = async (courseId) => {
   try {
     await axios.delete(`http://localhost:8080/api/courses/courses/${courseId}`, {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`
+        Authorization: `Bearer ${Cookies.get("token")}`
       }
     });
 
@@ -204,7 +205,7 @@ const EditCourse = ({ course, onClose, onSuccess }) => {
         {
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${localStorage.getItem('token')}`
+            'Authorization': `Bearer ${Cookies.get('token')}`
           }
         }
       );
@@ -336,7 +337,7 @@ const CreateCourse = ({ create, setCreate, onSuccess }) => {
         {
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${localStorage.getItem('token')}`
+            'Authorization': `Bearer ${Cookies.get('token')}`
           }
         }
       );
@@ -365,7 +366,7 @@ const CreateCourse = ({ create, setCreate, onSuccess }) => {
             <input
               type="text"
               name="name"
-              className="block py-2.5 px-0 w-full text-lg text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-purple-500 focus:outline-none focus:ring-0 focus:border-purple-600 peer"
+              className="block py-2.5 px-0 w-full text-lg text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text:white dark:border-gray-600 dark:focus:border-purple-500 focus:outline-none focus:ring-0 focus:border-purple-600 peer"
               placeholder=" "
               value={formData.name}
               onChange={handleChange}
@@ -380,7 +381,7 @@ const CreateCourse = ({ create, setCreate, onSuccess }) => {
             <input
               type="text"
               name="code"
-              className="block py-2.5 px-0 w-full text-lg text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-purple-500 focus:outline-none focus:ring-0 focus:border-purple-600 peer"
+              className="block py-2.5 px-0 w-full text-lg text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text:white dark:border-gray-600 dark:focus:border-purple-500 focus:outline-none focus:ring-0 focus:border-purple-600 peer"
               placeholder=" "
               value={formData.code}
               onChange={handleChange}
@@ -395,7 +396,7 @@ const CreateCourse = ({ create, setCreate, onSuccess }) => {
             <input
               type="text"
               name="session"
-              className="block py-2.5 px-0 w-full text-lg text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-purple-500 focus:outline-none focus:ring-0 focus:border-purple-600 peer"
+              className="block py-2.5 px-0 w-full text-lg text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text:white dark:border-gray-600 dark:focus:border-purple-500 focus:outline-none focus:ring-0 focus:border-purple-600 peer"
               placeholder=" "
               value={formData.session}
               onChange={handleChange}
@@ -410,7 +411,7 @@ const CreateCourse = ({ create, setCreate, onSuccess }) => {
             <input
               type="text"
               name="semester"
-              className="block py-2.5 px-0 w-full text-lg text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-purple-500 focus:outline-none focus:ring-0 focus:border-purple-600 peer"
+              className="block py-2.5 px-0 w-full text-lg text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text:white dark:border-gray-600 dark:focus:border-purple-500 focus:outline-none focus:ring-0 focus:border-purple-600 peer"
               placeholder=" "
               value={formData.semester}
               onChange={handleChange}

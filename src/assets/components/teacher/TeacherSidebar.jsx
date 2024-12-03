@@ -26,6 +26,7 @@ import ManageStudents from './ManageStudents';
 import subDash from '../subDash';
 import SubDash from '../subDash';
 import Tests from './Tests';
+import Cookies from 'js-cookie';
 
 const TeacherSidebar = () => {
   const [theme, setTheme] = useState(
@@ -91,8 +92,8 @@ const TeacherSidebar = () => {
     }
     
   ];
-  const firstName = localStorage.getItem("firstName") || "Profile";
-  const lastName = localStorage.getItem("lastName") || ""; 
+  const firstName = Cookies.get("firstName") || "Profile";
+  const lastName = Cookies.get("lastName") || ""; 
 
   return (
     <div className={cn(

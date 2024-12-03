@@ -5,6 +5,7 @@ import Input from "../ui/input";
 import { cn } from "../../../../lib/utils";
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from 'react-hot-toast';
+import Cookies from 'js-cookie';
 
 const Signin = () => {
   const theming = localStorage.getItem("theme"); 
@@ -62,13 +63,13 @@ const Signin = () => {
       
       const { token, user } = response.data;
 
-      // Save token and user info to localStorage
-      localStorage.setItem('token', token);
-      localStorage.setItem('userId', user.id);
-      localStorage.setItem('userEmail', user.email);
-      localStorage.setItem('firstName', user.firstName);
-      localStorage.setItem('lastName', user.lastName);
-      localStorage.setItem('userRole', user.role);
+      // Save token and user info to cookies
+      Cookies.set('token', token, { expires: 1 });
+      Cookies.set('userId', user.id, { expires: 1 });
+      Cookies.set('userEmail', user.email, { expires: 1 });
+      Cookies.set('firstName', user.firstName, { expires: 1 });
+      Cookies.set('lastName', user.lastName, { expires: 1 });
+      Cookies.set('userRole', user.role, { expires: 1 });
 
       setSuccess("Sign-in successful!");
       toast.success('Successfully signed in!', {

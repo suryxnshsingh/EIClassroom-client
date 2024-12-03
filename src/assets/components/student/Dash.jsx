@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import SubCard from '../ui/subcard';
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 const Loading = () => {
   return (
@@ -41,7 +42,7 @@ const Dash = () => {
       try {
         const response = await axios.get('http://localhost:8080/api/enrollment/enrollments/my-courses', {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`
+            Authorization: `Bearer ${Cookies.get('token')}`
           }
         });
 

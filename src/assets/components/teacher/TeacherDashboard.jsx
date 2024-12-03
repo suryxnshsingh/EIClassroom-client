@@ -4,6 +4,7 @@ import { LayoutDashboard } from 'lucide-react';
 import SubCard  from '../ui/subcard';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 const Loading = () => {
     return (
@@ -39,7 +40,7 @@ const TeacherDashbard = () => {
       try {
         const response = await axios.get(`http://localhost:8080/api/courses/teacher-courses`, {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`
+            Authorization: `Bearer ${Cookies.get("token")}`
           }
         });
         setSubjects(response.data);

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Loader2, Check, X, Users, BookUser, RotateCw } from 'lucide-react';
+import Cookies from 'js-cookie';
 
 const BASE_URL = 'http://localhost:8080';
 
@@ -16,7 +17,7 @@ const ManageStudentsPage = () => {
     try {
       const response = await axios.get(`${BASE_URL}/api/courses/teacher-courses`, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`
+          Authorization: `Bearer ${Cookies.get("token")}`
         }
       });
       const coursesData = response.data;
@@ -24,7 +25,7 @@ const ManageStudentsPage = () => {
       const updatedCourses = await Promise.all(
         coursesData.map(async (course) => {
           const enrolledResponse = await axios.get(`${BASE_URL}/api/courses/courses/${course.id}`, {
-            headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
+            headers: { Authorization: `Bearer ${Cookies.get("token")}` }
           });
           return {
             ...course,
@@ -48,7 +49,7 @@ const ManageStudentsPage = () => {
     try {
       const response = await axios.get(`${BASE_URL}/api/enrollment/enrollments/pending`, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`
+          Authorization: `Bearer ${Cookies.get("token")}`
         }
       });
       const pendingEnrollments = response.data;
@@ -86,7 +87,7 @@ const ManageStudentsPage = () => {
         { status },
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`
+            Authorization: `Bearer ${Cookies.get("token")}`
           }
         }
       );

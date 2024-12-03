@@ -5,6 +5,7 @@ import Input from "../ui/input";
 import { cn } from "../../../../lib/utils";
 import { useNavigate } from "react-router-dom";
 import { Toaster, toast } from "react-hot-toast";
+import Cookies from 'js-cookie';
 
 const Signup = () => {
   const [theme, setTheme] = useState(
@@ -78,12 +79,10 @@ const Signup = () => {
       // Send the signup request to the backend
       const response = await axios.post(`http://localhost:8080/api/auth/register`, formData);
       
-      // Store the JWT token
-      localStorage.setItem('token', response.data.token);
-      
-      // Store user info
-      localStorage.setItem('userId', response.data.user.id);
-      localStorage.setItem('userRole', response.data.user.role);
+      // Store the JWT token and user info in cookies
+      Cookies.set('token', response.data.token, { expires: 1 });
+      Cookies.set('userId', response.data.user.id, { expires: 1 });
+      Cookies.set('userRole', response.data.user.role, { expires: 1 });
       
       // Success toast
       toast.success('Account created successfully!', {
